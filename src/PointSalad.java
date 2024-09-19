@@ -1,3 +1,4 @@
+import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.Scanner;
 
@@ -170,8 +171,8 @@ public class PointSalad {
 		ArrayList<Card> deckOnion = new ArrayList<>();
 		ArrayList<Card> deckTomato = new ArrayList<>();
 
-        try (InputStream fInputStream = new FileInputStream("PointSaladManifest.json");
-             Scanner scanner = new Scanner(fInputStream, "UTF-8").useDelimiter("\\A")) {
+        try (InputStream fInputStream = new FileInputStream(Paths.get("resources", "PointSaladManifest.json").toString());
+			 Scanner scanner = new Scanner(fInputStream, "UTF-8").useDelimiter("\\A")) {
 
             // Read the entire JSON file into a String
             String jsonString = scanner.hasNext() ? scanner.next() : "";
