@@ -1,6 +1,6 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.7.17 Chrome/128.0.6613.36 Electron/32.0.1 Safari/537.36" version="24.7.17">
   <diagram name="Page-1" id="F4KrW8JxtzPAobyz8DqY">
-    <mxGraphModel dx="2075" dy="3233" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="160" dy="249" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -264,13 +264,13 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="SN2yluZUW8M9mS18KECz-169" value="" style="group" parent="SN2yluZUW8M9mS18KECz-71" vertex="1" connectable="0">
-          <mxGeometry x="271" y="578.6278408783893" width="209" height="181.8810586493467" as="geometry" />
+          <mxGeometry x="250" y="578.63" width="230" height="181.88" as="geometry" />
         </mxCell>
         <mxCell id="SN2yluZUW8M9mS18KECz-170" value="«interface»&lt;br&gt;&lt;b&gt;IGameBoard&lt;/b&gt;" style="html=1;whiteSpace=wrap;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;fillColor=#647687;fontColor=#ffffff;strokeColor=#314354;" parent="SN2yluZUW8M9mS18KECz-169" vertex="1">
-          <mxGeometry width="209.00000000000003" height="60.62701954978224" as="geometry" />
+          <mxGeometry width="230.00000000000003" height="60.62666666666667" as="geometry" />
         </mxCell>
-        <mxCell id="SN2yluZUW8M9mS18KECz-171" value="&lt;div&gt;AL&amp;lt;IPile&amp;gt; getPiles();&lt;/div&gt;ICard[][] getMarketCards();&lt;div&gt;ICard draftCard(int, int);&lt;/div&gt;&lt;div&gt;void drawCardIntoMarket(int, int);&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" parent="SN2yluZUW8M9mS18KECz-169" vertex="1">
-          <mxGeometry y="60.62701954978224" width="209.00000000000003" height="121.25403909956448" as="geometry" />
+        <mxCell id="SN2yluZUW8M9mS18KECz-171" value="&lt;div&gt;AL&amp;lt;IPile&amp;gt; getPiles();&lt;/div&gt;ICard[][] getMarketCards();&lt;div&gt;ICard draftCard(int, int);&lt;/div&gt;&lt;div&gt;void drawCardIntoMarket(Icard, int, int);&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" parent="SN2yluZUW8M9mS18KECz-169" vertex="1">
+          <mxGeometry y="60.62666666666667" width="230.00000000000003" height="121.25333333333334" as="geometry" />
         </mxCell>
         <mxCell id="t7THmQA8hoJjXBgSS74K-101" value="" style="group" parent="SN2yluZUW8M9mS18KECz-71" vertex="1" connectable="0">
           <mxGeometry x="271" y="794.3942323279263" width="310" height="176.53161574789536" as="geometry" />
@@ -284,8 +284,8 @@
         <mxCell id="t7THmQA8hoJjXBgSS74K-102" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=0;exitDx=0;exitDy=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;dashed=1;" parent="SN2yluZUW8M9mS18KECz-71" source="SN2yluZUW8M9mS18KECz-170" target="SN2yluZUW8M9mS18KECz-167" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="323" y="550" />
-              <mxPoint x="304" y="550" />
+              <mxPoint x="308" y="570" />
+              <mxPoint x="304" y="570" />
             </Array>
           </mxGeometry>
         </mxCell>

@@ -1,8 +1,8 @@
 package common;
 
-/// <summary>
-/// Interface for objects that can be represented as a string.
-/// </summary>
+/**
+ * Interface for objects that can be represented as a string.
+ */
 public interface IRepresentable {
     String represent();
 }
