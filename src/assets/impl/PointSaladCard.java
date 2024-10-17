@@ -4,6 +4,7 @@ import assets.ICard;
 import assets.ICriteriaStrategy;
 import assets.IResource;
 import exceptions.CardFlippingForbiddenDueToGameLogic;
+import exceptions.CardSidePeekingForbiddenDueToGameLogic;
 
 public class PointSaladCard implements ICard {
 
@@ -18,12 +19,15 @@ public class PointSaladCard implements ICard {
     }
 
     @Override
-    public ICriteriaStrategy getCriteriaStrategy() {
+    public ICriteriaStrategy getCriteriaStrategy() throws CardSidePeekingForbiddenDueToGameLogic {
+        if (!criteriaSideActive){
+            throw new CardSidePeekingForbiddenDueToGameLogic("Criteria side is not active");
+        }
         return criteriaStrategy;
     }
 
     @Override
-    public IResource getResource() {
+    public IResource getResource() throws CardSidePeekingForbiddenDueToGameLogic{
         return resource;
     }
 
@@ -47,8 +51,11 @@ public class PointSaladCard implements ICard {
 
     @Override
     public String represent() {
-        return "A card with resource: "
-                + resource.represent() + " and criteria: "
-                + criteriaStrategy.represent();
+        if (criteriaSideActive){
+            return "A card with criteria: "
+                    + criteriaStrategy.represent() + " and resource: "
+                    + resource.represent();
+        }
+        return "A card with resource: " + resource.represent();
     }
 }

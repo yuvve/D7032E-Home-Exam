@@ -21,6 +21,13 @@ public interface IPile extends IRepresentable {
     int getCardCount();
 
     /**
+     * Views the top card from the pile.
+     * Will return null if the pile is empty.
+     * @return The top card.
+     */
+    ICard viewTop();
+
+    /**
      * Draws (fetch and remove) the top card from the pile.
      * Will return null if the pile is empty.
      * @return The top card.
@@ -33,11 +40,4 @@ public interface IPile extends IRepresentable {
      * @return The bottom card.
      */
     ICard drawBottom();
-
-    /**
-     * Views the top card from the pile.
-     * Will return null if the pile is empty.
-     * @return The top card.
-     */
-    ICriteriaStrategy viewTop();
 }

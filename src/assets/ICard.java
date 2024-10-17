@@ -2,6 +2,7 @@ package assets;
 
 import common.IRepresentable;
 import exceptions.CardFlippingForbiddenDueToGameLogic;
+import exceptions.CardSidePeekingForbiddenDueToGameLogic;
 
 /**
  * Interface representing a card in the game, where one side is a scoring criteria and the other side is a resource.
@@ -11,14 +12,16 @@ public interface ICard extends IRepresentable {
     /**
      * Gets the criteria strategy of the card.
      * @return The criteria strategy of the card.
+     * @throws CardSidePeekingForbiddenDueToGameLogic If viewing the criteria side is forbidden due to game logic.
      */
-    ICriteriaStrategy getCriteriaStrategy();
+    ICriteriaStrategy getCriteriaStrategy() throws CardSidePeekingForbiddenDueToGameLogic;
 
     /**
      * Gets the resource of the card.
      * @return The resource of the card.
+     * @throws CardSidePeekingForbiddenDueToGameLogic If viewing the resource side is forbidden due to game logic.
      */
-    IResource getResource();
+    IResource getResource() throws CardSidePeekingForbiddenDueToGameLogic;
 
     /**
      * Gets whether the criteria side of the card is active.

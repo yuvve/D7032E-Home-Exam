@@ -1,8 +1,7 @@
-package assets.impl;
+package assets.impl.criterias;
 
 import assets.ICriteriaStrategy;
 import assets.IResource;
-import assets.Util;
 
 import java.util.ArrayList;
 

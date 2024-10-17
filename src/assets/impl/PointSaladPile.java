@@ -21,6 +21,14 @@ public class PointSaladPile implements IPile {
     }
 
     @Override
+    public ICard viewTop() {
+        if (cards.isEmpty()) {
+            return null;
+        }
+        return cards.getFirst();
+    }
+
+    @Override
     public ICard drawTop() {
         if (cards.isEmpty()) {
             return null;
@@ -34,14 +42,6 @@ public class PointSaladPile implements IPile {
             return null;
         }
         return cards.removeLast();
-    }
-
-    @Override
-    public ICriteriaStrategy viewTop() {
-        if (cards.isEmpty()) {
-            return null;
-        }
-        return cards.getFirst().getCriteriaStrategy();
     }
 
     @Override
