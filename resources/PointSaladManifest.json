@@ -1,202 +1,1484 @@
 {
-    "cards": [
-        {
-            "id": 1,
-            "criteria": {
-                "PEPPER": "MOST LETTUCE = 10",
-                "LETTUCE": "MOST PEPPER = 10",
-                "CARROT": "MOST CABBAGE = 10",
-                "CABBAGE": "MOST CARROT = 10",
-                "ONION": "MOST TOMATO = 10",
-                "TOMATO": "MOST ONION = 10"
-            }
-        },
-        {
-            "id": 2,
-            "criteria": {
-                "PEPPER": "FEWEST LETTUCE = 7",
-                "LETTUCE": "FEWEST PEPPER = 7",
-                "CARROT": "FEWEST CABBAGE = 7",
-                "CABBAGE": "FEWEST CARROT = 7",
-                "ONION": "FEWEST TOMATO = 7",
-                "TOMATO": "FEWEST ONION = 7"
-            }
-        },
-        {
-            "id": 3,
-            "criteria": {
-                "PEPPER": "LETTUCE: EVEN=7, ODD=3",
-                "LETTUCE": "PEPPER: EVEN=7, ODD=3",
-                "CARROT": "CABBAGE: EVEN=7, ODD=3",
-                "CABBAGE": "CARROT: EVEN=7, ODD=3",
-                "ONION": "TOMATO: EVEN=7, ODD=3",
-                "TOMATO": "ONION: EVEN=7, ODD=3"
-            }
-        },
-        {
-            "id": 4,
-            "criteria": {
-                "PEPPER": "2 / LETTUCE",
-                "LETTUCE": "2 / PEPPER",
-                "CARROT": "2 / CABBAGE",
-                "CABBAGE": "2 / CARROT",
-                "ONION": "2 / TOMATO",
-                "TOMATO": "2 / ONION"
-            }
-        },
-        {
-            "id": 5,
-            "criteria": {
-                "PEPPER": "LETTUCE + LETTUCE = 5",
-                "LETTUCE": "PEPPER + PEPPER = 5",
-                "CARROT": "CABBAGE + CABBAGE = 5",
-                "CABBAGE": "CARROT + CARROT = 5",
-                "ONION": "TOMATO + TOMATO = 5",
-                "TOMATO": "ONION + ONION = 5"
-            }
-        },
-        {
-            "id": 6,
-            "criteria": {
-                "PEPPER": "CARROT + ONION = 5",
-                "LETTUCE": "CABBAGE + ONION = 5",
-                "CARROT": "TOMATO + LETTUCE = 5",
-                "CABBAGE": "LETTUCE + ONION = 5",
-                "ONION": "CABBAGE + LETTUCE = 5",
-                "TOMATO": "CARROT + LETTUCE = 5"
-            }
-        },
-        {
-            "id": 7,
-            "criteria": {
-                "PEPPER": "CABBAGE + TOMATO = 5",
-                "LETTUCE": "CARROT + TOMATO = 5",
-                "CARROT": "ONION + PEPPER = 5",
-                "CABBAGE": "TOMATO + PEPPER = 5",
-                "ONION": "CARROT + PEPPER = 5",
-                "TOMATO": "CABBAGE + PEPPER = 5"
-            }
-        },
-        {
-            "id": 8,
-            "criteria": {
-                "PEPPER": "1 / LETTUCE,  1 / ONION",
-                "LETTUCE": "1 / PEPPER,  1 / TOMATO",
-                "CARROT": "1 / CABBAGE,  1 / LETTUCE",
-                "CABBAGE": "1 / CARROT,  1 / PEPPER",
-                "ONION": "1 / TOMATO,  1 / CARROT",
-                "TOMATO": "1 / ONION,  1 / CABBAGE"
-            }
-        },
-        {
-            "id": 9,
-            "criteria": {
-                "PEPPER": "1 / LETTUCE,  1 / TOMATO",
-                "LETTUCE": "1 / PEPPER,  1 / ONION",
-                "CARROT": "1 / CABBAGE,  1 / PEPPER",
-                "CABBAGE": "1 / CARROT,  1 / LETTUCE",
-                "ONION": "1 / TOMATO,  1 / CABBAGE",
-                "TOMATO": "1 / ONION,  1 / CARROT"
-            }
-        },
-        {
-            "id": 10,
-            "criteria": {
-                "PEPPER": "3 / LETTUCE,  -2 / CARROT",
-                "LETTUCE": "3 / PEPPER,  -2 / CABBAGE",
-                "CARROT": "3 / CABBAGE,  -2 / TOMATO",
-                "CABBAGE": "3 / CARROT,  -2 / ONION",
-                "ONION": "3 / TOMATO,  -2 / LETTUCE",
-                "TOMATO": "3 / ONION,  -2 / PEPPER"
-            }
-        },
-        {
-            "id": 11,
-            "criteria": {
-                "PEPPER": "LETTUCE + LETTUCE + LETTUCE = 8",
-                "LETTUCE": "PEPPER + PEPPER + PEPPER = 8",
-                "CARROT": "CABBAGE + CABBAGE + CABBAGE = 8",
-                "CABBAGE": "CARROT + CARROT + CARROT = 8",
-                "ONION": "TOMATO + TOMATO + TOMATO = 8",
-                "TOMATO": "ONION + ONION + ONION = 8"
-            }
-        },
-        {
-            "id": 12,
-            "criteria": {
-                "PEPPER": "PEPPER + LETTUCE + CABBAGE = 8",
-                "LETTUCE": "LETTUCE + PEPPER + CARROT = 8",
-                "CARROT": "CARROT + CABBAGE + ONION = 8",
-                "CABBAGE": "CABBAGE + CARROT + TOMATO = 8",
-                "ONION": "ONION + TOMATO + PEPPER = 8",
-                "TOMATO": "TOMATO + ONION + LETTUCE = 8"
-            }
-        },
-        {
-            "id": 13,
-            "criteria": {
-                "PEPPER": "TOMATO + LETTUCE + CARROT = 8",
-                "LETTUCE": "ONION + PEPPER + CABBAGE = 8",
-                "CARROT": "PEPPER + CABBAGE + TOMATO = 8",
-                "CABBAGE": "LETTUCE + CARROT + ONION = 8",
-                "ONION": "CABBAGE + TOMATO + LETTUCE = 8",
-                "TOMATO": "CARROT + ONION + PEPPER = 8"
-            }
-        },
-        {
-            "id": 14,
-            "criteria": {
-                "PEPPER": "2/LETTUCE,  1/ONION,  -2/PEPPER",
-                "LETTUCE": "2/PEPPER,  1/TOMATO,  -2/LETTUCE",
-                "CARROT": "2/CABBAGE,  1/LETTUCE,  -2/CARROT",
-                "CABBAGE": "2/CARROT,  1/PEPPER,  -2/CABBAGE",
-                "ONION": "2/TOMATO,  1/CARROT,  -2/ONION",
-                "TOMATO": "2/ONION,  1/CABBAGE,  -2/TOMATO"
-            }
-        },
-        {
-            "id": 15,
-            "criteria": {
-                "PEPPER": "2/LETTUCE,  2/CARROT,  -4/ONION",
-                "LETTUCE": "2/PEPPER,  2/CABBAGE,  -4/TOMATO",
-                "CARROT": "2/CABBAGE,  2/TOMATO,  -4/LETTUCE",
-                "CABBAGE": "2/CARROT,  2/ONION,  -4/PEPPER",
-                "ONION": "2/TOMATO,  2/LETTUCE,  -4/CARROT",
-                "TOMATO": "2/ONION,  2/PEPPER,  -4/CABBAGE"
-            }
-        },
-        {
-            "id": 16,
-            "criteria": {
-                "PEPPER": "3/LETTUCE,  -1/ONION,  -1/PEPPER",
-                "LETTUCE": "3/PEPPER,  -1/TOMATO,  -1/LETTUCE",
-                "CARROT": "3/CABBAGE,  -1/LETTUCE,  -1/CARROT",
-                "CABBAGE": "3/CARROT,  -1/PEPPER,  -1/CABBAGE",
-                "ONION": "3/TOMATO,  -1/CARROT,  -1/ONION",
-                "TOMATO": "3/ONION,  -1/CABBAGE,  -1/TOMATO"
-            }
-        },
-        {
-            "id": 17,
-            "criteria": {
-                "PEPPER": "4/LETTUCE,  -2/TOMATO,  -2/CABBAGE",
-                "LETTUCE": "4/PEPPER,  -2/ONION,  -2/CARROT",
-                "CARROT": "4/CABBAGE,  -2/PEPPER,  -2/ONION",
-                "CABBAGE": "4/CARROT,  -2/LETTUCE,  -2/TOMATO",
-                "ONION": "4/TOMATO,  -1/CABBAGE,  -2/PEPPER",
-                "TOMATO": "4/ONION,  -2/CARROT,  -2/LETTUCE"
-            }
-        },
-        {
-            "id": 18,
-            "criteria": {
-                "PEPPER": "MOST TOTAL VEGETABLE = 10",
-                "LETTUCE": "FEWEST TOTAL VEGETABLE = 7",
-                "CARROT": "5 / VEGETABLE TYPE >=3",
-                "CABBAGE": "5 / MISSING VEGETABLE TYPE",
-                "ONION": "3 / VEGETABLE TYPE >=2",
-                "TOMATO": "COMPLETE SET = 12"
-            }
-        }
-    ]
+  "Cards": [
+    {
+      "Resource": "PEPPER",
+      "Criteria": {
+        "Name": "PointsIfHasMostOfResource",
+        "Points": [
+          10
+        ],
+        "Args": [
+          "LETTUCE"
+        ]
+      }
+    },
+    {
+      "Resource": "LETTUCE",
+      "Criteria": {
+        "Name": "PointsIfHasMostOfResource",
+        "Points": [
+          10
+        ],
+        "Args": [
+          "PEPPER"
+        ]
+      }
+    },
+    {
+      "Resource": "CARROT",
+      "Criteria": {
+        "Name": "PointsIfHasMostOfResource",
+        "Points": [
+          10
+        ],
+        "Args": [
+          "CABBAGE"
+        ]
+      }
+    },
+    {
+      "Resource": "CABBAGE",
+      "Criteria": {
+        "Name": "PointsIfHasMostOfResource",
+        "Points": [
+          10
+        ],
+        "Args": [
+          "CARROT"
+        ]
+      }
+    },
+    {
+      "Resource": "ONION",
+      "Criteria": {
+        "Name": "PointsIfHasMostOfResource",
+        "Points": [
+          10
+        ],
+        "Args": [
+          "TOMATO"
+        ]
+      }
+    },
+    {
+      "Resource": "TOMATO",
+      "Criteria": {
+        "Name": "PointsIfHasMostOfResource",
+        "Points": [
+          10
+        ],
+        "Args": [
+          "ONION"
+        ]
+      }
+    },
+    {
+      "Resource": "PEPPER",
+      "Criteria": {
+        "Name": "PointsIfHasFewestOfResource",
+        "Points": [
+          7
+        ],
+        "Args": [
+          "LETTUCE"
+        ]
+      }
+    },
+    {
+      "Resource": "LETTUCE",
+      "Criteria": {
+        "Name": "PointsIfHasFewestOfResource",
+        "Points": [
+          7
+        ],
+        "Args": [
+          "PEPPER"
+        ]
+      }
+    },
+    {
+      "Resource": "CARROT",
+      "Criteria": {
+        "Name": "PointsIfHasFewestOfResource",
+        "Points": [
+          7
+        ],
+        "Args": [
+          "CABBAGE"
+        ]
+      }
+    },
+    {
+      "Resource": "CABBAGE",
+      "Criteria": {
+        "Name": "PointsIfHasFewestOfResource",
+        "Points": [
+          7
+        ],
+        "Args": [
+          "CARROT"
+        ]
+      }
+    },
+    {
+      "Resource": "ONION",
+      "Criteria": {
+        "Name": "PointsIfHasFewestOfResource",
+        "Points": [
+          7
+        ],
+        "Args": [
+          "TOMATO"
+        ]
+      }
+    },
+    {
+      "Resource": "TOMATO",
+      "Criteria": {
+        "Name": "PointsIfHasFewestOfResource",
+        "Points": [
+          7
+        ],
+        "Args": [
+          "ONION"
+        ]
+      }
+    },
+    {
+      "Resource": "PEPPER",
+      "Criteria": {
+        "Name": "PointsIfHasEvenOrOddOfResource",
+        "Points": [
+          7,
+          3
+        ],
+        "Args": [
+          "LETTUCE"
+        ]
+      }
+    },
+    {
+      "Resource": "LETTUCE",
+      "Criteria": {
+        "Name": "PointsIfHasEvenOrOddOfResource",
+        "Points": [
+          7,
+          3
+        ],
+        "Args": [
+          "PEPPER"
+        ]
+      }
+    },
+    {
+      "Resource": "CARROT",
+      "Criteria": {
+        "Name": "PointsIfHasEvenOrOddOfResource",
+        "Points": [
+          7,
+          3
+        ],
+        "Args": [
+          "CABBAGE"
+        ]
+      }
+    },
+    {
+      "Resource": "CABBAGE",
+      "Criteria": {
+        "Name": "PointsIfHasEvenOrOddOfResource",
+        "Points": [
+          7,
+          3
+        ],
+        "Args": [
+          "CARROT"
+        ]
+      }
+    },
+    {
+      "Resource": "ONION",
+      "Criteria": {
+        "Name": "PointsIfHasEvenOrOddOfResource",
+        "Points": [
+          7,
+          3
+        ],
+        "Args": [
+          "TOMATO"
+        ]
+      }
+    },
+    {
+      "Resource": "TOMATO",
+      "Criteria": {
+        "Name": "PointsIfHasEvenOrOddOfResource",
+        "Points": [
+          7,
+          3
+        ],
+        "Args": [
+          "ONION"
+        ]
+      }
+    },
+    {
+      "Resource": "PEPPER",
+      "Criteria": {
+        "Name": "PointsPerCopyOfResource",
+        "Points": [
+          2
+        ],
+        "Args": [
+          "LETTUCE"
+        ]
+      }
+    },
+    {
+      "Resource": "LETTUCE",
+      "Criteria": {
+        "Name": "PointsPerCopyOfResource",
+        "Points": [
+          2
+        ],
+        "Args": [
+          "PEPPER"
+        ]
+      }
+    },
+    {
+      "Resource": "CARROT",
+      "Criteria": {
+        "Name": "PointsPerCopyOfResource",
+        "Points": [
+          2
+        ],
+        "Args": [
+          "CABBAGE"
+        ]
+      }
+    },
+    {
+      "Resource": "CABBAGE",
+      "Criteria": {
+        "Name": "PointsPerCopyOfResource",
+        "Points": [
+          2
+        ],
+        "Args": [
+          "CARROT"
+        ]
+      }
+    },
+    {
+      "Resource": "ONION",
+      "Criteria": {
+        "Name": "PointsPerCopyOfResource",
+        "Points": [
+          2
+        ],
+        "Args": [
+          "TOMATO"
+        ]
+      }
+    },
+    {
+      "Resource": "TOMATO",
+      "Criteria": {
+        "Name": "PointsPerCopyOfResource",
+        "Points": [
+          2
+        ],
+        "Args": [
+          "ONION"
+        ]
+      }
+    },
+    {
+      "Resource": "PEPPER",
+      "Criteria": {
+        "Name": "PointsPerCombinationOfResources",
+        "Points": [
+          5
+        ],
+        "Args": [
+          "LETTUCE",
+          "LETTUCE"
+        ]
+      }
+    },
+    {
+      "Resource": "LETTUCE",
+      "Criteria": {
+        "Name": "PointsPerCombinationOfResources",
+        "Points": [
+          5
+        ],
+        "Args": [
+          "PEPPER",
+          "PEPPER"
+        ]
+      }
+    },
+    {
+      "Resource": "CARROT",
+      "Criteria": {
+        "Name": "PointsPerCombinationOfResources",
+        "Points": [
+          5
+        ],
+        "Args": [
+          "CABBAGE",
+          "CABBAGE"
+        ]
+      }
+    },
+    {
+      "Resource": "CABBAGE",
+      "Criteria": {
+        "Name": "PointsPerCombinationOfResources",
+        "Points": [
+          5
+        ],
+        "Args": [
+          "CARROT",
+          "CARROT"
+        ]
+      }
+    },
+    {
+      "Resource": "ONION",
+      "Criteria": {
+        "Name": "PointsPerCombinationOfResources",
+        "Points": [
+          5
+        ],
+        "Args": [
+          "TOMATO",
+          "TOMATO"
+        ]
+      }
+    },
+    {
+      "Resource": "TOMATO",
+      "Criteria": {
+        "Name": "PointsPerCombinationOfResources",
+        "Points": [
+          5
+        ],
+        "Args": [
+          "ONION",
+          "ONION"
+        ]
+      }
+    },
+    {
+      "Resource": "PEPPER",
+      "Criteria": {
+        "Name": "PointsPerCombinationOfResources",
+        "Points": [
+          5
+        ],
+        "Args": [
+          "CARROT",
+          "ONION"
+        ]
+      }
+    },
+    {
+      "Resource": "LETTUCE",
+      "Criteria": {
+        "Name": "PointsPerCombinationOfResources",
+        "Points": [
+          5
+        ],
+        "Args": [
+          "CABBAGE",
+          "ONION"
+        ]
+      }
+    },
+    {
+      "Resource": "CARROT",
+      "Criteria": {
+        "Name": "PointsPerCombinationOfResources",
+        "Points": [
+          5
+        ],
+        "Args": [
+          "TOMATO",
+          "LETTUCE"
+        ]
+      }
+    },
+    {
+      "Resource": "CABBAGE",
+      "Criteria": {
+        "Name": "PointsPerCombinationOfResources",
+        "Points": [
+          5
+        ],
+        "Args": [
+          "LETTUCE",
+          "ONION"
+        ]
+      }
+    },
+    {
+      "Resource": "ONION",
+      "Criteria": {
+        "Name": "PointsPerCombinationOfResources",
+        "Points": [
+          5
+        ],
+        "Args": [
+          "CABBAGE",
+          "LETTUCE"
+        ]
+      }
+    },
+    {
+      "Resource": "TOMATO",
+      "Criteria": {
+        "Name": "PointsPerCombinationOfResources",
+        "Points": [
+          5
+        ],
+        "Args": [
+          "CARROT",
+          "LETTUCE"
+        ]
+      }
+    },
+    {
+      "Resource": "PEPPER",
+      "Criteria": {
+        "Name": "PointsPerCombinationOfResources",
+        "Points": [
+          5
+        ],
+        "Args": [
+          "CABBAGE",
+          "TOMATO"
+        ]
+      }
+    },
+    {
+      "Resource": "LETTUCE",
+      "Criteria": {
+        "Name": "PointsPerCombinationOfResources",
+        "Points": [
+          5
+        ],
+        "Args": [
+          "CARROT",
+          "TOMATO"
+        ]
+      }
+    },
+    {
+      "Resource": "CARROT",
+      "Criteria": {
+        "Name": "PointsPerCombinationOfResources",
+        "Points": [
+          5
+        ],
+        "Args": [
+          "ONION",
+          "PEPPER"
+        ]
+      }
+    },
+    {
+      "Resource": "CABBAGE",
+      "Criteria": {
+        "Name": "PointsPerCombinationOfResources",
+        "Points": [
+          5
+        ],
+        "Args": [
+          "TOMATO",
+          "PEPPER"
+        ]
+      }
+    },
+    {
+      "Resource": "ONION",
+      "Criteria": {
+        "Name": "PointsPerCombinationOfResources",
+        "Points": [
+          5
+        ],
+        "Args": [
+          "CARROT",
+          "PEPPER"
+        ]
+      }
+    },
+    {
+      "Resource": "TOMATO",
+      "Criteria": {
+        "Name": "PointsPerCombinationOfResources",
+        "Points": [
+          5
+        ],
+        "Args": [
+          "CABBAGE",
+          "PEPPER"
+        ]
+      }
+    },
+    {
+      "Resource": "PEPPER",
+      "Criteria": {
+        "Name": "PointsPerCopyOfResource",
+        "Points": [
+          1,
+          1
+        ],
+        "Args": [
+          "LETTUCE",
+          "ONION"
+        ]
+      }
+    },
+    {
+      "Resource": "LETTUCE",
+      "Criteria": {
+        "Name": "PointsPerCopyOfResource",
+        "Points": [
+          1,
+          1
+        ],
+        "Args": [
+          "PEPPER",
+          "TOMATO"
+        ]
+      }
+    },
+    {
+      "Resource": "CARROT",
+      "Criteria": {
+        "Name": "PointsPerCopyOfResource",
+        "Points": [
+          1,
+          1
+        ],
+        "Args": [
+          "CABBAGE",
+          "LETTUCE"
+        ]
+      }
+    },
+    {
+      "Resource": "CABBAGE",
+      "Criteria": {
+        "Name": "PointsPerCopyOfResource",
+        "Points": [
+          1,
+          1
+        ],
+        "Args": [
+          "CARROT",
+          "PEPPER"
+        ]
+      }
+    },
+    {
+      "Resource": "ONION",
+      "Criteria": {
+        "Name": "PointsPerCopyOfResource",
+        "Points": [
+          1,
+          1
+        ],
+        "Args": [
+          "TOMATO",
+          "CARROT"
+        ]
+      }
+    },
+    {
+      "Resource": "TOMATO",
+      "Criteria": {
+        "Name": "PointsPerCopyOfResource",
+        "Points": [
+          1,
+          1
+        ],
+        "Args": [
+          "ONION",
+          "CABBAGE"
+        ]
+      }
+    },
+    {
+      "Resource": "PEPPER",
+      "Criteria": {
+        "Name": "PointsPerCopyOfResource",
+        "Points": [
+          1,
+          1
+        ],
+        "Args": [
+          "LETTUCE",
+          "TOMATO"
+        ]
+      }
+    },
+    {
+      "Resource": "LETTUCE",
+      "Criteria": {
+        "Name": "PointsPerCopyOfResource",
+        "Points": [
+          1,
+          1
+        ],
+        "Args": [
+          "PEPPER",
+          "ONION"
+        ]
+      }
+    },
+    {
+      "Resource": "CARROT",
+      "Criteria": {
+        "Name": "PointsPerCopyOfResource",
+        "Points": [
+          1,
+          1
+        ],
+        "Args": [
+          "CABBAGE",
+          "PEPPER"
+        ]
+      }
+    },
+    {
+      "Resource": "CABBAGE",
+      "Criteria": {
+        "Name": "PointsPerCopyOfResource",
+        "Points": [
+          1,
+          1
+        ],
+        "Args": [
+          "CARROT",
+          "LETTUCE"
+        ]
+      }
+    },
+    {
+      "Resource": "ONION",
+      "Criteria": {
+        "Name": "PointsPerCopyOfResource",
+        "Points": [
+          1,
+          1
+        ],
+        "Args": [
+          "TOMATO",
+          "CABBAGE"
+        ]
+      }
+    },
+    {
+      "Resource": "TOMATO",
+      "Criteria": {
+        "Name": "PointsPerCopyOfResource",
+        "Points": [
+          1,
+          1
+        ],
+        "Args": [
+          "ONION",
+          "CARROT"
+        ]
+      }
+    },
+    {
+      "Resource": "PEPPER",
+      "Criteria": {
+        "Name": "PointsPerCopyOfResource",
+        "Points": [
+          3,
+          -2
+        ],
+        "Args": [
+          "LETTUCE",
+          "CARROT"
+        ]
+      }
+    },
+    {
+      "Resource": "LETTUCE",
+      "Criteria": {
+        "Name": "PointsPerCopyOfResource",
+        "Points": [
+          3,
+          -2
+        ],
+        "Args": [
+          "PEPPER",
+          "CABBAGE"
+        ]
+      }
+    },
+    {
+      "Resource": "CARROT",
+      "Criteria": {
+        "Name": "PointsPerCopyOfResource",
+        "Points": [
+          3,
+          -2
+        ],
+        "Args": [
+          "CABBAGE",
+          "TOMATO"
+        ]
+      }
+    },
+    {
+      "Resource": "CABBAGE",
+      "Criteria": {
+        "Name": "PointsPerCopyOfResource",
+        "Points": [
+          3,
+          -2
+        ],
+        "Args": [
+          "CARROT",
+          "ONION"
+        ]
+      }
+    },
+    {
+      "Resource": "ONION",
+      "Criteria": {
+        "Name": "PointsPerCopyOfResource",
+        "Points": [
+          3,
+          -2
+        ],
+        "Args": [
+          "TOMATO",
+          "LETTUCE"
+        ]
+      }
+    },
+    {
+      "Resource": "TOMATO",
+      "Criteria": {
+        "Name": "PointsPerCopyOfResource",
+        "Points": [
+          3,
+          -2
+        ],
+        "Args": [
+          "ONION",
+          "PEPPER"
+        ]
+      }
+    },
+    {
+      "Resource": "PEPPER",
+      "Criteria": {
+        "Name": "PointsPerCombinationOfResources",
+        "Points": [
+          8
+        ],
+        "Args": [
+          "LETTUCE",
+          "LETTUCE",
+          "LETTUCE"
+        ]
+      }
+    },
+    {
+      "Resource": "LETTUCE",
+      "Criteria": {
+        "Name": "PointsPerCombinationOfResources",
+        "Points": [
+          8
+        ],
+        "Args": [
+          "PEPPER",
+          "PEPPER",
+          "PEPPER"
+        ]
+      }
+    },
+    {
+      "Resource": "CARROT",
+      "Criteria": {
+        "Name": "PointsPerCombinationOfResources",
+        "Points": [
+          8
+        ],
+        "Args": [
+          "CABBAGE",
+          "CABBAGE",
+          "CABBAGE"
+        ]
+      }
+    },
+    {
+      "Resource": "CABBAGE",
+      "Criteria": {
+        "Name": "PointsPerCombinationOfResources",
+        "Points": [
+          8
+        ],
+        "Args": [
+          "CARROT",
+          "CARROT",
+          "CARROT"
+        ]
+      }
+    },
+    {
+      "Resource": "ONION",
+      "Criteria": {
+        "Name": "PointsPerCombinationOfResources",
+        "Points": [
+          8
+        ],
+        "Args": [
+          "TOMATO",
+          "TOMATO",
+          "TOMATO"
+        ]
+      }
+    },
+    {
+      "Resource": "TOMATO",
+      "Criteria": {
+        "Name": "PointsPerCombinationOfResources",
+        "Points": [
+          8
+        ],
+        "Args": [
+          "ONION",
+          "ONION",
+          "ONION"
+        ]
+      }
+    },
+    {
+      "Resource": "PEPPER",
+      "Criteria": {
+        "Name": "PointsPerCombinationOfResources",
+        "Points": [
+          8
+        ],
+        "Args": [
+          "PEPPER",
+          "LETTUCE",
+          "CABBAGE"
+        ]
+      }
+    },
+    {
+      "Resource": "LETTUCE",
+      "Criteria": {
+        "Name": "PointsPerCombinationOfResources",
+        "Points": [
+          8
+        ],
+        "Args": [
+          "LETTUCE",
+          "PEPPER",
+          "CARROT"
+        ]
+      }
+    },
+    {
+      "Resource": "CARROT",
+      "Criteria": {
+        "Name": "PointsPerCombinationOfResources",
+        "Points": [
+          8
+        ],
+        "Args": [
+          "CARROT",
+          "CABBAGE",
+          "ONION"
+        ]
+      }
+    },
+    {
+      "Resource": "CABBAGE",
+      "Criteria": {
+        "Name": "PointsPerCombinationOfResources",
+        "Points": [
+          8
+        ],
+        "Args": [
+          "CABBAGE",
+          "CARROT",
+          "TOMATO"
+        ]
+      }
+    },
+    {
+      "Resource": "ONION",
+      "Criteria": {
+        "Name": "PointsPerCombinationOfResources",
+        "Points": [
+          8
+        ],
+        "Args": [
+          "ONION",
+          "TOMATO",
+          "PEPPER"
+        ]
+      }
+    },
+    {
+      "Resource": "TOMATO",
+      "Criteria": {
+        "Name": "PointsPerCombinationOfResources",
+        "Points": [
+          8
+        ],
+        "Args": [
+          "TOMATO",
+          "ONION",
+          "LETTUCE"
+        ]
+      }
+    },
+    {
+      "Resource": "PEPPER",
+      "Criteria": {
+        "Name": "PointsPerCombinationOfResources",
+        "Points": [
+          8
+        ],
+        "Args": [
+          "TOMATO",
+          "LETTUCE",
+          "CARROT"
+        ]
+      }
+    },
+    {
+      "Resource": "LETTUCE",
+      "Criteria": {
+        "Name": "PointsPerCombinationOfResources",
+        "Points": [
+          8
+        ],
+        "Args": [
+          "ONION",
+          "PEPPER",
+          "CABBAGE"
+        ]
+      }
+    },
+    {
+      "Resource": "CARROT",
+      "Criteria": {
+        "Name": "PointsPerCombinationOfResources",
+        "Points": [
+          8
+        ],
+        "Args": [
+          "PEPPER",
+          "CABBAGE",
+          "TOMATO"
+        ]
+      }
+    },
+    {
+      "Resource": "CABBAGE",
+      "Criteria": {
+        "Name": "PointsPerCombinationOfResources",
+        "Points": [
+          8
+        ],
+        "Args": [
+          "LETTUCE",
+          "CARROT",
+          "ONION"
+        ]
+      }
+    },
+    {
+      "Resource": "ONION",
+      "Criteria": {
+        "Name": "PointsPerCombinationOfResources",
+        "Points": [
+          8
+        ],
+        "Args": [
+          "CABBAGE",
+          "TOMATO",
+          "LETTUCE"
+        ]
+      }
+    },
+    {
+      "Resource": "TOMATO",
+      "Criteria": {
+        "Name": "PointsPerCombinationOfResources",
+        "Points": [
+          8
+        ],
+        "Args": [
+          "CARROT",
+          "ONION",
+          "PEPPER"
+        ]
+      }
+    },
+    {
+      "Resource": "PEPPER",
+      "Criteria": {
+        "Name": "PointsPerCopyOfResource",
+        "Points": [
+          2,
+          1,
+          -2
+        ],
+        "Args": [
+          "LETTUCE",
+          "ONION",
+          "PEPPER"
+        ]
+      }
+    },
+    {
+      "Resource": "LETTUCE",
+      "Criteria": {
+        "Name": "PointsPerCopyOfResource",
+        "Points": [
+          2,
+          1,
+          -2
+        ],
+        "Args": [
+          "PEPPER",
+          "TOMATO",
+          "LETTUCE"
+        ]
+      }
+    },
+    {
+      "Resource": "CARROT",
+      "Criteria": {
+        "Name": "PointsPerCopyOfResource",
+        "Points": [
+          2,
+          1,
+          -2
+        ],
+        "Args": [
+          "CABBAGE",
+          "LETTUCE",
+          "CARROT"
+        ]
+      }
+    },
+    {
+      "Resource": "CABBAGE",
+      "Criteria": {
+        "Name": "PointsPerCopyOfResource",
+        "Points": [
+          2,
+          1,
+          -2
+        ],
+        "Args": [
+          "CARROT",
+          "PEPPER",
+          "CABBAGE"
+        ]
+      }
+    },
+    {
+      "Resource": "ONION",
+      "Criteria": {
+        "Name": "PointsPerCopyOfResource",
+        "Points": [
+          2,
+          1,
+          -2
+        ],
+        "Args": [
+          "TOMATO",
+          "CARROT",
+          "ONION"
+        ]
+      }
+    },
+    {
+      "Resource": "TOMATO",
+      "Criteria": {
+        "Name": "PointsPerCopyOfResource",
+        "Points": [
+          2,
+          1,
+          -2
+        ],
+        "Args": [
+          "ONION",
+          "CABBAGE",
+          "TOMATO"
+        ]
+      }
+    },
+    {
+      "Resource": "PEPPER",
+      "Criteria": {
+        "Name": "PointsPerCopyOfResource",
+        "Points": [
+          2,
+          2,
+          -4
+        ],
+        "Args": [
+          "LETTUCE",
+          "CARROT",
+          "ONION"
+        ]
+      }
+    },
+    {
+      "Resource": "LETTUCE",
+      "Criteria": {
+        "Name": "PointsPerCopyOfResource",
+        "Points": [
+          2,
+          2,
+          -4
+        ],
+        "Args": [
+          "PEPPER",
+          "CABBAGE",
+          "TOMATO"
+        ]
+      }
+    },
+    {
+      "Resource": "CARROT",
+      "Criteria": {
+        "Name": "PointsPerCopyOfResource",
+        "Points": [
+          2,
+          2,
+          -4
+        ],
+        "Args": [
+          "CABBAGE",
+          "TOMATO",
+          "LETTUCE"
+        ]
+      }
+    },
+    {
+      "Resource": "CABBAGE",
+      "Criteria": {
+        "Name": "PointsPerCopyOfResource",
+        "Points": [
+          2,
+          2,
+          -4
+        ],
+        "Args": [
+          "CARROT",
+          "ONION",
+          "PEPPER"
+        ]
+      }
+    },
+    {
+      "Resource": "ONION",
+      "Criteria": {
+        "Name": "PointsPerCopyOfResource",
+        "Points": [
+          2,
+          2,
+          -4
+        ],
+        "Args": [
+          "TOMATO",
+          "LETTUCE",
+          "CARROT"
+        ]
+      }
+    },
+    {
+      "Resource": "TOMATO",
+      "Criteria": {
+        "Name": "PointsPerCopyOfResource",
+        "Points": [
+          2,
+          2,
+          -4
+        ],
+        "Args": [
+          "ONION",
+          "PEPPER",
+          "CABBAGE"
+        ]
+      }
+    },
+    {
+      "Resource": "PEPPER",
+      "Criteria": {
+        "Name": "PointsPerCopyOfResource",
+        "Points": [
+          3,
+          -1,
+          -1
+        ],
+        "Args": [
+          "LETTUCE",
+          "ONION",
+          "PEPPER"
+        ]
+      }
+    },
+    {
+      "Resource": "LETTUCE",
+      "Criteria": {
+        "Name": "PointsPerCopyOfResource",
+        "Points": [
+          3,
+          -1,
+          -1
+        ],
+        "Args": [
+          "PEPPER",
+          "TOMATO",
+          "LETTUCE"
+        ]
+      }
+    },
+    {
+      "Resource": "CARROT",
+      "Criteria": {
+        "Name": "PointsPerCopyOfResource",
+        "Points": [
+          3,
+          -1,
+          -1
+        ],
+        "Args": [
+          "CABBAGE",
+          "LETTUCE",
+          "CARROT"
+        ]
+      }
+    },
+    {
+      "Resource": "CABBAGE",
+      "Criteria": {
+        "Name": "PointsPerCopyOfResource",
+        "Points": [
+          3,
+          -1,
+          -1
+        ],
+        "Args": [
+          "CARROT",
+          "PEPPER",
+          "CABBAGE"
+        ]
+      }
+    },
+    {
+      "Resource": "ONION",
+      "Criteria": {
+        "Name": "PointsPerCopyOfResource",
+        "Points": [
+          3,
+          -1,
+          -1
+        ],
+        "Args": [
+          "TOMATO",
+          "CARROT",
+          "ONION"
+        ]
+      }
+    },
+    {
+      "Resource": "TOMATO",
+      "Criteria": {
+        "Name": "PointsPerCopyOfResource",
+        "Points": [
+          3,
+          -1,
+          -1
+        ],
+        "Args": [
+          "ONION",
+          "CABBAGE",
+          "TOMATO"
+        ]
+      }
+    },
+    {
+      "Resource": "PEPPER",
+      "Criteria": {
+        "Name": "PointsPerCopyOfResource",
+        "Points": [
+          4,
+          -2,
+          -2
+        ],
+        "Args": [
+          "LETTUCE",
+          "TOMATO",
+          "CABBAGE"
+        ]
+      }
+    },
+    {
+      "Resource": "LETTUCE",
+      "Criteria": {
+        "Name": "PointsPerCopyOfResource",
+        "Points": [
+          4,
+          -2,
+          -2
+        ],
+        "Args": [
+          "PEPPER",
+          "ONION",
+          "CARROT"
+        ]
+      }
+    },
+    {
+      "Resource": "CARROT",
+      "Criteria": {
+        "Name": "PointsPerCopyOfResource",
+        "Points": [
+          4,
+          -2,
+          -2
+        ],
+        "Args": [
+          "CABBAGE",
+          "PEPPER",
+          "ONION"
+        ]
+      }
+    },
+    {
+      "Resource": "CABBAGE",
+      "Criteria": {
+        "Name": "PointsPerCopyOfResource",
+        "Points": [
+          4,
+          -2,
+          -2
+        ],
+        "Args": [
+          "CARROT",
+          "LETTUCE",
+          "TOMATO"
+        ]
+      }
+    },
+    {
+      "Resource": "ONION",
+      "Criteria": {
+        "Name": "PointsPerCopyOfResource",
+        "Points": [
+          4,
+          -1,
+          -2
+        ],
+        "Args": [
+          "TOMATO",
+          "CABBAGE",
+          "PEPPER"
+        ]
+      }
+    },
+    {
+      "Resource": "TOMATO",
+      "Criteria": {
+        "Name": "PointsPerCopyOfResource",
+        "Points": [
+          4,
+          -2,
+          -2
+        ],
+        "Args": [
+          "ONION",
+          "CARROT",
+          "LETTUCE"
+        ]
+      }
+    },
+    {
+      "Resource": "PEPPER",
+      "Criteria": {
+        "Name": "PointsIfMostTotalResources",
+        "Points": [
+          10
+        ],
+        "Args": []
+      }
+    },
+    {
+      "Resource": "LETTUCE",
+      "Criteria": {
+        "Name": "PointsIfFewestTotalResources",
+        "Points": [
+          7
+        ],
+        "Args": []
+      }
+    },
+    {
+      "Resource": "CARROT",
+      "Criteria": {
+        "Name": "PointsPerTypeIfHasAtLeastXOfType",
+        "Points": [
+          5
+        ],
+        "Args": [
+          3
+        ]
+      }
+    },
+    {
+      "Resource": "CABBAGE",
+      "Criteria": {
+        "Name": "PointsPerMissingType",
+        "Points": [
+          5
+        ],
+        "Args": []
+      }
+    },
+    {
+      "Resource": "ONION",
+      "Criteria": {
+        "Name": "PointsPerTypeIfHasAtLeastXOfType",
+        "Points": [
+          3
+        ],
+        "Args": [
+          2
+        ]
+      }
+    },
+    {
+      "Resource": "TOMATO",
+      "Criteria": {
+        "Name": "PointsIfHasCompleteSet",
+        "Points": [
+          12
+        ],
+        "Args": []
+      }
+    }
+  ]
 }

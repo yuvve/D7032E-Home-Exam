@@ -6,7 +6,7 @@ import assets.Util;
 
 import java.util.ArrayList;
 
-public class PointsPerCombinationOfResource implements ICriteriaStrategy {
+public class PointsPerCombinationOfResources implements ICriteriaStrategy {
     private final int pointsValue;
     private final ArrayList<IResource> resourcesInCombo;
 
@@ -15,7 +15,7 @@ public class PointsPerCombinationOfResource implements ICriteriaStrategy {
      * @param pointsValue The points to award for each combination of resources
      * @param resourcesInCombo The resources that must be in a combination to earn points
      */
-    public PointsPerCombinationOfResource(int pointsValue, ArrayList<IResource> resourcesInCombo) {
+    public PointsPerCombinationOfResources(int pointsValue, ArrayList<IResource> resourcesInCombo) {
         this.pointsValue = pointsValue;
         this.resourcesInCombo = resourcesInCombo;
     }
