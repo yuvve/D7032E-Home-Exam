@@ -1,6 +1,7 @@
 package assets;
 
 import common.IRepresentable;
+import exceptions.CardFlippingForbiddenDueToGameLogic;
 
 /**
  * Interface representing a card in the game, where one side is a scoring criteria and the other side is a resource.
@@ -26,8 +27,15 @@ public interface ICard extends IRepresentable {
     boolean isCriteriaSideActive();
 
     /**
+     * Gets whether the card can be flipped.
+     * @return Whether the card can be flipped.
+     */
+    boolean canFlip();
+
+    /**
      * Flips the card to the other side.
      * If the criteria side is active, the resource side becomes active, and vice versa.
+     * @throws CardFlippingForbiddenDueToGameLogic If the card cannot be flipped due to game logic.
      */
-    void flipCriteriaSide();
+    void flip() throws CardFlippingForbiddenDueToGameLogic ;
 }

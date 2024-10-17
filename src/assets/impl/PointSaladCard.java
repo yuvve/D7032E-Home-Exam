@@ -3,6 +3,7 @@ package assets.impl;
 import assets.ICard;
 import assets.ICriteriaStrategy;
 import assets.IResource;
+import exceptions.CardFlippingForbiddenDueToGameLogic;
 
 public class PointSaladCard implements ICard {
 
@@ -32,7 +33,15 @@ public class PointSaladCard implements ICard {
     }
 
     @Override
-    public void flipCriteriaSide() {
+    public boolean canFlip(){
+        return criteriaSideActive;
+    }
+
+    @Override
+    public void flip() throws CardFlippingForbiddenDueToGameLogic {
+        if (!canFlip()){
+            throw new CardFlippingForbiddenDueToGameLogic("Card cannot be flipped");
+        }
         criteriaSideActive = !criteriaSideActive;
     }
 

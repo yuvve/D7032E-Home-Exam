@@ -94,7 +94,7 @@
         <mxCell id="SN2yluZUW8M9mS18KECz-17" value="«interface»&lt;br&gt;&lt;b&gt;ICard&lt;/b&gt;" style="html=1;whiteSpace=wrap;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;fillColor=#647687;fontColor=#ffffff;strokeColor=#314354;" parent="SN2yluZUW8M9mS18KECz-16" vertex="1">
           <mxGeometry width="171" height="43.15217273837441" as="geometry" />
         </mxCell>
-        <mxCell id="SN2yluZUW8M9mS18KECz-18" value="&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;ICriteriaStrategy getCriteria();&lt;/span&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;IResource getResource();&lt;/div&gt;&lt;div&gt;boolean isCriteriaSideActive();&lt;/div&gt;&lt;div&gt;void flip();&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" parent="SN2yluZUW8M9mS18KECz-16" vertex="1">
+        <mxCell id="SN2yluZUW8M9mS18KECz-18" value="&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;ICriteriaStrategy getCriteria();&lt;/span&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;IResource getResource();&lt;/div&gt;&lt;div&gt;boolean isCriteriaSideActive();&lt;/div&gt;&lt;div&gt;boolean canFlip();&lt;/div&gt;&lt;div&gt;void flip();&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" parent="SN2yluZUW8M9mS18KECz-16" vertex="1">
           <mxGeometry y="43.15217273837441" width="171" height="151.03260458431043" as="geometry" />
         </mxCell>
         <mxCell id="FavM__Tn094tiXzaovP9-109" value="" style="group" parent="SN2yluZUW8M9mS18KECz-71" vertex="1" connectable="0">
