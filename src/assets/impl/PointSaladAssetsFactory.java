@@ -6,7 +6,6 @@ import exceptions.DeckGenerationException;
 import exceptions.PileGenerationException;
 import exceptions.MarketGenerationException;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -14,9 +13,9 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.HashMap;
 
-public class PointSaladAssetFactory extends AbstractAssetFactory {
-    private static final int NUM_PLAYERS_MIN = 2;
-    private static final int NUM_PLAYERS_MAX = 6;
+public class PointSaladAssetsFactory implements IAbstractAssetsFactory {
+    private static final int MIN_PLAYERS = 2;
+    private static final int MAX_PLAYERS = 6;
     private static final int CARDS_TO_REMOVE_PER_PLAYER_MISSING = 3;
     private static final int NUM_PILES = 3;
     private static final int DECK_SIZE = 108;
@@ -25,10 +24,9 @@ public class PointSaladAssetFactory extends AbstractAssetFactory {
     private static final int NUM_RESOURCES = 6;
 
     @Override
-    public IGameBoard createGameBoard(String deckRawString, int numPlayers)
-            throws PileGenerationException, MarketGenerationException, JSONException {
+    public IGameBoard createGameBoard(JSONObject deckJson, int numPlayers)
+            throws PileGenerationException, MarketGenerationException {
 
-        JSONObject deckJson = new JSONObject(deckRawString);
         ArrayList<ICard> deckCards = createDeck(deckJson, numPlayers);
         ArrayList<IPile> piles = createPiles(deckCards);
         IMarket market = createMarket(piles);
@@ -37,16 +35,18 @@ public class PointSaladAssetFactory extends AbstractAssetFactory {
     }
 
     @Override
-    protected ArrayList<ICard> createDeck(JSONObject deckJson, int numPlayers)
+    public ArrayList<ICard> createDeck(JSONObject deckJson, int numPlayers)
             throws DeckGenerationException {
 
-        if (numPlayers < NUM_PLAYERS_MIN || numPlayers > NUM_PLAYERS_MAX) {
+        if (numPlayers < MIN_PLAYERS || numPlayers > MAX_PLAYERS) {
             throw new DeckGenerationException("Invalid number of players.");
         }
 
         ArrayList<ICard> cards = new ArrayList<>();
-        for (String cardName : deckJson.keySet()) {
-            JSONObject cardJson = deckJson.getJSONObject(cardName);
+
+        JSONArray cardsArray = deckJson.getJSONArray("Cards");
+        for (int i = 0; i < cardsArray.length(); i++) {
+            JSONObject cardJson = cardsArray.getJSONObject(i);
             ICard card = createCard(cardJson);
             cards.add(card);
         }
@@ -55,7 +55,7 @@ public class PointSaladAssetFactory extends AbstractAssetFactory {
             throw new DeckGenerationException("Incorrect number of cards in deck.");
         }
 
-        if (numPlayers == 6) {
+        if (numPlayers == MAX_PLAYERS) {
             Collections.shuffle(cards);
             return cards;
         }
@@ -63,7 +63,7 @@ public class PointSaladAssetFactory extends AbstractAssetFactory {
         Map<IResource, ArrayList<ICard>> resourcePiles = sortCardsByResource(cards);
         for (ArrayList<ICard> cardsPile: resourcePiles.values()) {
             Collections.shuffle(cardsPile);
-            int numCardsToRemove = CARDS_TO_REMOVE_PER_PLAYER_MISSING * (NUM_PLAYERS_MAX - numPlayers);
+            int numCardsToRemove = CARDS_TO_REMOVE_PER_PLAYER_MISSING * (MAX_PLAYERS - numPlayers);
             for (int i = 0; i < numCardsToRemove; i++) {
                 cardsPile.removeFirst();
             }
@@ -78,7 +78,7 @@ public class PointSaladAssetFactory extends AbstractAssetFactory {
     }
 
     @Override
-    protected ArrayList<IPile> createPiles(ArrayList<ICard> deck) throws PileGenerationException {
+    public ArrayList<IPile> createPiles(ArrayList<ICard> deck) throws PileGenerationException {
         Collections.shuffle(deck);
         ArrayList<IPile> piles = new ArrayList<>();
 
@@ -101,7 +101,7 @@ public class PointSaladAssetFactory extends AbstractAssetFactory {
     }
 
     @Override
-    protected IMarket createMarket(ArrayList<IPile> piles) throws MarketGenerationException {
+    public IMarket createMarket(ArrayList<IPile> piles) throws MarketGenerationException {
         if (piles.size() != NUM_PILES) {
             throw new MarketGenerationException("Incorrect number of piles.");
         }
@@ -117,19 +117,19 @@ public class PointSaladAssetFactory extends AbstractAssetFactory {
     }
 
     @Override
-    protected IPile createPile(ArrayList<ICard> cards) {
+    public IPile createPile(ArrayList<ICard> cards) {
         return new PointSaladPile(cards);
     }
 
     @Override
-    protected ICard createCard(JSONObject cardJson){
-        ICriteriaStrategy criteriaStrategy = createCriteria(cardJson.getJSONObject("criteria"));
-        IResource resource = createResource(cardJson.getJSONObject("resource"));
+    public ICard createCard(JSONObject cardJson){
+        ICriteriaStrategy criteriaStrategy = createCriteria(cardJson.getJSONObject("Criteria"));
+        IResource resource = createResource(cardJson.getString("Resource"));
         return new PointSaladCard(criteriaStrategy, resource);
     }
 
     @Override
-    protected ICriteriaStrategy createCriteria(JSONObject criteriaJson){
+    public ICriteriaStrategy createCriteria(JSONObject criteriaJson){
         // Match criteria string to criteria class with given parameters
         String name = criteriaJson.getString("Name");
         JSONArray pointsArray = criteriaJson.getJSONArray("Points");
@@ -204,9 +204,8 @@ public class PointSaladAssetFactory extends AbstractAssetFactory {
     }
 
     @Override
-    protected IResource createResource(JSONObject resourceJson){
-        String name = resourceJson.getString("Name");
-        return PointSaladResource.valueOf(name);
+    public IResource createResource(String resourceName){
+        return PointSaladResource.valueOf(resourceName);
     }
 
     private Map<IResource, ArrayList<ICard>> sortCardsByResource(ArrayList<ICard> cards) {
@@ -214,8 +213,7 @@ public class PointSaladAssetFactory extends AbstractAssetFactory {
 
         for (ICard card : cards) {
             IResource resource = card.getResource();
-            sortedCards.get(resource).add(card);
-        }
+            sortedCards.computeIfAbsent(resource, k -> new ArrayList<>()).add(card);        }
 
         return sortedCards;
     }

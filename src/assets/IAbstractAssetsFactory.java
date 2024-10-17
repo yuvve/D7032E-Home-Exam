@@ -3,7 +3,6 @@ package assets;
 import exceptions.DeckGenerationException;
 import exceptions.PileGenerationException;
 import exceptions.MarketGenerationException;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -11,11 +10,18 @@ import java.util.ArrayList;
 /**
  * Interface for an abstract factory that generates assets according to game rules.
  */
-public abstract class AbstractAssetFactory implements IGameBoardFactory {
+public interface IAbstractAssetsFactory {
 
-    @Override
-    public abstract IGameBoard createGameBoard(String deckRawString, int numPlayers)
-            throws PileGenerationException, MarketGenerationException, JSONException;
+    /**
+     * Creates a game board.
+     * @param deckJson The JSON object representing the deck of cards.
+     * @param numPlayers The number of players.
+     * @return The game board.
+     * @throws PileGenerationException Thrown if the deck is incorrect for pile generation.
+     * @throws MarketGenerationException Thrown if the piles are incorrect for market generation.
+     */
+    IGameBoard createGameBoard(JSONObject deckJson, int numPlayers)
+            throws PileGenerationException, MarketGenerationException;
 
     /**
      * Creates a deck of cards.
@@ -23,7 +29,7 @@ public abstract class AbstractAssetFactory implements IGameBoardFactory {
      * @param numPlayers The number of players.
      * @return The deck of cards.
      */
-    protected abstract ArrayList<ICard> createDeck(JSONObject deckJson, int numPlayers)
+    ArrayList<ICard> createDeck(JSONObject deckJson, int numPlayers)
             throws DeckGenerationException;
 
     /**
@@ -32,7 +38,7 @@ public abstract class AbstractAssetFactory implements IGameBoardFactory {
      * @return The piles.
      * @throws PileGenerationException Thrown if any deck is incorrect for pile generation.
      */
-    protected abstract ArrayList<IPile> createPiles(ArrayList<ICard> deck) throws PileGenerationException;
+    ArrayList<IPile> createPiles(ArrayList<ICard> deck) throws PileGenerationException;
 
     /**
      * Creates a market.
@@ -40,33 +46,33 @@ public abstract class AbstractAssetFactory implements IGameBoardFactory {
      * @return The market.
      * @throws MarketGenerationException Thrown if the piles are incorrect for market generation.
      */
-    protected abstract IMarket createMarket(ArrayList<IPile> piles) throws MarketGenerationException;
+    IMarket createMarket(ArrayList<IPile> piles) throws MarketGenerationException;
 
     /**
      * Creates a pile.
      * @param cards The cards in the pile.
      * @return The pile.
      */
-    protected abstract IPile createPile(ArrayList<ICard> cards);
+    IPile createPile(ArrayList<ICard> cards);
 
     /**
      * Creates a card.
      * @param cardJson The JSON object representing the card.
      * @return The card.
      */
-    protected abstract ICard createCard(JSONObject cardJson);
+    ICard createCard(JSONObject cardJson);
 
     /**
      * Creates a criteria strategy.
      * @param criteriaJson The JSON object representing the criteria strategy.
      * @return The criteria strategy.
      */
-    protected abstract ICriteriaStrategy createCriteria(JSONObject criteriaJson);
+    ICriteriaStrategy createCriteria(JSONObject criteriaJson);
 
     /**
      * Creates a resource.
-     * @param resourceJson The JSON object representing the resource.
+     * @param resourceName The name of the resource.
      * @return The resource.
      */
-    protected abstract IResource createResource(JSONObject resourceJson);
+    IResource createResource(String resourceName);
 }
