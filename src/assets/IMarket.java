@@ -1,7 +1,7 @@
 package assets;
 
 import common.IRepresentable;
-import exceptions.MarketPositionOccupied;
+import exceptions.MarketCardPlacementException;
 
 /**
  * Interface for the card market.
@@ -32,7 +32,7 @@ public interface IMarket extends IRepresentable {
      *            Must be between 0 and the number of rows in the market cards.
      * @param column The column of the card.
      *               Must be between 0 and the number of columns in the market cards.
-     * @throws MarketPositionOccupied If the position is already occupied.
+     * @throws MarketCardPlacementException If the position is already occupied.
      */
-    void placeCardInPosition(ICard card, int row, int column) throws MarketPositionOccupied;
+    void placeCardInPosition(ICard card, int row, int column) throws MarketCardPlacementException;
 }

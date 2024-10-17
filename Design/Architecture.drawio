@@ -1,6 +1,6 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.7.17 Chrome/128.0.6613.36 Electron/32.0.1 Safari/537.36" version="24.7.17">
   <diagram name="Page-1" id="F4KrW8JxtzPAobyz8DqY">
-    <mxGraphModel dx="692" dy="1078" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1365" dy="565" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -210,8 +210,8 @@
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="271" y="770" />
-              <mxPoint x="231" y="770" />
-              <mxPoint x="231" y="588" />
+              <mxPoint x="171" y="770" />
+              <mxPoint x="171" y="588" />
               <mxPoint x="117" y="588" />
             </Array>
           </mxGeometry>
@@ -261,28 +261,28 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="SN2yluZUW8M9mS18KECz-169" value="" style="group" parent="SN2yluZUW8M9mS18KECz-71" vertex="1" connectable="0">
-          <mxGeometry x="250" y="578.63" width="230" height="181.88" as="geometry" />
+          <mxGeometry x="301" y="540" width="150" height="91.37" as="geometry" />
         </mxCell>
         <mxCell id="SN2yluZUW8M9mS18KECz-170" value="«interface»&lt;br&gt;&lt;b&gt;IGameBoard&lt;/b&gt;" style="html=1;whiteSpace=wrap;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;fillColor=#647687;fontColor=#ffffff;strokeColor=#314354;" parent="SN2yluZUW8M9mS18KECz-169" vertex="1">
-          <mxGeometry width="230.00000000000003" height="60.62666666666667" as="geometry" />
+          <mxGeometry width="150.00000000000003" height="30.45666666666667" as="geometry" />
         </mxCell>
         <mxCell id="SN2yluZUW8M9mS18KECz-171" value="&lt;div&gt;&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;AL&amp;lt;IPile&amp;gt; getPiles();&lt;/span&gt;&lt;br&gt;&lt;/div&gt;&lt;/div&gt;&lt;div&gt;IMarket getMarket();&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" parent="SN2yluZUW8M9mS18KECz-169" vertex="1">
-          <mxGeometry y="60.62666666666667" width="230.00000000000003" height="121.25333333333334" as="geometry" />
+          <mxGeometry y="30.45666666666667" width="150.00000000000003" height="60.91333333333334" as="geometry" />
         </mxCell>
         <mxCell id="t7THmQA8hoJjXBgSS74K-101" value="" style="group" parent="SN2yluZUW8M9mS18KECz-71" vertex="1" connectable="0">
           <mxGeometry x="271" y="794.3942323279263" width="310" height="176.53161574789536" as="geometry" />
         </mxCell>
-        <mxCell id="SN2yluZUW8M9mS18KECz-81" value="«interface»&lt;br&gt;&lt;b&gt;IAbstractAssetFactory&lt;/b&gt;" style="html=1;whiteSpace=wrap;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;fillColor=#647687;fontColor=#ffffff;strokeColor=#314354;" parent="t7THmQA8hoJjXBgSS74K-101" vertex="1">
+        <mxCell id="SN2yluZUW8M9mS18KECz-81" value="«abstract»&lt;br&gt;&lt;b&gt;AbstractAssetFactory&lt;/b&gt;" style="html=1;whiteSpace=wrap;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;fillColor=#a0522d;fontColor=#ffffff;strokeColor=#6D1F00;" parent="t7THmQA8hoJjXBgSS74K-101" vertex="1">
           <mxGeometry width="310" height="58.843871915965124" as="geometry" />
         </mxCell>
-        <mxCell id="SN2yluZUW8M9mS18KECz-82" value="&lt;div&gt;IGameBoard createGameBoard(JSONObject);&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;AL&amp;lt;IPile&amp;gt; createPiles(AL&amp;lt;ICard&amp;gt;);&lt;/span&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;div&gt;IMarket createMarket(AL&amp;lt;IPile&amp;gt;);&lt;/div&gt;&lt;/div&gt;&lt;div&gt;IPile createPile(AL&amp;lt;ICard&amp;gt;);&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;ICard &lt;/span&gt;&lt;span style=&quot;background-color: initial;&quot; class=&quot;hljs-title function_&quot;&gt;createCard&lt;/span&gt;&lt;span style=&quot;background-color: initial;&quot; class=&quot;hljs-params&quot;&gt;(JSONObject)&lt;/span&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;;&lt;/span&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;ICriteriaStrategy&amp;nbsp;&lt;span class=&quot;hljs-title function_&quot;&gt;createCriteria&lt;/span&gt;&lt;span class=&quot;hljs-params&quot;&gt;(JSONObject)&lt;/span&gt;;&lt;br&gt;IResource &lt;span class=&quot;hljs-title function_&quot;&gt;createResource&lt;/span&gt;&lt;span class=&quot;hljs-params&quot;&gt;(JSONObject)&lt;/span&gt;;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" parent="t7THmQA8hoJjXBgSS74K-101" vertex="1">
+        <mxCell id="SN2yluZUW8M9mS18KECz-82" value="&lt;div&gt;+ IGameBoard createGameBoard(String, int);&lt;/div&gt;&lt;div&gt;- AL&amp;lt;ICard&amp;gt; createDeck(JSONObject, int);&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;- AL&amp;lt;IPile&amp;gt; createPiles(AL&amp;lt;ICard&amp;gt;);&lt;/span&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;div&gt;- IMarket createMarket(AL&amp;lt;IPile&amp;gt;);&lt;/div&gt;&lt;/div&gt;&lt;div&gt;- IPile createPile(AL&amp;lt;ICard&amp;gt;);&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;- ICard &lt;/span&gt;&lt;span style=&quot;background-color: initial;&quot; class=&quot;hljs-title function_&quot;&gt;createCard&lt;/span&gt;&lt;span style=&quot;background-color: initial;&quot; class=&quot;hljs-params&quot;&gt;(JSONObject)&lt;/span&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;;&lt;/span&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;- ICriteriaStrategy&amp;nbsp;&lt;span class=&quot;hljs-title function_&quot;&gt;createCriteria&lt;/span&gt;&lt;span class=&quot;hljs-params&quot;&gt;(JSONObject)&lt;/span&gt;;&lt;br&gt;- IResource &lt;span class=&quot;hljs-title function_&quot;&gt;createResource&lt;/span&gt;&lt;span class=&quot;hljs-params&quot;&gt;(JSONObject)&lt;/span&gt;;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" parent="t7THmQA8hoJjXBgSS74K-101" vertex="1">
           <mxGeometry y="58.843871915965124" width="310" height="117.68774383193025" as="geometry" />
         </mxCell>
         <mxCell id="t7THmQA8hoJjXBgSS74K-102" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=0;exitDx=0;exitDy=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;dashed=1;" parent="SN2yluZUW8M9mS18KECz-71" source="SN2yluZUW8M9mS18KECz-170" target="SN2yluZUW8M9mS18KECz-167" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="308" y="570" />
-              <mxPoint x="304" y="570" />
+              <mxPoint x="358" y="500" />
+              <mxPoint x="304" y="500" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -306,6 +306,37 @@
         </mxCell>
         <mxCell id="D8gUfjj4I-UpTydI1lHh-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="SN2yluZUW8M9mS18KECz-71" source="D8gUfjj4I-UpTydI1lHh-2" target="SN2yluZUW8M9mS18KECz-18">
           <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="D8gUfjj4I-UpTydI1lHh-12" value="" style="group" vertex="1" connectable="0" parent="SN2yluZUW8M9mS18KECz-71">
+          <mxGeometry x="191" y="660" width="239" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="D8gUfjj4I-UpTydI1lHh-13" value="«interface»&lt;br&gt;&lt;b&gt;IGameBoardFactory&lt;/b&gt;" style="html=1;whiteSpace=wrap;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;fillColor=#647687;fontColor=#ffffff;strokeColor=#314354;" vertex="1" parent="D8gUfjj4I-UpTydI1lHh-12">
+          <mxGeometry width="239.00000000000006" height="30.000000000000004" as="geometry" />
+        </mxCell>
+        <mxCell id="D8gUfjj4I-UpTydI1lHh-14" value="&lt;div&gt;&lt;div&gt;IGameBoard createGameBoard(String, int)&lt;/div&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" vertex="1" parent="D8gUfjj4I-UpTydI1lHh-12">
+          <mxGeometry y="30.000000000000004" width="239.00000000000006" height="60.00000000000001" as="geometry" />
+        </mxCell>
+        <mxCell id="D8gUfjj4I-UpTydI1lHh-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="SN2yluZUW8M9mS18KECz-71" source="D8gUfjj4I-UpTydI1lHh-13" target="SN2yluZUW8M9mS18KECz-171">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="461" y="675" />
+              <mxPoint x="461" y="650" />
+              <mxPoint x="376" y="650" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="D8gUfjj4I-UpTydI1lHh-16" value="Extends" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="D8gUfjj4I-UpTydI1lHh-15">
+          <mxGeometry x="-0.5726" y="2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="D8gUfjj4I-UpTydI1lHh-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.526;entryY=0.982;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="SN2yluZUW8M9mS18KECz-71" source="SN2yluZUW8M9mS18KECz-81" target="D8gUfjj4I-UpTydI1lHh-14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="D8gUfjj4I-UpTydI1lHh-18" value="Implements" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="D8gUfjj4I-UpTydI1lHh-17">
+          <mxGeometry x="0.2886" y="-1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
         </mxCell>
         <mxCell id="FavM__Tn094tiXzaovP9-86" value="AL = ArrayList" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry width="60" height="30" as="geometry" />
@@ -704,12 +735,12 @@
         <mxCell id="H68FtNxgXIMP8BipjUGC-61" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.25;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="SN2yluZUW8M9mS18KECz-171" target="SN2yluZUW8M9mS18KECz-3" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="550" y="870" />
-              <mxPoint x="550" y="810" />
+              <mxPoint x="510" y="781" />
+              <mxPoint x="510" y="810" />
               <mxPoint x="770" y="810" />
               <mxPoint x="770" y="480" />
               <mxPoint x="780" y="480" />
-              <mxPoint x="780" y="112" />
+              <mxPoint x="780" y="113" />
             </Array>
           </mxGeometry>
         </mxCell>

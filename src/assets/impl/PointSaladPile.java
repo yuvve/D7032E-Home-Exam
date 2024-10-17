@@ -1,14 +1,17 @@
 package assets.impl;
 
 import assets.ICard;
-import assets.ICriteriaStrategy;
 import assets.IPile;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class PointSaladPile implements IPile {
-    private ArrayList<ICard> cards;
+    private final ArrayList<ICard> cards;
+
+    public PointSaladPile(ArrayList<ICard> cards) {
+        this.cards = cards;
+    }
 
     @Override
     public void shuffle() {

@@ -1,8 +1,6 @@
 package assets;
 
 import common.IRepresentable;
-import exceptions.IncorrectDeckForPileGeneration;
-import exceptions.IncorrectPilesForMarketGeneration;
 
 import java.util.ArrayList;
 

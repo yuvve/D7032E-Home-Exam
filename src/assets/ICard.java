@@ -1,8 +1,8 @@
 package assets;
 
 import common.IRepresentable;
-import exceptions.CardFlippingForbiddenDueToGameLogic;
-import exceptions.CardSidePeekingForbiddenDueToGameLogic;
+import exceptions.CardFlippingException;
+import exceptions.CardFlippingException;
 
 /**
  * Interface representing a card in the game, where one side is a scoring criteria and the other side is a resource.
@@ -12,16 +12,16 @@ public interface ICard extends IRepresentable {
     /**
      * Gets the criteria strategy of the card.
      * @return The criteria strategy of the card.
-     * @throws CardSidePeekingForbiddenDueToGameLogic If viewing the criteria side is forbidden due to game logic.
+     * @throws CardFlippingException If viewing the criteria side is forbidden due to game logic.
      */
-    ICriteriaStrategy getCriteriaStrategy() throws CardSidePeekingForbiddenDueToGameLogic;
+    ICriteriaStrategy getCriteriaStrategy() throws CardFlippingException;
 
     /**
      * Gets the resource of the card.
      * @return The resource of the card.
-     * @throws CardSidePeekingForbiddenDueToGameLogic If viewing the resource side is forbidden due to game logic.
+     * @throws CardFlippingException If viewing the resource side is forbidden due to game logic.
      */
-    IResource getResource() throws CardSidePeekingForbiddenDueToGameLogic;
+    IResource getResource() throws CardFlippingException;
 
     /**
      * Gets whether the criteria side of the card is active.
@@ -38,7 +38,7 @@ public interface ICard extends IRepresentable {
     /**
      * Flips the card to the other side.
      * If the criteria side is active, the resource side becomes active, and vice versa.
-     * @throws CardFlippingForbiddenDueToGameLogic If the card cannot be flipped due to game logic.
+     * @throws CardFlippingException If the card cannot be flipped due to game logic.
      */
-    void flip() throws CardFlippingForbiddenDueToGameLogic ;
+    void flip() throws CardFlippingException ;
 }
