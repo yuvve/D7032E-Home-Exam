@@ -8,16 +8,17 @@ import java.util.ArrayList;
  * Interface for a pile of cards in the game.
  */
 public interface IPile extends IRepresentable {
-    /**
-     * Gets the cards in the pile.
-     * @return The cards in the pile.
-     */
-    ArrayList<ICard> getCards();
 
     /**
      * Shuffles the pile.
      */
     void shuffle();
+
+    /**
+     * Gets the number of cards in the pile.
+     * @return The number of cards.
+     */
+    int getCardCount();
 
     /**
      * Draws (fetch and remove) the top card from the pile.
