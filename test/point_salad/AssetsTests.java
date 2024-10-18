@@ -1,12 +1,11 @@
 package point_salad;
 
-import assets.ICard;
-import assets.IMarket;
-import assets.IPile;
-import assets.IResource;
+import assets.*;
 import assets.impl.PointSaladAssetsFactory;
 import assets.impl.PointSaladResource;
+import exceptions.CardFlippingException;
 import org.json.JSONObject;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import utils.Util;
@@ -28,12 +27,18 @@ public class AssetsTests {
     private static final String JSON_FILENAME = "PointSaladManifest.json";
 
     private static JSONObject deckJson;
-    private static PointSaladAssetsFactory factory;
+    private static IAbstractAssetsFactory factory;
 
     @BeforeAll
     public static void setUpAll() throws FileNotFoundException {
         deckJson = Util.fileToJSON(JSON_FILENAME);
         factory = new PointSaladAssetsFactory();
+    }
+
+    @AfterAll
+    public static void tearDownAll() {
+        deckJson = null;
+        factory = null;
     }
 
     /**
@@ -164,5 +169,24 @@ public class AssetsTests {
             }
         }
         assertTrue(true);
+    }
+
+    /**
+     * <H1>Requirement 8</H1>
+     * Test that cards can be flipped to vegetable side, but not to criteria side.
+     */
+    @Test
+    public void testCardFlip() {
+        ArrayList<ICard> deck = factory.createDeck(deckJson, MAX_PLAYERS);
+        ICard card = deck.getFirst();
+        assertTrue(card.isCriteriaSideActive(), "Card started with criteria side down!");
+        card.flip();
+        assertFalse(card.isCriteriaSideActive(), "Card did not flip to vegetable side!");
+        try {
+            card.flip();
+            fail("Card flipped to criteria side!");
+        } catch (CardFlippingException e) {
+            assertTrue(true);
+        }
     }
 }
