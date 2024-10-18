@@ -13,7 +13,6 @@ import utils.Util;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -30,13 +29,11 @@ public class AssetsTests {
 
     private static JSONObject deckJson;
     private static PointSaladAssetsFactory factory;
-    private static Random random;
 
     @BeforeAll
     public static void setUpAll() throws FileNotFoundException {
         deckJson = Util.fileToJSON(JSON_FILENAME);
         factory = new PointSaladAssetsFactory();
-        random = new Random();
     }
 
     /**
