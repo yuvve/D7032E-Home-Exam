@@ -6,7 +6,7 @@ import point_salad.AssetsTests;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
-public class Utils {
+public class Util {
     private final String filename = "file.json";
 
     public static JSONObject fileToJSON(String filename) throws FileNotFoundException {
