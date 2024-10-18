@@ -2,8 +2,6 @@ package assets.impl;
 
 import assets.IResource;
 
-import java.util.Objects;
-
 public enum PointSaladResource implements IResource {
     PEPPER("PEPPER"),
     LETTUCE("LETTUCE"),

@@ -15,7 +15,7 @@ public class PointSaladCard implements ICard {
     public PointSaladCard(ICriteriaStrategy criteriaStrategy, IResource resource){
         this.criteriaStrategy = criteriaStrategy;
         this.resource = resource;
-        this.criteriaSideActive = false;
+        this.criteriaSideActive = true;
     }
 
     @Override

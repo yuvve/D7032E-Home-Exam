@@ -2,7 +2,6 @@ package assets;
 
 import common.IRepresentable;
 import exceptions.CardFlippingException;
-import exceptions.CardFlippingException;
 
 /**
  * Interface representing a card in the game, where one side is a scoring criteria and the other side is a resource.
@@ -40,5 +39,5 @@ public interface ICard extends IRepresentable {
      * If the criteria side is active, the resource side becomes active, and vice versa.
      * @throws CardFlippingException If the card cannot be flipped due to game logic.
      */
-    void flip() throws CardFlippingException ;
+    void flip() throws CardFlippingException;
 }
