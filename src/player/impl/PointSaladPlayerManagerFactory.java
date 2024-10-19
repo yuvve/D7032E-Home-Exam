@@ -7,10 +7,10 @@ import player.IPlayerManagerFactory;
 import java.util.ArrayList;
 
 public class PointSaladPlayerManagerFactory implements IPlayerManagerFactory {
-    private final PointSaladPlayerFactory playerFactory = new PointSaladPlayerFactory();
 
     @Override
     public IPlayerManager createPlayerManager(int numHumans, int numBots) {
+        PointSaladPlayerFactory playerFactory = new PointSaladPlayerFactory();
         int numTotalPlayers = numHumans + numBots;
         if (numTotalPlayers < 2 || numTotalPlayers > 6) {
             throw new IllegalArgumentException("Invalid number of players (humans + bots).");
