@@ -1,5 +1,6 @@
 package player.impl;
 
+import common.point_salad.Constants;
 import player.IPlayer;
 import player.IPlayerManager;
 
@@ -7,8 +8,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class PointSaladPlayerManager implements IPlayerManager {
-    private final int MIN_PLAYERS = 2;
-    private final int MAX_PLAYERS = 6;
+    private final int MIN_PLAYERS = Constants.MIN_PLAYERS.getValue();
+    private final int MAX_PLAYERS = Constants.MAX_PLAYERS.getValue();
     
     private final ArrayList<IPlayer> players;
     private IPlayer currentPlayer;

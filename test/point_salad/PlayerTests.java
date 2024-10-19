@@ -1,6 +1,6 @@
 package point_salad;
 
-import org.junit.jupiter.api.BeforeAll;
+import common.point_salad.Constants;
 import org.junit.jupiter.api.Test;
 import player.IPlayerManager;
 import player.IPlayerManagerFactory;
@@ -9,8 +9,8 @@ import player.impl.PointSaladPlayerManagerFactory;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PlayerTests {
-    private static final int MIN_PLAYERS = 2;
-    private static final int MAX_PLAYERS = 6;
+    private static final int MIN_PLAYERS = Constants.MIN_PLAYERS.getValue();
+    private static final int MAX_PLAYERS = Constants.MAX_PLAYERS.getValue();
 
     /**
      * <H1>Requirement 6</H1>

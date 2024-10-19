@@ -2,6 +2,8 @@ package assets.impl;
 
 import assets.*;
 import assets.impl.criterias.*;
+import common.point_salad.Constants;
+import common.point_salad.ManifestMetadata;
 import exceptions.DeckGenerationException;
 import exceptions.PileGenerationException;
 import exceptions.MarketGenerationException;
@@ -14,14 +16,19 @@ import java.util.Map;
 import java.util.HashMap;
 
 public class PointSaladAssetsFactory implements IAbstractAssetsFactory {
-    private static final int MIN_PLAYERS = 2;
-    private static final int MAX_PLAYERS = 6;
-    private static final int CARDS_TO_REMOVE_PER_PLAYER_MISSING = 3;
-    private static final int NUM_PILES = 3;
-    private static final int DECK_SIZE = 108;
-    private static final int MARKET_ROWS = 3;
-    private static final int MARKET_COLS = 2;
-    private static final int NUM_RESOURCES = 6;
+    private static final int MIN_PLAYERS = Constants.MIN_PLAYERS.getValue();
+    private static final int MAX_PLAYERS = Constants.MAX_PLAYERS.getValue();
+    private static final int CARDS_TO_REMOVE_PER_PLAYER_MISSING =
+            Constants.CARDS_REMOVED_PER_MISSING_PLAYER_PER_VEG.getValue();
+    private static final int NUM_PILES = Constants.NUM_PILES.getValue();
+    private static final int DECK_SIZE = Constants.DECK_SIZE.getValue();
+    private static final int MARKET_ROWS = Constants.MARKET_ROWS.getValue();
+    private static final int MARKET_COLS = Constants.MARKET_COLS.getValue();
+    private static final int NUM_RESOURCES = Constants.NUM_TYPES.getValue();
+    private static final String CARDS_FIELD = ManifestMetadata.CARDS_FIELD.getValue();
+    private static final String ARGS_FIELD = ManifestMetadata.ARGS_FIELD.getValue();
+    private static final String POINTS_FIELD = ManifestMetadata.POINTS_FIELD.getValue();
+    private static final String NAME_FIELD = ManifestMetadata.NAME_FIELD.getValue();
 
     @Override
     public IGameBoard createGameBoard(JSONObject deckJson, int numPlayers)
@@ -44,7 +51,7 @@ public class PointSaladAssetsFactory implements IAbstractAssetsFactory {
 
         ArrayList<ICard> cards = new ArrayList<>();
 
-        JSONArray cardsArray = deckJson.getJSONArray("Cards");
+        JSONArray cardsArray = deckJson.getJSONArray(CARDS_FIELD);
         for (int i = 0; i < cardsArray.length(); i++) {
             JSONObject cardJson = cardsArray.getJSONObject(i);
             ICard card = createCard(cardJson);
@@ -131,9 +138,9 @@ public class PointSaladAssetsFactory implements IAbstractAssetsFactory {
     @Override
     public ICriteriaStrategy createCriteria(JSONObject criteriaJson){
         // Match criteria string to criteria class with given parameters
-        String name = criteriaJson.getString("Name");
-        JSONArray pointsArray = criteriaJson.getJSONArray("Points");
-        JSONArray argsArray = criteriaJson.getJSONArray("Args");
+        String name = criteriaJson.getString(NAME_FIELD);
+        JSONArray pointsArray = criteriaJson.getJSONArray(POINTS_FIELD);
+        JSONArray argsArray = criteriaJson.getJSONArray(ARGS_FIELD);
 
         switch (name) {
             case "PointsIfHasMostOfResource": {

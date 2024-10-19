@@ -3,6 +3,8 @@ package point_salad;
 import assets.*;
 import assets.impl.PointSaladAssetsFactory;
 import assets.impl.PointSaladResource;
+import common.point_salad.Constants;
+import common.point_salad.ManifestMetadata;
 import exceptions.CardFlippingException;
 import org.json.JSONObject;
 import org.junit.jupiter.api.AfterAll;
@@ -16,15 +18,17 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AssetsTests {
-    private static final int MIN_PLAYERS = 2;
-    private static final int MAX_PLAYERS = 6;
-    private static final int NUM_TYPES = 6;
-    private static final int NUM_CARDS = 108;
+    private static final int MIN_PLAYERS = Constants.MIN_PLAYERS.getValue();
+    private static final int MAX_PLAYERS = Constants.MAX_PLAYERS.getValue();
+    private static final int NUM_TYPES = Constants.NUM_TYPES.getValue();
+    private static final int NUM_CARDS = Constants.DECK_SIZE.getValue();
     private static final int NUM_COPIES_OF_EACH_TYPE = NUM_CARDS / NUM_TYPES;
-    private static final int NUM_PILES = 3;
-    private static final int CARDS_REMOVED_PER_MISSING_PLAYER_PER_VEG = 3;
-    private static final int CARDS_DRAWN_PER_PILE_TO_INIT_MARKET = 2;
-    private static final String JSON_FILENAME = "PointSaladManifest.json";
+    private static final int NUM_PILES = Constants.NUM_PILES.getValue();
+    private static final int CARDS_REMOVED_PER_MISSING_PLAYER_PER_VEG =
+            Constants.CARDS_REMOVED_PER_MISSING_PLAYER_PER_VEG.getValue();
+    private static final int CARDS_DRAWN_PER_PILE_TO_INIT_MARKET =
+            Constants.CARDS_DRAWN_PER_PILE_TO_INIT_MARKET.getValue();
+    private static final String JSON_FILENAME = ManifestMetadata.MANIFEST_FILENAME.getValue();
 
     private static JSONObject deckJson;
     private static IAbstractAssetsFactory factory;
