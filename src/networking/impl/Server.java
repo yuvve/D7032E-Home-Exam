@@ -63,6 +63,7 @@ public class Server implements IServer {
                     new DataInputStream(connectionSocket.getInputStream()),
                     new DataOutputStream(connectionSocket.getOutputStream()));
             clients.add(client);
+            System.out.println("Player " + clientId + " connected");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

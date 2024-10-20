@@ -41,6 +41,6 @@ public class PointsPerCombinationOfResources implements ICriteriaStrategy {
         }
         resourcesString.delete(resourcesString.length() - 5, resourcesString.length());
 
-        return "Get " + pointsValue + " points for each combination of " + resourcesString;
+        return "\"" + pointsValue + " points for each combination of " + resourcesString + ".\"";
     }
 }

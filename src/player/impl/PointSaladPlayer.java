@@ -63,10 +63,9 @@ public class PointSaladPlayer implements IPlayer {
     @Override
     public String represent() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Player ").append(playerId).append(":\n");
-        sb.append("Hand: ");
+        sb.append("Player ").append(playerId).append(":\n|");
         for (ICard card : hand) {
-            sb.append(card.represent()).append(" ");
+            sb.append(card.represent()).append("|");
         }
         sb.append("\n");
         return sb.toString();

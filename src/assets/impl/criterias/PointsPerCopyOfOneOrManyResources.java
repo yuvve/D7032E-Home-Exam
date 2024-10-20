@@ -45,6 +45,6 @@ public class PointsPerCopyOfOneOrManyResources implements ICriteriaStrategy {
         }
         resourcesString.delete(resourcesString.length() - 2, resourcesString.length());
 
-        return "Get " + resourcesString;
+        return "\"" + resourcesString + ".\"";
     }
 }

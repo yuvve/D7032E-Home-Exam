@@ -28,6 +28,6 @@ public class PointsPerMissingType implements ICriteriaStrategy {
 
     @Override
     public String represent() {
-        return "Get " + pointsValue + " points for each missing resource type.";
+        return "\"" + pointsValue + " points for each missing resource type.\"";
     }
 }

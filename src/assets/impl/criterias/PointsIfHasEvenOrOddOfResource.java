@@ -46,7 +46,7 @@ public class PointsIfHasEvenOrOddOfResource implements ICriteriaStrategy {
 
     @Override
     public String represent() {
-        return "Get " + pointsValue + " points if you have an "
-                + (even ? "even" : "odd") + " number of " + resource.represent();
+        return "\"" + pointsValue + " points if you have an "
+                + (even ? "even" : "odd") + " number of " + resource.represent() + ".\"";
     }
 }

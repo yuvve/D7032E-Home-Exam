@@ -46,6 +46,24 @@ public class PointSaladPlayerManager implements IPlayerManager {
     }
 
     @Override
+    public int countHumanPlayers() {
+        int count = 0;
+        for (IPlayer player : players) {
+            if (!player.isBot()) count++;
+        }
+        return count;
+    }
+
+    @Override
+    public int countBotPlayers() {
+        int count = 0;
+        for (IPlayer player : players) {
+            if (player.isBot()) count++;
+        }
+        return count;
+    }
+
+    @Override
     public Map<IPlayer, Integer> calculateScores() {
         Map<IPlayer, Integer> scores = new HashMap<>();
         Map<IPlayer, ArrayList<IResource>> playerResources = new HashMap<>();
@@ -60,6 +78,15 @@ public class PointSaladPlayerManager implements IPlayerManager {
             }
         }
         return scores;
+    }
+
+    @Override
+    public String represent() {
+        StringBuilder sb = new StringBuilder();
+        for (IPlayer player : players) {
+            sb.append(player.represent()).append("\n");
+        }
+        return sb.toString();
     }
 
     private ArrayList<IResource> getPlayerResources(IPlayer player) {

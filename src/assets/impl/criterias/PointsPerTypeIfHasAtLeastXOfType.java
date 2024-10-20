@@ -34,6 +34,6 @@ public class PointsPerTypeIfHasAtLeastXOfType implements ICriteriaStrategy {
 
     @Override
     public String represent() {
-        return "Get " + pointsValue + " points for each type of resource you have at least " + acceptableLimit + " of.";
+        return "\"" + pointsValue + " points for each type of resource you have at least " + acceptableLimit + " of.\"";
     }
 }

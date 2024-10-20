@@ -2,6 +2,7 @@ package assets.impl;
 
 import assets.ICard;
 import assets.IMarket;
+import common.point_salad.Constants;
 import exceptions.MarketCardPlacementException;
 
 public class PointSaladMarket implements IMarket {
@@ -42,22 +43,6 @@ public class PointSaladMarket implements IMarket {
         cards[row][column] = card;
     }
 
-    @Override
-    public String represent() {
-        StringBuilder marketString = new StringBuilder();
-        for (ICard[] card : cards) {
-            for (ICard iCard : card) {
-                if (iCard == null) {
-                    marketString.append("Empty");
-                } else {
-                    marketString.append(iCard.represent());
-                }
-                marketString.append(" ");
-            }
-            marketString.append("\n");
-        }
-        return marketString.toString();
-    }
 
     @Override
     public int getMarketSize() {
@@ -70,5 +55,27 @@ public class PointSaladMarket implements IMarket {
             }
         }
         return count;
+    }
+
+    @Override
+    public String represent() {
+        StringBuilder marketString = new StringBuilder();
+        marketString.append(" |");
+        for (int i = 0; i < Constants.MARKET_COLS.getValue(); i++) {
+            marketString.append(" ").append(i+1).append(" |");
+        }
+        marketString.append("\n");
+        for (int i = 0; i < Constants.MARKET_ROWS.getValue(); i++) {
+            marketString.append(i+1).append("|");
+            for (int j = 0; j < Constants.MARKET_COLS.getValue(); j++) {
+                if (cards[i][j] == null){
+                    marketString.append("   |");
+                } else {
+                    marketString.append(cards[i][j].represent()).append("|");
+                }
+            }
+            marketString.append("\n");
+        }
+        return marketString.toString();
     }
 }

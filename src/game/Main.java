@@ -21,19 +21,19 @@ import java.util.Objects;
 public class Main {
     public static void main(String[] args) {
         String ipPort = "";
+        String prompt = "Enter an IP address and port to join a server [IP]:[PORT], or leave blank to host a server.";
         if (args.length == 0){
-            System.out.println("Enter an IP address and port to join a server [IP]:[PORT], " +
-                    "or leave blank to host a server.");
+            System.out.println(prompt);
             ipPort = Util.getIpPort();
         }
         else if (args.length != 1) {
             System.out.println("Invalid number of arguments.");
-            System.out.println("Enter an IP address and port to join a server [IP]:[PORT], " +
-                    "or leave blank to host a server.");
+            System.out.println(prompt);
             ipPort = Util.getIpPort();
         } else {
             if (!Util.validateIpPort(args[0])) {
                 System.out.println("Invalid IP and port.");
+                System.out.println(prompt);
                 ipPort = Util.getIpPort();
             } else {
                 ipPort = args[0];
@@ -64,7 +64,8 @@ public class Main {
         try {
             deckJson = Util.fileToJSON("PointSaladManifest.json");
         } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            System.out.println("Error: Could not find the PointSaladManifest.json file.");
+            return;
         }
         int minHumanPlayers = Constants.MIN_PLAYERS.getValue()-1;
         int maxHumanPlayers = Constants.MAX_PLAYERS.getValue();
@@ -92,7 +93,7 @@ public class Main {
                 server,
                 playerFactory.createPlayerManager(humanPlayers, botPlayers),
                 assetsFactory.createGameBoard(deckJson, humanPlayers + botPlayers),
-                new HashMap<Integer, Integer>()
+                new HashMap<>()
         );
         gameLoop.startGame();
 

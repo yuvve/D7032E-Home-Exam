@@ -49,6 +49,9 @@ public class PointSaladPile implements IPile {
 
     @Override
     public String represent() {
-        return "A pile with " + cards.size() + " cards. The top card is: " + viewTop().represent();
+        StringBuilder sb = new StringBuilder();
+        sb.append("(").append(cards.size()).append(" cards)").append("\n");
+        sb.append(viewTop().represent()).append("\n");
+        return sb.toString();
     }
 }

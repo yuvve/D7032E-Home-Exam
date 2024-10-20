@@ -17,7 +17,8 @@ public class Util {
         String ipPort = scanner.nextLine();
         do {
             if (!validateIpPort(ipPort)) {
-                System.out.println("Invalid input. Please enter an IP address and port in the form [IP]:[PORT].");
+                System.out.println("Invalid input. Please enter an IP address and port in the form [IP]:[PORT], " +
+                        "or enter nothing to host a server.");
                 ipPort = scanner.nextLine();
             }
         } while (!validateIpPort(ipPort));
@@ -27,9 +28,13 @@ public class Util {
     /**
      * Validates that user input is an IP address and port
      * @param input the user's input
-     * @return true if the input is in the form [IP]:[PORT] and PORT is an integer between 0 and 65535, false otherwise
+     * @return true if:
+     *  The input is in the form [IP]:[PORT] and PORT is an integer between 0 and 65535
+     *  OR the input is empty
+     * false otherwise
      */
     public static boolean validateIpPort(String input){
+        if (input.isEmpty()) return true;
         String[] parts = input.split(":");
         if (parts.length != 2) return false;
         try {

@@ -47,7 +47,7 @@ public class PointsIfMostOrFewestTotalResources implements ICriteriaStrategy {
 
     @Override
     public String represent() {
-        return "Get " + pointsValue + " points if you have the "
-                + (mostOf ? "most" : "fewest") + " total resources";
+        return "\"" + pointsValue + " points if you have the "
+                + (mostOf ? "most" : "fewest") + " total resources.\"";
     }
 }

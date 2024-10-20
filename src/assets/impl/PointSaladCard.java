@@ -52,10 +52,10 @@ public class PointSaladCard implements ICard {
     @Override
     public String represent() {
         if (criteriaSideActive){
-            return "A card with criteria: "
-                    + criteriaStrategy.represent() + " and resource: "
-                    + resource.represent();
+            return
+                    "Criteria: " + criteriaStrategy.represent() + "\n"
+                    + "Resource: " + resource.represent();
         }
-        return "A card with resource: " + resource.represent();
+        return resource.represent();
     }
 }

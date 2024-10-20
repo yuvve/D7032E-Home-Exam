@@ -34,18 +34,6 @@ public class PointSaladGameBoard implements IGameBoard {
     }
 
     @Override
-    public String represent() {
-        // Pretty print the game board
-        StringBuilder sb = new StringBuilder();
-        sb.append("Piles:\n");
-        for (IPile pile : piles) {
-            sb.append(pile.represent()).append("\n");
-        }
-        sb.append("Market:\n").append(market.represent());
-        return sb.toString();
-    }
-
-    @Override
     public boolean hasGameEnded() {
         if (market.getMarketSize() != 0) {
             return false;
@@ -56,5 +44,17 @@ public class PointSaladGameBoard implements IGameBoard {
             }
         }
             return true;
+    }
+
+    @Override
+    public String represent() {
+        // Pretty print the game board
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < piles.size(); i++) {
+            sb.append("Pile ").append(i + 1).append(":\n");
+            sb.append(piles.get(i).represent()).append("\n");
+        }
+        sb.append(market.represent());
+        return sb.toString();
     }
 }

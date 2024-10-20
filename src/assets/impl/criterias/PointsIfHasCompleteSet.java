@@ -33,6 +33,6 @@ public class PointsIfHasCompleteSet implements ICriteriaStrategy {
 
     @Override
     public String represent() {
-        return "Get " + pointsValue + " points if you have at least one of every resource.";
+        return "\"" + pointsValue + " points if you have at least one of every resource.\"";
     }
 }
