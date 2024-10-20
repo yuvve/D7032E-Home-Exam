@@ -9,16 +9,24 @@ import java.util.ArrayList;
  * Contains the card pile(s) and the market.
  */
 public interface IGameBoard extends IRepresentable {
+
     /**
-     * Gets the piles of cards.
-     * @return The piles of cards.
+     * Gets a specific pile of cards.
+     * @param index The index of the pile.
+     * @return The pile of cards.
      */
-    ArrayList<IPile> getPiles();
+    IPile getPile(int index) throws IllegalArgumentException;
 
     /**
      * Gets the market.
      * @return The market.
      */
     IMarket getMarket();
+
+    /**
+     * Checks if the game has ended.
+     * @return True if the game has ended, false otherwise.
+     */
+    boolean hasGameEnded();
 
 }

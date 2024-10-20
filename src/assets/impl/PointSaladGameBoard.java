@@ -21,8 +21,11 @@ public class PointSaladGameBoard implements IGameBoard {
     }
 
     @Override
-    public ArrayList<IPile> getPiles() {
-        return piles;
+    public IPile getPile(int index) throws IllegalArgumentException {
+        if (index < 0 || index >= piles.size()) {
+            throw new IllegalArgumentException("Invalid index");
+        }
+        return piles.get(index);
     }
 
     @Override
@@ -40,5 +43,18 @@ public class PointSaladGameBoard implements IGameBoard {
         }
         sb.append("Market:\n").append(market.represent());
         return sb.toString();
+    }
+
+    @Override
+    public boolean hasGameEnded() {
+        if (market.getMarketSize() != 0) {
+            return false;
+        }
+        for (IPile pile : piles) {
+            if (pile.getCardCount() != 0) {
+                return false;
+            }
+        }
+            return true;
     }
 }

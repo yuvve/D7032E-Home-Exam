@@ -15,13 +15,12 @@ public class PointSaladMarket implements IMarket {
         this.cards = cards;
     }
 
-    @Override
-    public ICard[][] viewCards() {
-        return cards;
-    }
 
     @Override
-    public ICard draftCard(int row, int column) {
+    public ICard draftCard(int row, int column) throws IllegalArgumentException {
+        if (row < 0 || row >= cards.length || column < 0 || column >= cards[0].length){
+            throw new IllegalArgumentException("Invalid coordinates.");
+        }
         if (cards[row][column] == null){
             return null;
         }
@@ -32,7 +31,11 @@ public class PointSaladMarket implements IMarket {
     }
 
     @Override
-    public void placeCardInPosition(ICard card, int row, int column) throws MarketCardPlacementException {
+    public void placeCardInPosition(ICard card, int row, int column)
+            throws MarketCardPlacementException, IllegalArgumentException {
+        if (row < 0 || row >= cards.length || column < 0 || column >= cards[0].length){
+            throw new IllegalArgumentException("Invalid coordinates.");
+        }
         if (cards[row][column] != null){
             throw new MarketCardPlacementException("The position is already occupied.");
         }
@@ -54,5 +57,18 @@ public class PointSaladMarket implements IMarket {
             marketString.append("\n");
         }
         return marketString.toString();
+    }
+
+    @Override
+    public int getMarketSize() {
+        int count = 0;
+        for (ICard[] card : cards) {
+            for (ICard iCard : card) {
+                if (iCard != null) {
+                    count++;
+                }
+            }
+        }
+        return count;
     }
 }

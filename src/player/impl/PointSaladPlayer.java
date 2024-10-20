@@ -16,15 +16,19 @@ public class PointSaladPlayer implements IPlayer {
      * Constructor for a player in the Point Salad game.
      * @param playerId the player's ID
      * @param isBot true if the player is a bot, false otherwise
+     * @param hand the player's hand (can be empty or null)
      */
-    public PointSaladPlayer(int playerId, boolean isBot) {
+    public PointSaladPlayer(int playerId, boolean isBot, ArrayList<ICard> hand) {
+        if (hand == null) {
+            hand = new ArrayList<>();
+        }
         this.playerId = playerId;
         this.isBot = isBot;
-        this.hand = new ArrayList<>();
+        this.hand = hand;
     }
 
     @Override
-    public int getPlayerId() {
+    public int getId() {
         return playerId;
     }
 

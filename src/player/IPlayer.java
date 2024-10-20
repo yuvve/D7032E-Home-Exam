@@ -2,7 +2,6 @@ package player;
 
 import assets.ICard;
 import common.IRepresentable;
-import exceptions.CardFlippingException;
 
 import java.util.ArrayList;
 
@@ -15,7 +14,7 @@ public interface IPlayer extends IRepresentable {
      * Get the player's ID.
      * @return the player's ID
      */
-    int getPlayerId();
+    int getId();
 
     /**
      * Checks if the player is a bot.

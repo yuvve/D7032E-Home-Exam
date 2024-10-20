@@ -1,6 +1,6 @@
 package player;
 
-import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * Interface for managing player order and turns.
@@ -8,10 +8,9 @@ import java.util.ArrayList;
 public interface IPlayerManager {
 
     /**
-     * Get the players in the game.
-     * @return the players in the game
+     * Randomize the order of the players.
      */
-    ArrayList<IPlayer> getPlayers();
+    void randomizePlayerOrder();
 
     /**
      * Get the current player.
@@ -23,4 +22,16 @@ public interface IPlayerManager {
      * Move the turn to the next player.
      */
     void nextTurn();
+
+    /**
+     * Get the number of players in the game.
+     * @return the number of players in the game
+     */
+    int countPlayers();
+
+    /**
+     * Calculate the scores of all players.
+     * @return a map of players to their scores
+     */
+    Map<IPlayer, Integer> calculateScores();
 }
