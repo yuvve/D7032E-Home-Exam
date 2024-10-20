@@ -126,7 +126,7 @@ public class Main {
 
         Map<Integer, Integer> playerClientMap = new HashMap<>();
         ArrayList<ITurnActionStrategy> humanStrategies =
-                turnActionStrategyFactory.createHumanStrategies(gameBoard, server);
+                turnActionStrategyFactory.createHumanStrategies(gameBoard, server, playerClientMap);
         ArrayList<ITurnActionStrategy> botStrategies =
                 turnActionStrategyFactory.createBotStrategies(gameBoard);
 

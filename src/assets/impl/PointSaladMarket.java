@@ -16,19 +16,14 @@ public class PointSaladMarket implements IMarket {
         this.cards = cards;
     }
 
+    @Override
+    public ICard viewCard(int row, int column) throws IllegalArgumentException {
+        return getCard(row, column, true);
+    }
 
     @Override
     public ICard draftCard(int row, int column) throws IllegalArgumentException {
-        if (row < 0 || row >= cards.length || column < 0 || column >= cards[0].length){
-            throw new IllegalArgumentException("Invalid coordinates.");
-        }
-        if (cards[row][column] == null){
-            return null;
-        }
-
-        ICard card = cards[row][column];
-        cards[row][column] = null;
-        return card;
+        return getCard(row, column, false);
     }
 
     @Override
@@ -77,5 +72,18 @@ public class PointSaladMarket implements IMarket {
             marketString.append("\n");
         }
         return marketString.toString();
+    }
+
+    private ICard getCard(int row, int column, boolean viewOnly) throws IllegalArgumentException {
+        if (row < 0 || row >= cards.length || column < 0 || column >= cards[0].length){
+            throw new IllegalArgumentException("Invalid coordinates.");
+        }
+        if (cards[row][column] == null){
+            return null;
+        }
+
+        ICard card = cards[row][column];
+        if (!viewOnly) cards[row][column] = null;
+        return card;
     }
 }

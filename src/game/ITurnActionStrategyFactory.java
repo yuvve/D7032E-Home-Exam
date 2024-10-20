@@ -4,6 +4,7 @@ import assets.IGameBoard;
 import networking.IServer;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * Factory for creating turn action strategies.
@@ -14,9 +15,13 @@ public interface ITurnActionStrategyFactory {
      * Creates the actions for a human turn.
      * @param gameBoard The game board to perform the turn action on.
      * @param server The server to use.
+     * @param playerClientMap a map of player id to client id
      * @return The human turn actions
      */
-    ArrayList<ITurnActionStrategy> createHumanStrategies(IGameBoard gameBoard, IServer server);
+    ArrayList<ITurnActionStrategy> createHumanStrategies(
+            IGameBoard gameBoard,
+            IServer server,
+            Map<Integer, Integer> playerClientMap);
 
     /**
      * Creates the actions for a bot turn.

@@ -13,8 +13,6 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class PointSaladGameLoop extends GameLoopTemplate {
-    private final int MIN_PLAYERS = Constants.MIN_PLAYERS.getValue();
-    private final int MAX_PLAYERS = Constants.MAX_PLAYERS.getValue();
 
     public PointSaladGameLoop(
             IServer server,
@@ -38,13 +36,24 @@ public class PointSaladGameLoop extends GameLoopTemplate {
     }
 
     @Override
-    protected void preTurn() {
+    protected void preRound() {
         server.broadcast(gameBoard.represent());
+        server.broadcast(playerManager.represent());
+    }
+
+    @Override
+    protected void postRound() {
+
+    }
+
+    @Override
+    protected void preTurn() {
+
     }
 
     @Override
     protected void postTurn() {
-
+        //TODO: refill the market
     }
 
     @Override

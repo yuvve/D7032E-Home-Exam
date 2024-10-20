@@ -9,6 +9,15 @@ import exceptions.MarketCardPlacementException;
  */
 public interface IMarket extends IRepresentable {
 
+    /** Lets you view a market card without drafting it.
+     * @param row The row of the card.
+     *            Must be between 0 and the number of rows in the market cards.
+     * @param column The column of the card.
+     *               Must be between 0 and the number of columns in the market cards.
+     * @return The card viewed.
+     */
+    ICard viewCard(int row, int column) throws IllegalArgumentException;
+
     /**
      * Draws a card from the market from the given coordinates.
      * @param row The row of the card.

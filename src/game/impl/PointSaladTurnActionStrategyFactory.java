@@ -10,14 +10,18 @@ import game.impl.turns.PointSaladHumanMain;
 import networking.IServer;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class PointSaladTurnActionStrategyFactory implements ITurnActionStrategyFactory {
 
     @Override
-    public ArrayList<ITurnActionStrategy> createHumanStrategies(IGameBoard gameBoard, IServer server) {
+    public ArrayList<ITurnActionStrategy> createHumanStrategies(
+            IGameBoard gameBoard,
+            IServer server,
+            Map<Integer, Integer> playerClientMap) {
         ArrayList<ITurnActionStrategy> strategies = new ArrayList<>();
-        strategies.add(new PointSaladHumanMain(gameBoard, server));
-        strategies.add(new PointSaladHumanFree(gameBoard, server));
+        strategies.add(new PointSaladHumanMain(gameBoard, server, playerClientMap));
+        strategies.add(new PointSaladHumanFree(gameBoard, server, playerClientMap));
         return strategies;
     }
 
