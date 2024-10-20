@@ -1,9 +1,12 @@
 package game;
 
 import assets.IAbstractAssetsFactory;
+import assets.IGameBoard;
 import assets.impl.PointSaladAssetsFactory;
 import common.point_salad.Constants;
 import game.impl.PointSaladGameLoop;
+import game.impl.PointSaladGameLoopFactory;
+import game.impl.PointSaladTurnActionStrategyFactory;
 import networking.IClient;
 import networking.IServer;
 import networking.impl.Client;
@@ -11,11 +14,15 @@ import networking.impl.OfflineServer;
 import networking.impl.Server;
 import org.json.JSONObject;
 import player.IAbstractPlayerAssetsFactory;
+import player.IPlayerManager;
 import player.impl.PointSaladPlayerAssetsFactory;
 
 
 import java.io.FileNotFoundException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class Main {
@@ -41,7 +48,7 @@ public class Main {
         }
 
         if (Objects.equals(ipPort, "")) {
-            hostGame(ipPort);
+            hostPointSaladGame(ipPort);
         } else {
             joinGame(ipPort);
         }
@@ -56,15 +63,41 @@ public class Main {
         // loop and listen to server until you need to send a message, then continue looping again
     }
 
-    private static void hostGame(String ipPort){
+    /**
+     * Hosts a game of Point Salad.
+     * Calls the hostGame method with dependency injection for Point Salad.
+     * @param ipPort The IP address and port to host the game on.
+     */
+    private static void hostPointSaladGame(String ipPort){
+        IGameLoopFactory gameLoopFactory = new PointSaladGameLoopFactory();
         IAbstractAssetsFactory assetsFactory = new PointSaladAssetsFactory();
         IAbstractPlayerAssetsFactory playerFactory = new PointSaladPlayerAssetsFactory();
+        PointSaladTurnActionStrategyFactory turnActionStrategyFactory = new PointSaladTurnActionStrategyFactory();
+
+        hostGame(
+                ipPort,
+                gameLoopFactory,
+                assetsFactory,
+                playerFactory,
+                turnActionStrategyFactory,
+                "PointSaladManifest.json"
+        );
+    }
+
+    private static void hostGame(
+            String ipPort,
+            IGameLoopFactory gameLoopFactory,
+            IAbstractAssetsFactory assetsFactory,
+            IAbstractPlayerAssetsFactory playerFactory,
+            ITurnActionStrategyFactory turnActionStrategyFactory,
+            String deckManifestFilename){
+
         JSONObject deckJson;
 
         try {
-            deckJson = Util.fileToJSON("PointSaladManifest.json");
+            deckJson = Util.fileToJSON(deckManifestFilename);
         } catch (FileNotFoundException e) {
-            System.out.println("Error: Could not find the PointSaladManifest.json file.");
+            System.out.println("Error: Could not find the deck manifest.");
             return;
         }
         int minHumanPlayers = Constants.MIN_PLAYERS.getValue()-1;
@@ -82,6 +115,8 @@ public class Main {
             botPlayers = Util.getValidInput(minBots, maxBots);
         }
 
+        IPlayerManager playerManager = playerFactory.createPlayerManager(humanPlayers, botPlayers);
+        IGameBoard gameBoard = assetsFactory.createGameBoard(deckJson, humanPlayers + botPlayers);
         IServer server;
         if (humanPlayers > 1) {
             server = new Server();
@@ -89,13 +124,21 @@ public class Main {
             server = new OfflineServer();
         }
 
-        GameLoopTemplate gameLoop = new PointSaladGameLoop(
-                server,
-                playerFactory.createPlayerManager(humanPlayers, botPlayers),
-                assetsFactory.createGameBoard(deckJson, humanPlayers + botPlayers),
-                new HashMap<>()
-        );
-        gameLoop.startGame();
+        Map<Integer, Integer> playerClientMap = new HashMap<>();
+        ArrayList<ITurnActionStrategy> humanStrategies =
+                turnActionStrategyFactory.createHumanStrategies(gameBoard, server);
+        ArrayList<ITurnActionStrategy> botStrategies =
+                turnActionStrategyFactory.createBotStrategies(gameBoard);
 
+        GameLoopTemplate gameLoop = gameLoopFactory.createGameLoop(
+                server,
+                playerManager,
+                gameBoard,
+                playerClientMap,
+                humanStrategies,
+                botStrategies
+        );
+
+        gameLoop.startGame();
     }
 }

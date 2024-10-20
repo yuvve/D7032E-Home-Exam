@@ -3,9 +3,12 @@ package game.impl;
 import assets.IGameBoard;
 import common.point_salad.Constants;
 import game.GameLoopTemplate;
+import game.ITurnActionStrategy;
 import networking.IServer;
+import player.IPlayer;
 import player.IPlayerManager;
 
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -17,8 +20,10 @@ public class PointSaladGameLoop extends GameLoopTemplate {
             IServer server,
             IPlayerManager playerManager,
             IGameBoard gameBoard,
-            Map<Integer, Integer> playerClientMap) {
-        super(server, playerManager, gameBoard, playerClientMap);
+            Map<Integer, Integer> playerClientMap,
+            ArrayList<ITurnActionStrategy> humanTurns,
+            ArrayList<ITurnActionStrategy> botTurns) {
+        super(server, playerManager, gameBoard, playerClientMap, humanTurns, botTurns);
     }
 
     protected void setupGame(){
@@ -32,11 +37,17 @@ public class PointSaladGameLoop extends GameLoopTemplate {
         }
     }
 
-    protected void executeTurn(){
+    @Override
+    protected void preTurn() {
         server.broadcast(gameBoard.represent());
-        Scanner scan = new Scanner(System.in);
-        scan.nextLine();
     }
+
+    @Override
+    protected void postTurn() {
+
+    }
+
+    @Override
     protected void declareWinner(){
 
     }

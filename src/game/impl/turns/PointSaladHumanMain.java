@@ -1,4 +1,21 @@
 package game.impl.turns;
 
-public class PointSaladHumanMain {
+import assets.IGameBoard;
+import game.ITurnActionStrategy;
+import networking.IServer;
+import player.IPlayer;
+
+public class PointSaladHumanMain implements ITurnActionStrategy {
+    private IGameBoard gameBoard;
+    private IServer server;
+
+    public PointSaladHumanMain(IGameBoard gameBoard, IServer server) {
+        this.gameBoard = gameBoard;
+        this.server = server;
+    }
+
+    @Override
+    public void executeTurnAction(IPlayer player) {
+
+    }
 }

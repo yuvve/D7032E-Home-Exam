@@ -4,9 +4,7 @@ import assets.*;
 import assets.impl.criterias.*;
 import common.point_salad.Constants;
 import common.point_salad.ManifestMetadata;
-import exceptions.DeckGenerationException;
-import exceptions.PileGenerationException;
-import exceptions.MarketGenerationException;
+import exceptions.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -124,19 +122,19 @@ public class PointSaladAssetsFactory implements IAbstractAssetsFactory {
     }
 
     @Override
-    public IPile createPile(ArrayList<ICard> cards) {
+    public IPile createPile(ArrayList<ICard> cards) throws PileGenerationException {
         return new PointSaladPile(cards);
     }
 
     @Override
-    public ICard createCard(JSONObject cardJson){
+    public ICard createCard(JSONObject cardJson) throws CardGenerationException {
         ICriteriaStrategy criteriaStrategy = createCriteria(cardJson.getJSONObject("Criteria"));
         IResource resource = createResource(cardJson.getString("Resource"));
         return new PointSaladCard(criteriaStrategy, resource);
     }
 
     @Override
-    public ICriteriaStrategy createCriteria(JSONObject criteriaJson){
+    public ICriteriaStrategy createCriteria(JSONObject criteriaJson) throws CriteriaGenerationException {
         // Match criteria string to criteria class with given parameters
         String name = criteriaJson.getString(NAME_FIELD);
         JSONArray pointsArray = criteriaJson.getJSONArray(POINTS_FIELD);
@@ -211,11 +209,11 @@ public class PointSaladAssetsFactory implements IAbstractAssetsFactory {
     }
 
     @Override
-    public IResource createResource(String resourceName){
+    public IResource createResource(String resourceName) throws ResourceGenerationException {
         return PointSaladResource.valueOf(resourceName);
     }
 
-    private Map<IResource, ArrayList<ICard>> sortCardsByResource(ArrayList<ICard> cards) {
+    private Map<IResource, ArrayList<ICard>> sortCardsByResource(ArrayList<ICard> cards)  {
         Map<IResource, ArrayList<ICard>> sortedCards = new HashMap<>();
 
         for (ICard card : cards) {
