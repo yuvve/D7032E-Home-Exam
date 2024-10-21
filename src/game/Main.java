@@ -4,13 +4,13 @@ import assets.IAbstractAssetsFactory;
 import assets.IGameBoard;
 import assets.impl.PointSaladAssetsFactory;
 import common.point_salad.Constants;
-import game.impl.PointSaladGameLoop;
 import game.impl.PointSaladGameLoopFactory;
 import game.impl.PointSaladTurnActionStrategyFactory;
 import networking.IClient;
 import networking.IServer;
 import networking.impl.Client;
 import networking.impl.OfflineServer;
+import networking.impl.DedicatedServer;
 import networking.impl.Server;
 import org.json.JSONObject;
 import player.IAbstractPlayerAssetsFactory;
@@ -19,7 +19,6 @@ import player.impl.PointSaladPlayerAssetsFactory;
 
 
 import java.io.FileNotFoundException;
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class Main {
@@ -30,7 +29,7 @@ public class Main {
         String ipPort = "";
         String prompt =
                 "To join a server: `[IP]:[PORT]`\n" +
-                "To host a server: `[PORT]` or just leave blank to use default port (2048).";
+                "To host a (DEDICATED) server: `[PORT]` or just leave blank to use default port (2048).";
         if (args.length == 0){
             System.out.println(prompt);
             ipPort = Util.getIpPort(scanner);
@@ -66,8 +65,13 @@ public class Main {
     private static void joinGame(Scanner scanner, String ip, int port){
         IClient client = new Client();
         client.connectToServer(ip, port);
-
-        // loop and listen to server until you need to send a message, then continue looping again
+        while(client.isConnectionAlive()){
+            System.out.println(client.receiveMessage());
+            if (client.serverWaitingForInput()){
+                String msg = scanner.nextLine();
+                client.sendMessage(msg);
+            }
+        }
     }
 
     /**
@@ -133,7 +137,7 @@ public class Main {
         IGameBoard gameBoard = assetsFactory.createGameBoard(deckJson, humanPlayers + botPlayers);
         IServer server;
         if (humanPlayers > 1) {
-            server = new Server();
+            server = new Server(scanner);
             server.startServer(port);
         } else {
             server = new OfflineServer(scanner);

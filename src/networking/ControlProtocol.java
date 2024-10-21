@@ -4,7 +4,8 @@ package networking;
  * Enum for control protocols (so both client and server can use the same tokens for ending transmissions).
  */
 public enum ControlProtocol {
-    TRANSMISSION_OVER("TRANSMISSION_OVER");
+    TRANSMISSION_OVER("TRANSMISSION_OVER"),
+    GAME_OVER("GAME_OVER");
 
     private final String value;
 

@@ -1,81 +1,109 @@
 package networking.impl;
 
+import exceptions.NetworkingException;
 import networking.ControlProtocol;
 import networking.IClient;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.Socket;
+import java.util.Objects;
 
 public class Client implements IClient {
-    private boolean isConnected = false;
-    public DataInputStream inFromClient;
-    public DataOutputStream outToClient;
+    private boolean isConnected;
+    private boolean isServerListening;
+    public BufferedReader inFromServer;
+    public BufferedWriter outToServer;
+    private Socket socket;
+
+    public Client() {
+        isConnected = false;
+        isServerListening = false;
+    }
 
     @Override
-    public void connectToServer(String ip, int port) {
+    public void connectToServer(String ip, int port) throws NetworkingException {
         if (isConnected) {
             System.out.println("Already connected to server");
             return;
         }
-        Socket socket = null;
-        DataInputStream in = null;
-        DataOutputStream out = null;
+
         try {
             socket = new Socket(ip, port);
-            in = new DataInputStream(socket.getInputStream());
-            out = new DataOutputStream(socket.getOutputStream());
-            inFromClient = in;
-            outToClient = out;
+            inFromServer = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            outToServer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
             isConnected = true;
             System.out.println("Connected to server");
-        } catch (Exception e) {
-            System.out.println(e);
-        } finally {
-            if (!isConnected) {
-                try {
-                    if (in != null) in.close();
-                    if (out != null) out.close();
-                    if (socket != null) socket.close();
-                } catch (Exception e) {
-                    System.out.println(e);
-                }
-            }
+        } catch (IOException e) {
+            System.err.println("Connection error: " + e.getMessage());
+            closeConnection();
         }
     }
 
     @Override
-    public void sendMessage(String msg) {
+    public void sendMessage(String msg) throws NetworkingException{
+        isServerListening = false;
+
         if (!isConnected) {
-            System.out.println("Not connected to server");
-            return;
+            throw new NetworkingException("Not connected to server");
+        }
+
+        try {
+            outToServer.write(msg);
+            outToServer.newLine();
+            outToServer.flush();
+        } catch (IOException e) {
+            throw new NetworkingException("Error sending message: " + e.getMessage());
+        }
+    }
+
+    @Override
+    public String receiveMessage() throws NetworkingException{
+        if (!isConnected) {
+            throw new NetworkingException("Not connected to server");
         }
         try {
-            outToClient.writeUTF(msg);
-            outToClient.writeUTF(ControlProtocol.TRANSMISSION_OVER.getValue());
-        } catch (Exception e) {
-            System.out.println(e);
+            String fromServer = inFromServer.readLine();
+            /**
+            if (Objects.equals(fromServer, ControlProtocol.TRANSMISSION_OVER.getValue())) {
+                isServerListening = true;
+                return null;
+            }
+             */
+            if (Objects.equals(fromServer, ControlProtocol.GAME_OVER.getValue())) {
+                closeConnection();
+                return "Game over, closing connection!";
+            }
+        } catch (IOException e) {
+            throw new NetworkingException("Error receiving message: " + e.getMessage());
         }
+        throw new NetworkingException("Error receiving message: unexpected message from server");
     }
 
     @Override
-    public String receiveMessage() {
-        StringBuilder msg = new StringBuilder();
-        if (!isConnected) {
-            System.out.println("Not connected to server");
-            return null;
-        }
-        while (true) {
+    public boolean serverWaitingForInput() {
+        return false;
+    }
+
+    @Override
+    public boolean isConnectionAlive() {
+        return isConnected;
+    }
+
+    private void closeConnection() {
+        if (socket != null && !socket.isClosed()) {
             try {
-                String incoming = inFromClient.readUTF();
-                if (incoming.equals(ControlProtocol.TRANSMISSION_OVER.getValue())) {
-                    break;
-                }
-                msg.append(incoming).append("\n");
-            } catch (Exception e) {
-                System.out.println(e);
+                if (inFromServer != null) inFromServer.close();
+                if (outToServer != null) outToServer.close();
+                socket.close();
+            } catch (IOException e) {
+                System.err.println("Error closing connection: " + e.getMessage());
+            } finally {
+                isConnected = false;
             }
         }
-        return msg.toString();
     }
 }

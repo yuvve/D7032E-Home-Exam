@@ -26,10 +26,10 @@ public class PointSaladGameLoop extends GameLoopTemplate {
         if (playerManager.countHumanPlayers() > 1){
             System.out.println("Waiting for players to connect...");
         }
+
         for (int i = 0; i < playerManager.countHumanPlayers(); i++){
             int clientId = server.acceptClient();
             mapPlayerToClient(i, clientId);
-
         }
     }
 
