@@ -77,10 +77,12 @@ public class Main {
      * @param port the port to host the server on
      */
     private static void hostPointSaladGame(Scanner scanner, int port){
+        Random random = new Random();
         IGameLoopFactory gameLoopFactory = new PointSaladGameLoopFactory();
-        IAbstractAssetsFactory assetsFactory = new PointSaladAssetsFactory();
-        IAbstractPlayerAssetsFactory playerFactory = new PointSaladPlayerAssetsFactory();
+        IAbstractAssetsFactory assetsFactory = new PointSaladAssetsFactory(random);
+        IAbstractPlayerAssetsFactory playerFactory = new PointSaladPlayerAssetsFactory(random);
         PointSaladTurnActionStrategyFactory turnActionStrategyFactory = new PointSaladTurnActionStrategyFactory();
+
 
         hostGame(
                 scanner,
@@ -89,6 +91,7 @@ public class Main {
                 assetsFactory,
                 playerFactory,
                 turnActionStrategyFactory,
+                random,
                 "PointSaladManifest.json"
         );
     }
@@ -100,6 +103,7 @@ public class Main {
             IAbstractAssetsFactory assetsFactory,
             IAbstractPlayerAssetsFactory playerFactory,
             ITurnActionStrategyFactory turnActionStrategyFactory,
+            Random random,
             String deckManifestFilename){
 
         JSONObject deckJson;
@@ -139,7 +143,7 @@ public class Main {
         ArrayList<ITurnActionStrategy> humanStrategies =
                 turnActionStrategyFactory.createHumanStrategies(gameBoard, server, playerClientMap);
         ArrayList<ITurnActionStrategy> botStrategies =
-                turnActionStrategyFactory.createBotStrategies(gameBoard, playerManager);
+                turnActionStrategyFactory.createBotStrategies(gameBoard, playerManager, random);
 
         GameLoopTemplate gameLoop = gameLoopFactory.createGameLoop(
                 server,

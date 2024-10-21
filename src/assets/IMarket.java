@@ -3,6 +3,8 @@ package assets;
 import common.IRepresentable;
 import exceptions.MarketCardPlacementException;
 
+import java.util.ArrayList;
+
 /**
  * Interface for the card market.
  * Contains the cards that are available for drafting.
@@ -41,8 +43,8 @@ public interface IMarket extends IRepresentable {
             throws MarketCardPlacementException, IllegalArgumentException;
 
     /**
-     * Gets the amount of cards in the market.
-     * @return The amount of cards in the market.
+     * Gets the coordinates of all non-empty slots in the market.
+     * @return The coordinates of all non-empty slots in the market.
      */
-    int getMarketSize();
+    ArrayList<Integer[]> getNonEmptySlotsCoords();
 }

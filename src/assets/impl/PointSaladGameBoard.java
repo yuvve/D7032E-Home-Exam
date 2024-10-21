@@ -29,13 +29,24 @@ public class PointSaladGameBoard implements IGameBoard {
     }
 
     @Override
+    public ArrayList<Integer> getNonEmptyPiles() {
+        ArrayList<Integer> nonEmptyPilesIndexes = new ArrayList<>();
+        for (int i = 0; i < piles.size(); i++) {
+            if (piles.get(i).getCardCount() != 0) {
+                nonEmptyPilesIndexes.add(i);
+            }
+        }
+        return nonEmptyPilesIndexes;
+    }
+
+    @Override
     public IMarket getMarket() {
         return market;
     }
 
     @Override
     public boolean hasGameEnded() {
-        if (market.getMarketSize() != 0) {
+        if (!market.getNonEmptySlotsCoords().isEmpty()) {
             return false;
         }
         for (IPile pile : piles) {

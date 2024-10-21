@@ -7,6 +7,7 @@ import player.IPlayerManager;
 
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * Factory for creating turn action strategies.
@@ -29,7 +30,11 @@ public interface ITurnActionStrategyFactory {
      * Creates the actions for a bot turn.
      * @param gameBoard The game board to perform the turn action on.
      * @param playerManager The player manager of the match, can allow the bot to make smarter decisions.
+     * @param random The random number generator to use.
      * @return The bot turn actions
      */
-    ArrayList<ITurnActionStrategy> createBotStrategies(IGameBoard gameBoard, IPlayerManager playerManager);
+    ArrayList<ITurnActionStrategy> createBotStrategies(
+            IGameBoard gameBoard,
+            IPlayerManager playerManager,
+            Random random);
 }

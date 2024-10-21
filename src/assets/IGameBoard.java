@@ -18,6 +18,12 @@ public interface IGameBoard extends IRepresentable {
     IPile getPile(int index) throws IllegalArgumentException;
 
     /**
+     * Returns the indexes of all non-empty piles.
+     * @return The indexes of all non-empty piles.
+     */
+    ArrayList<Integer> getNonEmptyPiles();
+
+    /**
      * Gets the market.
      * @return The market.
      */

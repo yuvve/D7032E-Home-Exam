@@ -6,27 +6,28 @@ import assets.IResource;
 import player.IPlayer;
 import player.IPlayerManager;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class PointSaladPlayerManager implements IPlayerManager {
     private final ArrayList<IPlayer> players;
     private int currentPlayerIndex;
+    private boolean roundComplete;
+    private Random random;
 
     /**
      * Constructor for a player manager in the Point Salad game.
      * @param players the players in the game
      */
-    public PointSaladPlayerManager(ArrayList<IPlayer> players) {
+    public PointSaladPlayerManager(ArrayList<IPlayer> players, Random random) {
         this.players = players;
+        this.random = random;
         this.currentPlayerIndex = 0;
+        this.roundComplete = false;
     }
 
     @Override
     public void randomizePlayerOrder() {
-        Collections.shuffle(players);
+        Collections.shuffle(players, random);
         this.currentPlayerIndex = 0;
     }
 
@@ -37,7 +38,18 @@ public class PointSaladPlayerManager implements IPlayerManager {
 
     @Override
     public void nextTurn() {
-        currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
+        currentPlayerIndex = getNextPlayerIndex();
+        roundComplete = (currentPlayerIndex == 0);
+    }
+
+    @Override
+    public boolean roundComplete() {
+        return roundComplete;
+    }
+
+    @Override
+    public void nextRound() {
+        roundComplete = false;
     }
 
     @Override
@@ -91,6 +103,10 @@ public class PointSaladPlayerManager implements IPlayerManager {
             sb.append("\n");
         }
         return sb.toString();
+    }
+
+    private int getNextPlayerIndex(){
+        return (currentPlayerIndex + 1) % players.size();
     }
 
     private ArrayList<IResource> getPlayerResources(IPlayer player) {

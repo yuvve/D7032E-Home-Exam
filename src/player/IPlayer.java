@@ -35,6 +35,18 @@ public interface IPlayer extends IRepresentable {
     ArrayList<ICard> getHand();
 
     /**
+     * Gets all resource cards in the player's hand.
+     * @return all resource cards in the player's hand
+     */
+    ArrayList<ICard> getResourceCards();
+
+    /**
+     * Gets all criteria cards in the player's hand.
+     * @return all criteria cards in the player's hand
+     */
+    ArrayList<ICard> getCriteriaCards();
+
+    /**
      * Discard a card from the player's hand.
      * @param card the card to discard
      */

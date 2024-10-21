@@ -14,6 +14,7 @@ import game.Util;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -34,11 +35,13 @@ public class AssetsTests {
 
     private static JSONObject deckJson;
     private static IAbstractAssetsFactory factory;
+    private static Random random;
 
     @BeforeAll
     public static void setUpAll() throws FileNotFoundException {
+        random = new Random();
         deckJson = Util.fileToJSON(JSON_FILENAME);
-        factory = new PointSaladAssetsFactory();
+        factory = new PointSaladAssetsFactory(random);
     }
 
     @AfterAll

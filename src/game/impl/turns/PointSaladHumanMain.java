@@ -23,12 +23,11 @@ public class PointSaladHumanMain implements ITurnActionStrategy {
     public void executeTurnAction(IPlayer player) {
         int clientId = playerClientMap.get(player.getId());
         StringBuilder message = new StringBuilder();
-        message.append("It is your turn, ").append(".\n");
+        message.append("It's your turn (player ").append(player.getId()).append(")").append("!\n");
         message.append("You can either: \n");
-        message.append("- Pick one card from a pile by typing 'P<PILE NUMBER>' (i.e. P2) \n");
-        message.append("- Draft a card from the [M]arket by typing 'M<ROW_NUM><COL_NUM>' (i.e. M11) \n");
-        message.append("- Draft two cards from the [M]arket by typing 'M<ROW_NUM1><COL_NUM1><ROW_NUM2><COL_NUM3>'" +
-                " (i.e. M1101)\n");
+        message.append("- Pick one card from a pile by typing 'P<X>' (i.e. P2) \n");
+        message.append("- Draft a card at position (x,y) from the [M]arket by typing 'M<X><Y>' (i.e. M11) \n");
+        message.append("- Draft two cards from the [M]arket by typing 'M<X1><Y1><X2><Y2>' (i.e. M1101)\n");
         server.sendMsg(clientId, message.toString());
 
         String input;
@@ -69,11 +68,11 @@ public class PointSaladHumanMain implements ITurnActionStrategy {
         if (coords.length() == 4) {
             x1 = Integer.parseInt(coords.substring(0, 1));
             y1 = Integer.parseInt(coords.substring(1, 2));
-            x2 = Integer.parseInt(coords.substring(2));
-            y2 = Integer.parseInt(coords.substring(3));
+            x2 = Integer.parseInt(coords.substring(2,3));
+            y2 = Integer.parseInt(coords.substring(3,4));
         } else if (coords.length() == 2) {
             x1 = Integer.parseInt(coords.substring(0, 1));
-            y1 = Integer.parseInt(coords.substring(1));
+            y1 = Integer.parseInt(coords.substring(1,2));
             x2 = -1;
             y2 = -1;
         } else {

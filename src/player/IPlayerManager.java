@@ -26,6 +26,17 @@ public interface IPlayerManager extends IRepresentable {
     void nextTurn();
 
     /**
+     * Checks if the round is finished (all players have taken their turn).
+     * @return true if the round is finished, false otherwise
+     */
+    boolean roundComplete();
+
+    /**
+     * Move to the next round.
+     */
+    void nextRound();
+
+    /**
      * Get the number of players in the game.
      * @return the number of players in the game
      */

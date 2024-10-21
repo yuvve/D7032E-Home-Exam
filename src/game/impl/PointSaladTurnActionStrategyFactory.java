@@ -12,6 +12,7 @@ import player.IPlayerManager;
 
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Random;
 
 public class PointSaladTurnActionStrategyFactory implements ITurnActionStrategyFactory {
 
@@ -27,10 +28,11 @@ public class PointSaladTurnActionStrategyFactory implements ITurnActionStrategyF
     }
 
     @Override
-    public ArrayList<ITurnActionStrategy> createBotStrategies(IGameBoard gameBoard, IPlayerManager playerManager) {
+    public ArrayList<ITurnActionStrategy> createBotStrategies(
+            IGameBoard gameBoard, IPlayerManager playerManager, Random random) {
         ArrayList<ITurnActionStrategy> strategies = new ArrayList<>();
-        strategies.add(new PointSaladBotMain(gameBoard, playerManager));
-        strategies.add(new PointSaladBotFree(gameBoard, playerManager));
+        strategies.add(new PointSaladBotMain(gameBoard, playerManager, random));
+        strategies.add(new PointSaladBotFree(gameBoard, playerManager, random));
         return strategies;
     }
 }

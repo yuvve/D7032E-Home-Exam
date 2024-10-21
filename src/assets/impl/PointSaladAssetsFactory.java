@@ -8,10 +8,7 @@ import exceptions.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Map;
-import java.util.HashMap;
+import java.util.*;
 
 public class PointSaladAssetsFactory implements IAbstractAssetsFactory {
     private static final int MIN_PLAYERS = Constants.MIN_PLAYERS.getValue();
@@ -27,6 +24,12 @@ public class PointSaladAssetsFactory implements IAbstractAssetsFactory {
     private static final String ARGS_FIELD = ManifestMetadata.ARGS_FIELD.getValue();
     private static final String POINTS_FIELD = ManifestMetadata.POINTS_FIELD.getValue();
     private static final String NAME_FIELD = ManifestMetadata.NAME_FIELD.getValue();
+
+    private Random random;
+
+    public PointSaladAssetsFactory(Random random) {
+        this.random = random;
+    }
 
     @Override
     public IGameBoard createGameBoard(JSONObject deckJson, int numPlayers)
@@ -61,13 +64,13 @@ public class PointSaladAssetsFactory implements IAbstractAssetsFactory {
         }
 
         if (numPlayers == MAX_PLAYERS) {
-            Collections.shuffle(cards);
+            Collections.shuffle(cards, random);
             return cards;
         }
 
         Map<IResource, ArrayList<ICard>> resourcePiles = sortCardsByResource(cards);
         for (ArrayList<ICard> cardsPile: resourcePiles.values()) {
-            Collections.shuffle(cardsPile);
+            Collections.shuffle(cardsPile, random);
             int numCardsToRemove = CARDS_TO_REMOVE_PER_PLAYER_MISSING * (MAX_PLAYERS - numPlayers);
             for (int i = 0; i < numCardsToRemove; i++) {
                 cardsPile.removeFirst();
@@ -84,7 +87,7 @@ public class PointSaladAssetsFactory implements IAbstractAssetsFactory {
 
     @Override
     public ArrayList<IPile> createPiles(ArrayList<ICard> deck) throws PileGenerationException {
-        Collections.shuffle(deck);
+        Collections.shuffle(deck, random);
         ArrayList<IPile> piles = new ArrayList<>();
 
         int numCardsPerPile = deck.size() / NUM_PILES;
@@ -110,20 +113,23 @@ public class PointSaladAssetsFactory implements IAbstractAssetsFactory {
         if (piles.size() != NUM_PILES) {
             throw new MarketGenerationException("Incorrect number of piles.");
         }
+        if (piles.size() != MARKET_COLS) {
+            throw new MarketGenerationException("The number of piles must match the number of columns in the market.");
+        }
         ICard[][] marketLayout = new ICard[MARKET_ROWS][MARKET_COLS];
         for (int i = 0; i < piles.size(); i++) {
             // Draw two cards from each pile (to the column below the respective pile)
-            marketLayout[i][0] = piles.get(i).drawTop();
-            if(marketLayout[i][0].isCriteriaSideActive()) marketLayout[i][0].flip();
-            marketLayout[i][1] = piles.get(i).drawTop();
-            if(marketLayout[i][1].isCriteriaSideActive()) marketLayout[i][1].flip();
+            marketLayout[0][i] = piles.get(i).drawTop();
+            marketLayout[1][i] = piles.get(i).drawTop();
+            if(marketLayout[0][i].isCriteriaSideActive()) marketLayout[0][i].flip();
+            if(marketLayout[1][i].isCriteriaSideActive()) marketLayout[1][i].flip();
         }
         return new PointSaladMarket(marketLayout);
     }
 
     @Override
     public IPile createPile(ArrayList<ICard> cards) throws PileGenerationException {
-        return new PointSaladPile(cards);
+        return new PointSaladPile(cards, random);
     }
 
     @Override

@@ -48,6 +48,30 @@ public class PointSaladPlayer implements IPlayer {
     }
 
     @Override
+    public ArrayList<ICard> getResourceCards() {
+        ArrayList<ICard> vegetableCards = new ArrayList<>();
+
+        for (ICard card: hand) {
+            if (!card.isCriteriaSideActive()) {
+                vegetableCards.add(card);
+            }
+        }
+        return vegetableCards;
+    }
+
+    @Override
+    public ArrayList<ICard> getCriteriaCards() {
+        ArrayList<ICard> criteriaCards = new ArrayList<>();
+
+        for (ICard card: hand) {
+            if (card.isCriteriaSideActive()) {
+                criteriaCards.add(card);
+            }
+        }
+        return criteriaCards;
+    }
+
+    @Override
     public void discard(ICard card) {
         if (!hand.contains(card)) {
             throw new CardDiscardingException("Player does not have the card to discard.");
@@ -80,23 +104,27 @@ public class PointSaladPlayer implements IPlayer {
         }
         sb.append("Criteria Cards:").append("\n");
         sb.append("-----------------------------\n");
-        for (ICard card : criteriaCards) {
-            sb.append("Card ").append(hand.indexOf(card)).append(":\n");
-            sb.append(card.represent());
-            sb.append("\n");
+        if (!criteriaCards.isEmpty()) {
+            for (ICard card : criteriaCards) {
+                sb.append("Card ").append(hand.indexOf(card)).append(":\n");
+                sb.append(card.represent());
+                sb.append("\n");
+            }
         }
         sb.append("-----------------------------").append("\n").append("\n");
 
         sb.append("Vegetable Cards (with card NUMBER below):").append("\n");
         sb.append("-----------------------------").append("\n");
-        sb.append("|");
-        for (ICard card : vegetableCards) {
-            sb.append(card.represent()).append("|");
-        }
+        if (!vegetableCards.isEmpty()) {
+            sb.append("|");
+            for (ICard card : vegetableCards) {
+                sb.append(card.represent()).append("|");
+            }
 
-        sb.append("\n").append("|");
-        for (ICard card: vegetableCards){
-            sb.append(" ").append(hand.indexOf(card)).append(" |");
+            sb.append("\n").append("|");
+            for (ICard card : vegetableCards) {
+                sb.append(" ").append(hand.indexOf(card)).append(" |");
+            }
         }
         sb.append("\n").append("-----------------------------");
         return sb.toString();

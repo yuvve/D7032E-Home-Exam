@@ -48,8 +48,12 @@ public abstract class GameLoopTemplate {
         setupGame();
         while(!gameBoard.hasGameEnded()){
             preRound();
-            executeTurn();
+            while (!playerManager.roundComplete()) {
+                executeTurn(playerManager.getCurrentPlayer());
+                playerManager.nextTurn();
+            }
             postRound();
+            playerManager.nextRound();
         }
         declareWinner();
     }
@@ -57,18 +61,17 @@ public abstract class GameLoopTemplate {
     /**
      * Executes all turn actions
      */
-    private void executeTurn() {
-        IPlayer currentPlayer = playerManager.getCurrentPlayer();
-        if (currentPlayer.isBot()) {
+    private void executeTurn(IPlayer player) {
+        if (player.isBot()) {
             for (ITurnActionStrategy botTurn : botTurns) {
                 preTurn();
-                botTurn.executeTurnAction(currentPlayer);
+                botTurn.executeTurnAction(player);
                 postTurn();
             }
         } else {
             for (ITurnActionStrategy humanTurn : humanTurns) {
                 preTurn();
-                humanTurn.executeTurnAction(currentPlayer);
+                humanTurn.executeTurnAction(player);
                 postTurn();
             }
         }

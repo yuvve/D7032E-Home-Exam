@@ -5,6 +5,8 @@ import assets.IMarket;
 import common.point_salad.Constants;
 import exceptions.MarketCardPlacementException;
 
+import java.util.ArrayList;
+
 public class PointSaladMarket implements IMarket {
     private final ICard[][] cards;
 
@@ -40,16 +42,16 @@ public class PointSaladMarket implements IMarket {
 
 
     @Override
-    public int getMarketSize() {
-        int count = 0;
-        for (ICard[] card : cards) {
-            for (ICard iCard : card) {
-                if (iCard != null) {
-                    count++;
+    public ArrayList<Integer[]> getNonEmptySlotsCoords() {
+        ArrayList<Integer[]> nonEmptySlots = new ArrayList<>();
+        for (int i = 0; i< cards.length; i++) {
+            for (int j = 0; j < cards[0].length; j++) {
+                if (cards[i][j] != null){
+                    nonEmptySlots.add(new Integer[]{i, j});
                 }
             }
         }
-        return count;
+        return nonEmptySlots;
     }
 
     @Override

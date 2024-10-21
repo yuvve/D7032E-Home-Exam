@@ -8,8 +8,8 @@ public enum Constants {
     CARDS_REMOVED_PER_MISSING_PLAYER_PER_VEG(3),
     NUM_PILES(3),
     CARDS_DRAWN_PER_PILE_TO_INIT_MARKET(2),
-    MARKET_ROWS(3),
-    MARKET_COLS(2);
+    MARKET_ROWS(2),
+    MARKET_COLS(3);
 
     private final int value;
 
