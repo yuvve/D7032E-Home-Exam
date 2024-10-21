@@ -40,4 +40,16 @@ public interface IPile extends IRepresentable {
      * @return The bottom card.
      */
     ICard drawBottom();
+
+    /**
+     * Gets the bottom half of the pile.
+     * @return The bottom half of the pile.
+     */
+    ArrayList<ICard> getBottomHalf();
+
+    /**
+     * Adds cards to the pile.
+     * @param cards The cards to add.
+     */
+    void addCards(ArrayList<ICard> cards);
 }

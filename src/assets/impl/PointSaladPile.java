@@ -51,6 +51,21 @@ public class PointSaladPile implements IPile {
     }
 
     @Override
+    public ArrayList<ICard> getBottomHalf() {
+        int halfSize = cards.size() / 2;
+        ArrayList<ICard> bottomHalf = new ArrayList<>();
+        for (int i = 0; i < halfSize; i++) {
+            bottomHalf.add(drawBottom());
+        }
+        return bottomHalf;
+    }
+
+    @Override
+    public void addCards(ArrayList<ICard> cards) {
+        this.cards.addAll(cards);
+    }
+
+    @Override
     public String represent() {
         StringBuilder sb = new StringBuilder();
         sb.append("(").append(cards.size()).append(" cards)").append("\n");

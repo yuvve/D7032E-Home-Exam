@@ -10,12 +10,13 @@ import java.util.ArrayList;
  */
 public interface IGameBoard extends IRepresentable {
 
-    /**
-     * Gets a specific pile of cards.
-     * @param index The index of the pile.
+
+    /** Gets a pile of cards from the game board.
+     * @param pileIndex The index of the pile.
+     *                  Must be between 0 and the number of piles in the game board.
      * @return The pile of cards.
      */
-    IPile getPile(int index) throws IllegalArgumentException;
+    ICard getCardFromPile(int pileIndex) throws IllegalArgumentException;
 
     /**
      * Returns the indexes of all non-empty piles.
@@ -28,6 +29,11 @@ public interface IGameBoard extends IRepresentable {
      * @return The market.
      */
     IMarket getMarket();
+
+    /**
+     * Refills the market.
+     */
+    void refillMarket();
 
     /**
      * Checks if the game has ended.

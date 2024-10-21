@@ -6,6 +6,7 @@ import game.ITurnActionStrategy;
 import networking.IServer;
 import player.IPlayer;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 public class PointSaladHumanMain implements ITurnActionStrategy {
@@ -24,6 +25,8 @@ public class PointSaladHumanMain implements ITurnActionStrategy {
         int clientId = playerClientMap.get(player.getId());
         StringBuilder message = new StringBuilder();
         message.append("It's your turn (player ").append(player.getId()).append(")").append("!\n");
+        message.append("Your current hand: \n");
+        message.append(player.represent()).append("\n");
         message.append("You can either: \n");
         message.append("- Pick one card from a pile by typing 'P<X>' (i.e. P2) \n");
         message.append("- Draft a card at position (x,y) from the [M]arket by typing 'M<X><Y>' (i.e. M11) \n");
@@ -52,8 +55,7 @@ public class PointSaladHumanMain implements ITurnActionStrategy {
         } while (true);
 
         if (action == 'P') {
-            IPile pile = gameBoard.getPile(pileIndex);
-            player.addToHand(pile.drawTop());
+            player.addToHand(gameBoard.getCardFromPile(pileIndex));
         } else {
             player.addToHand(gameBoard.getMarket().draftCard(coords[0][0], coords[0][1]));
             if (coords[1][0] != -1 && coords[1][1] != -1) {
@@ -93,8 +95,8 @@ public class PointSaladHumanMain implements ITurnActionStrategy {
 
         if (action == 'P'){
             try {
-                IPile pile = gameBoard.getPile(pileIndex);
-                if (pile.getCardCount() == 0) return false;
+                ArrayList<Integer> nonEmptyPiles = gameBoard.getNonEmptyPiles();
+                if (!nonEmptyPiles.contains(pileIndex)) return false;
             } catch (IllegalArgumentException e) {
                 return false;
             }

@@ -41,7 +41,7 @@ public class PointSaladGameLoop extends GameLoopTemplate {
 
     @Override
     protected void postRound() {
-
+        gameBoard.refillMarket();
     }
 
     @Override

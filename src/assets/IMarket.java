@@ -47,4 +47,11 @@ public interface IMarket extends IRepresentable {
      * @return The coordinates of all non-empty slots in the market.
      */
     ArrayList<Integer[]> getNonEmptySlotsCoords();
+
+    /**
+     * Gets the size of the market ({rows, columns}).
+     * @return The size of the market.
+     */
+    int[] getMarketSize();
+
 }

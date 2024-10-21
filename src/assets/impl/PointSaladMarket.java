@@ -55,6 +55,11 @@ public class PointSaladMarket implements IMarket {
     }
 
     @Override
+    public int[] getMarketSize() {
+        return new int[]{cards.length, cards[0].length};
+    }
+
+    @Override
     public String represent() {
         StringBuilder sb = new StringBuilder();
 

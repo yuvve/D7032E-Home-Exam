@@ -40,8 +40,7 @@ public class PointSaladBotMain implements ITurnActionStrategy {
 
     private void takeFromPiles(ArrayList<Integer> nonEmptyPiles) {
         int pileIndex = nonEmptyPiles.get(random.nextInt(nonEmptyPiles.size()));
-        IPile pile = gameBoard.getPile(pileIndex);
-        playerManager.getCurrentPlayer().addToHand(pile.drawTop());
+        playerManager.getCurrentPlayer().addToHand(gameBoard.getCardFromPile(pileIndex));
     }
 
     private void takeFromMarket(ArrayList<Integer[]> nonEmptyMarketCoords) {
