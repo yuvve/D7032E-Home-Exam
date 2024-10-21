@@ -29,14 +29,14 @@ public class PointSaladHumanMain implements ITurnActionStrategy {
         message.append(player.represent()).append("\n");
         message.append("You can either: \n");
         message.append("- Pick one card from a pile by typing 'P<X>' (i.e. P2) \n");
-        message.append("- Draft a card at position (x,y) from the [M]arket by typing 'M<X><Y>' (i.e. M11) \n");
-        message.append("- Draft two cards from the [M]arket by typing 'M<X1><Y1><X2><Y2>' (i.e. M1101)\n");
+        message.append("- Draft a card from from the [M]arket by typing 'M<ROW><COL>' (i.e. M11) \n");
+        message.append("- Draft two cards from the [M]arket by typing 'M<ROW1><COL1><ROW2><COL2>' (i.e. M1101)\n");
         server.sendMsg(clientId, message.toString());
 
         String input;
         char action;
         int pileIndex;
-        int[][] coords;
+        int[][] marketIndices;
 
         do {
             input = server.getClientInput(clientId);
@@ -48,7 +48,7 @@ public class PointSaladHumanMain implements ITurnActionStrategy {
                 } else {
                     action = input.charAt(0);
                     pileIndex = Integer.parseInt(input.substring(1,2));
-                    coords = parseCoords(input.substring(1));
+                    marketIndices = parseCoords(input.substring(1));
                     break;
                 }
             }
@@ -57,30 +57,30 @@ public class PointSaladHumanMain implements ITurnActionStrategy {
         if (action == 'P') {
             player.addToHand(gameBoard.getCardFromPile(pileIndex));
         } else {
-            player.addToHand(gameBoard.getMarket().draftCard(coords[0][0], coords[0][1]));
-            if (coords[1][0] != -1 && coords[1][1] != -1) {
-                player.addToHand(gameBoard.getMarket().draftCard(coords[1][0], coords[1][1]));
+            player.addToHand(gameBoard.getMarket().draftCard(marketIndices[0][0], marketIndices[0][1]));
+            if (marketIndices[1][0] != -1 && marketIndices[1][1] != -1) {
+                player.addToHand(gameBoard.getMarket().draftCard(marketIndices[1][0], marketIndices[1][1]));
             }
         }
     }
 
     private int[][] parseCoords(String coords) {
-        int x1, x2, y1, y2;
+        int row1, row2, col1, col2;
 
         if (coords.length() == 4) {
-            x1 = Integer.parseInt(coords.substring(0, 1));
-            y1 = Integer.parseInt(coords.substring(1, 2));
-            x2 = Integer.parseInt(coords.substring(2,3));
-            y2 = Integer.parseInt(coords.substring(3,4));
+            row1 = Integer.parseInt(coords.substring(0, 1));
+            col1 = Integer.parseInt(coords.substring(1, 2));
+            row2 = Integer.parseInt(coords.substring(2,3));
+            col2 = Integer.parseInt(coords.substring(3,4));
         } else if (coords.length() == 2) {
-            x1 = Integer.parseInt(coords.substring(0, 1));
-            y1 = Integer.parseInt(coords.substring(1,2));
-            x2 = -1;
-            y2 = -1;
+            row1 = Integer.parseInt(coords.substring(0, 1));
+            col1 = Integer.parseInt(coords.substring(1,2));
+            row2 = -1;
+            col2 = -1;
         } else {
             return null;
         }
-        return new int[][]{{x1, y1}, {x2, y2}};
+        return new int[][]{{row1, col1}, {row2, col2}};
     }
 
     private boolean validateAction(String input) {

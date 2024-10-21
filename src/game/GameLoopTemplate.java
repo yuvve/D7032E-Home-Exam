@@ -15,9 +15,9 @@ public abstract class GameLoopTemplate {
     protected IServer server;
     protected IPlayerManager playerManager;
     protected IGameBoard gameBoard;
-    protected Map<Integer, Integer> playerClientMap;
     protected ArrayList<ITurnActionStrategy> humanTurns;
     protected ArrayList<ITurnActionStrategy> botTurns;
+    private Map<Integer, Integer> playerClientMap;
 
     /**
      * Constructor for a game loop template.
@@ -25,6 +25,8 @@ public abstract class GameLoopTemplate {
      * @param playerManager The player manager to use.
      * @param gameBoard The game board to use.
      * @param playerClientMap The player to client map to use.
+     * @param humanTurns The human turn actions to use.
+     * @param botTurns The bot turn actions to use.
      */
     public GameLoopTemplate(
             IServer server,
@@ -48,7 +50,7 @@ public abstract class GameLoopTemplate {
         setupGame();
         while(!gameBoard.hasGameEnded()){
             preRound();
-            while (!playerManager.roundComplete()) {
+            while (!playerManager.roundComplete() && !gameBoard.hasGameEnded()) {
                 executeTurn(playerManager.getCurrentPlayer());
                 playerManager.nextTurn();
             }
@@ -63,18 +65,43 @@ public abstract class GameLoopTemplate {
      */
     private void executeTurn(IPlayer player) {
         if (player.isBot()) {
+            preTurn();
             for (ITurnActionStrategy botTurn : botTurns) {
-                preTurn();
                 botTurn.executeTurnAction(player);
-                postTurn();
             }
+            postTurn();
         } else {
+            preTurn();
             for (ITurnActionStrategy humanTurn : humanTurns) {
-                preTurn();
                 humanTurn.executeTurnAction(player);
-                postTurn();
             }
+            postTurn();
         }
+    }
+
+    /** get the client id of a player
+     * @param playerId the id of the player
+     * @return the client id of the player
+     * @throws IllegalArgumentException if the player id is not found in the playerClientMap
+     */
+    protected int getClientId(int playerId) throws IllegalArgumentException {
+        int clientId = playerClientMap.getOrDefault(playerId, -1);
+        if (clientId == -1){
+            throw new IllegalArgumentException("Player ID not found in playerClientMap");
+        }
+        return clientId;
+    }
+
+    /** map a player to a client
+     * @param playerId the id of the player
+     * @param clientId the id of the client
+     * @throws IllegalArgumentException if the player id already exists in the playerClientMap
+     */
+    protected void mapPlayerToClient(int playerId, int clientId) throws IllegalArgumentException {
+        if (playerClientMap.containsKey(playerId)){
+            throw new IllegalArgumentException("Player ID already exists in playerClientMap");
+        }
+        playerClientMap.put(playerId, clientId);
     }
 
     /**

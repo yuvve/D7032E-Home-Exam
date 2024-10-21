@@ -27,14 +27,15 @@ public class PointSaladBotMain implements ITurnActionStrategy {
     public void executeTurnAction(IPlayer player) {
         ArrayList<Integer> nonEmptyPiles = gameBoard.getNonEmptyPiles();
         ArrayList<Integer[]> nonEmptyMarketCoords = gameBoard.getMarket().getNonEmptySlotsCoords();
-        if (nonEmptyPiles.isEmpty()) {
-            takeFromMarket(nonEmptyMarketCoords);
-        } else if (nonEmptyMarketCoords.isEmpty()) {
-            takeFromPiles(nonEmptyPiles);
-        } else {
+
+        if (!nonEmptyPiles.isEmpty() && !nonEmptyMarketCoords.isEmpty()){
             boolean takeFromPile = random.nextFloat() < PROB_TAKE_FROM_PILE;
             if (takeFromPile) takeFromPiles(nonEmptyPiles);
             else takeFromMarket(nonEmptyMarketCoords);
+        } else if (!nonEmptyMarketCoords.isEmpty()) {
+            takeFromMarket(nonEmptyMarketCoords);
+        } else if (!nonEmptyPiles.isEmpty()) {
+            takeFromPiles(nonEmptyPiles);
         }
     }
 
@@ -51,6 +52,7 @@ public class PointSaladBotMain implements ITurnActionStrategy {
 
         if (random.nextFloat() < PROB_TAKE_TWICE_FROM_MARKET) {
             nonEmptyMarketCoords.remove(coords);
+            if (nonEmptyMarketCoords.isEmpty()) return;
             coords = nonEmptyMarketCoords.get(
                     random.nextInt(nonEmptyMarketCoords.size())
             );

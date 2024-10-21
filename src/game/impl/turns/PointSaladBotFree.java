@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class PointSaladBotFree implements ITurnActionStrategy {
-    private static final float FLIP_CARD = 0.125f;
+    private static final float FLIP_CARD = 0.0625f;
 
     private IGameBoard gameBoard;
     private IPlayerManager playerManager;

@@ -1,11 +1,15 @@
 package player.impl;
 
 import assets.ICard;
+import assets.IResource;
+import assets.Util;
 import exceptions.CardDiscardingException;
 import exceptions.CardFlippingException;
 import player.IPlayer;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PointSaladPlayer implements IPlayer {
     private final int playerId;
@@ -102,6 +106,7 @@ public class PointSaladPlayer implements IPlayer {
                 vegetableCards.add(card);
             }
         }
+        Map<IResource, Integer> resources = countResources(vegetableCards);
         sb.append("Criteria Cards:").append("\n");
         sb.append("-----------------------------\n");
         if (!criteriaCards.isEmpty()) {
@@ -113,20 +118,33 @@ public class PointSaladPlayer implements IPlayer {
         }
         sb.append("-----------------------------").append("\n").append("\n");
 
-        sb.append("Vegetable Cards (with card NUMBER below):").append("\n");
+        sb.append("Vegetable Cards (with number of copies below):").append("\n");
         sb.append("-----------------------------").append("\n");
         if (!vegetableCards.isEmpty()) {
             sb.append("|");
-            for (ICard card : vegetableCards) {
-                sb.append(card.represent()).append("|");
+            for (IResource resource : resources.keySet()) {
+                sb.append(resource.represent()).append("|");
             }
 
             sb.append("\n").append("|");
-            for (ICard card : vegetableCards) {
-                sb.append(" ").append(hand.indexOf(card)).append(" |");
+            for (IResource resource : resources.keySet()) {
+                sb.append(" ").append(resources.get(resource)).append(" |");
             }
         }
         sb.append("\n").append("-----------------------------");
         return sb.toString();
+    }
+
+    private Map<IResource, Integer> countResources(ArrayList<ICard> cards){
+        Map<IResource, Integer> resourceCount = new HashMap<>();
+        for (ICard card: cards) {
+            IResource resource = card.getResource();
+                if (resourceCount.containsKey(resource)) {
+                    resourceCount.put(resource, resourceCount.get(resource) + 1);
+                } else {
+                    resourceCount.put(resource, 1);
+                }
+            }
+        return resourceCount;
     }
 }

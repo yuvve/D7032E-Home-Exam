@@ -81,6 +81,7 @@ public class PointSaladPlayerManager implements IPlayerManager {
         Map<IPlayer, ArrayList<IResource>> playerResources = new HashMap<>();
         for (IPlayer player : players) {
             playerResources.put(player, getPlayerResources(player));
+            scores.put(player, 0);
         }
         for (IPlayer player : players) {
             for (ICriteriaStrategy criteria : getPlayerCriterias(player)) {
@@ -95,6 +96,12 @@ public class PointSaladPlayerManager implements IPlayerManager {
     @Override
     public String represent() {
         StringBuilder sb = new StringBuilder();
+        sb.append("The player order is: ");
+        for (IPlayer player : players){
+            sb.append(player.getId());
+            if (players.indexOf(player) != players.size() - 1) sb.append("->");
+        }
+        sb.append("\n");
         for (IPlayer player : players) {
             sb.append("Player ").append(player.getId()).append(":\n");
             sb.append("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
