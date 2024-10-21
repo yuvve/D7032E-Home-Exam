@@ -8,6 +8,7 @@ import game.impl.turns.PointSaladBotMain;
 import game.impl.turns.PointSaladHumanFree;
 import game.impl.turns.PointSaladHumanMain;
 import networking.IServer;
+import player.IPlayerManager;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -26,10 +27,10 @@ public class PointSaladTurnActionStrategyFactory implements ITurnActionStrategyF
     }
 
     @Override
-    public ArrayList<ITurnActionStrategy> createBotStrategies(IGameBoard gameBoard) {
+    public ArrayList<ITurnActionStrategy> createBotStrategies(IGameBoard gameBoard, IPlayerManager playerManager) {
         ArrayList<ITurnActionStrategy> strategies = new ArrayList<>();
-        strategies.add(new PointSaladBotMain(gameBoard));
-        strategies.add(new PointSaladBotFree(gameBoard));
+        strategies.add(new PointSaladBotMain(gameBoard, playerManager));
+        strategies.add(new PointSaladBotFree(gameBoard, playerManager));
         return strategies;
     }
 }

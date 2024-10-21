@@ -63,11 +63,42 @@ public class PointSaladPlayer implements IPlayer {
     @Override
     public String represent() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Player ").append(playerId).append(":\n|");
-        for (ICard card : hand) {
+        if (hand.isEmpty()) {
+            sb.append("Hand is empty.");
+            return sb.toString();
+        }
+        ArrayList<ICard> criteriaCards = new ArrayList<>();
+        ArrayList<ICard> vegetableCards = new ArrayList<>();
+
+        for (ICard card: hand) {
+            if (card.isCriteriaSideActive()) {
+                criteriaCards.add(card);
+            }
+            else {
+                vegetableCards.add(card);
+            }
+        }
+        sb.append("Criteria Cards:").append("\n");
+        sb.append("-----------------------------\n");
+        for (ICard card : criteriaCards) {
+            sb.append("Card ").append(hand.indexOf(card)).append(":\n");
+            sb.append(card.represent());
+            sb.append("\n");
+        }
+        sb.append("-----------------------------").append("\n").append("\n");
+
+        sb.append("Vegetable Cards (with card NUMBER below):").append("\n");
+        sb.append("-----------------------------").append("\n");
+        sb.append("|");
+        for (ICard card : vegetableCards) {
             sb.append(card.represent()).append("|");
         }
-        sb.append("\n");
+
+        sb.append("\n").append("|");
+        for (ICard card: vegetableCards){
+            sb.append(" ").append(hand.indexOf(card)).append(" |");
+        }
+        sb.append("\n").append("-----------------------------");
         return sb.toString();
     }
 }

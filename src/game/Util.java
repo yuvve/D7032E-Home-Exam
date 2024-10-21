@@ -12,8 +12,7 @@ public class Util {
      * Gets the IP address and port from the user
      * @return the IP address and port
      */
-    public static String getIpPort(){
-        Scanner scanner = new Scanner(System.in);
+    public static String getIpPort(Scanner scanner){
         String ipPort = scanner.nextLine();
         do {
             if (!validateIpPort(ipPort)) {
@@ -36,9 +35,19 @@ public class Util {
     public static boolean validateIpPort(String input){
         if (input.isEmpty()) return true;
         String[] parts = input.split(":");
-        if (parts.length != 2) return false;
+        String portString;
+        if (parts.length == 1)
+        {
+            portString = parts[0];
+        }
+        else if (parts.length == 2) {
+            portString = parts[1];
+        }
+        else{
+            return false;
+        }
         try {
-            int port = Integer.parseInt(parts[1]);
+            int port = Integer.parseInt(portString);
             return port >= 0 && port <= 65535;
         } catch (NumberFormatException e) {
             return false;
@@ -73,8 +82,7 @@ public class Util {
      * @param max the maximum value
      * @return the valid input
      */
-    public static int getValidInput(int min, int max) {
-        Scanner scanner = new Scanner(System.in);
+    public static int getValidInput(Scanner scanner, int min, int max) {
         String input = scanner.nextLine();
         do {
             if (!validateInput(input, min, max)) {

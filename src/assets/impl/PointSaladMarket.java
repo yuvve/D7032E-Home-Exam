@@ -54,24 +54,25 @@ public class PointSaladMarket implements IMarket {
 
     @Override
     public String represent() {
-        StringBuilder marketString = new StringBuilder();
-        marketString.append(" |");
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(" |");
         for (int i = 0; i < Constants.MARKET_COLS.getValue(); i++) {
-            marketString.append(" ").append(i+1).append(" |");
+            sb.append(" ").append(i).append(" |");
         }
-        marketString.append("\n");
+        sb.append("\n");
         for (int i = 0; i < Constants.MARKET_ROWS.getValue(); i++) {
-            marketString.append(i+1).append("|");
+            sb.append(i).append("|");
             for (int j = 0; j < Constants.MARKET_COLS.getValue(); j++) {
                 if (cards[i][j] == null){
-                    marketString.append("   |");
+                    sb.append("   |");
                 } else {
-                    marketString.append(cards[i][j].represent()).append("|");
+                    sb.append(cards[i][j].represent()).append("|");
                 }
             }
-            marketString.append("\n");
+            sb.append("\n");
         }
-        return marketString.toString();
+        return sb.toString();
     }
 
     private ICard getCard(int row, int column, boolean viewOnly) throws IllegalArgumentException {

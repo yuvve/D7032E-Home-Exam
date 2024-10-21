@@ -2,6 +2,8 @@ package game;
 
 import assets.IGameBoard;
 import networking.IServer;
+import player.IPlayer;
+import player.IPlayerManager;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -26,7 +28,8 @@ public interface ITurnActionStrategyFactory {
     /**
      * Creates the actions for a bot turn.
      * @param gameBoard The game board to perform the turn action on.
+     * @param playerManager The player manager of the match, can allow the bot to make smarter decisions.
      * @return The bot turn actions
      */
-    ArrayList<ITurnActionStrategy> createBotStrategies(IGameBoard gameBoard);
+    ArrayList<ITurnActionStrategy> createBotStrategies(IGameBoard gameBoard, IPlayerManager playerManager);
 }

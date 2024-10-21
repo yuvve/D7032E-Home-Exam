@@ -25,10 +25,10 @@ public class PointSaladHumanMain implements ITurnActionStrategy {
         StringBuilder message = new StringBuilder();
         message.append("It is your turn, ").append(".\n");
         message.append("You can either: \n");
-        message.append("1. Pick one card from a pile by typing 'P<PILE NUMBER>' (i.e. P2) \n");
-        message.append("2. Draft a card from the [M]arket by typing 'M<ROW_NUM><COL_NUM>' (i.e. M12) \n");
-        message.append("3. Draft two cards from the [M]arket by typing 'M<ROW_NUM1><COL_NUM1><ROW_NUM2><COL_NUM3>'" +
-                " (i.e. M1223)\n");
+        message.append("- Pick one card from a pile by typing 'P<PILE NUMBER>' (i.e. P2) \n");
+        message.append("- Draft a card from the [M]arket by typing 'M<ROW_NUM><COL_NUM>' (i.e. M11) \n");
+        message.append("- Draft two cards from the [M]arket by typing 'M<ROW_NUM1><COL_NUM1><ROW_NUM2><COL_NUM3>'" +
+                " (i.e. M1101)\n");
         server.sendMsg(clientId, message.toString());
 
         String input;

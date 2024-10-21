@@ -36,9 +36,7 @@ public class PointSaladPile implements IPile {
         if (cards.isEmpty()) {
             return null;
         }
-        ICard card = cards.removeFirst();
-        cards.getFirst().flip();
-        return card;
+        return cards.removeFirst();
     }
 
     @Override

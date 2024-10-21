@@ -20,43 +20,50 @@ import player.impl.PointSaladPlayerAssetsFactory;
 
 import java.io.FileNotFoundException;
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public class Main {
+    private static int DEFAULT_PORT = 2048;
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
         String ipPort = "";
-        String prompt = "Enter an IP address and port to join a server [IP]:[PORT], or leave blank to host a server.";
+        String prompt =
+                "To join a server: `[IP]:[PORT]`\n" +
+                "To host a server: `[PORT]` or just leave blank to use default port (2048).";
         if (args.length == 0){
             System.out.println(prompt);
-            ipPort = Util.getIpPort();
+            ipPort = Util.getIpPort(scanner);
         }
         else if (args.length != 1) {
             System.out.println("Invalid number of arguments.");
             System.out.println(prompt);
-            ipPort = Util.getIpPort();
+            ipPort = Util.getIpPort(scanner);
         } else {
             if (!Util.validateIpPort(args[0])) {
                 System.out.println("Invalid IP and port.");
                 System.out.println(prompt);
-                ipPort = Util.getIpPort();
+                ipPort = Util.getIpPort(scanner);
             } else {
                 ipPort = args[0];
             }
         }
 
         if (Objects.equals(ipPort, "")) {
-            hostPointSaladGame(ipPort);
-        } else {
-            joinGame(ipPort);
+            int port = DEFAULT_PORT;
+            hostPointSaladGame(scanner, port);
+        } else if (ipPort.split(":").length == 1) {
+            int port = Integer.parseInt(ipPort);
+            hostPointSaladGame(scanner, port);
+        }
+        else {
+            String ip = ipPort.split(":")[0];
+            int port = Integer.parseInt(ipPort.split(":")[1]);
+            joinGame(scanner, ip, port);
         }
     }
 
-    private static void joinGame(String ipPort){
-        String ip = ipPort.split(":")[0];
-        int port = Integer.parseInt(ipPort.split(":")[1]);
+    private static void joinGame(Scanner scanner, String ip, int port){
         IClient client = new Client();
         client.connectToServer(ip, port);
 
@@ -66,16 +73,18 @@ public class Main {
     /**
      * Hosts a game of Point Salad.
      * Calls the hostGame method with dependency injection for Point Salad.
-     * @param ipPort The IP address and port to host the game on.
+     * @param scanner the scanner for user input
+     * @param port the port to host the server on
      */
-    private static void hostPointSaladGame(String ipPort){
+    private static void hostPointSaladGame(Scanner scanner, int port){
         IGameLoopFactory gameLoopFactory = new PointSaladGameLoopFactory();
         IAbstractAssetsFactory assetsFactory = new PointSaladAssetsFactory();
         IAbstractPlayerAssetsFactory playerFactory = new PointSaladPlayerAssetsFactory();
         PointSaladTurnActionStrategyFactory turnActionStrategyFactory = new PointSaladTurnActionStrategyFactory();
 
         hostGame(
-                ipPort,
+                scanner,
+                port,
                 gameLoopFactory,
                 assetsFactory,
                 playerFactory,
@@ -85,7 +94,8 @@ public class Main {
     }
 
     private static void hostGame(
-            String ipPort,
+            Scanner scanner,
+            int port,
             IGameLoopFactory gameLoopFactory,
             IAbstractAssetsFactory assetsFactory,
             IAbstractPlayerAssetsFactory playerFactory,
@@ -103,7 +113,7 @@ public class Main {
         int minHumanPlayers = Constants.MIN_PLAYERS.getValue()-1;
         int maxHumanPlayers = Constants.MAX_PLAYERS.getValue();
         System.out.println("How many HUMAN players are there (" + minHumanPlayers + "-" + maxHumanPlayers + ")?");
-        int humanPlayers = Util.getValidInput(minHumanPlayers, maxHumanPlayers);
+        int humanPlayers = Util.getValidInput(scanner, minHumanPlayers, maxHumanPlayers);
 
         int botPlayers;
         if (humanPlayers == Constants.MAX_PLAYERS.getValue()){
@@ -112,7 +122,7 @@ public class Main {
             int minBots = Math.max(Constants.MIN_PLAYERS.getValue() - humanPlayers, 0);
             int maxBots = Math.min(Constants.MAX_PLAYERS.getValue() - humanPlayers, Constants.MAX_PLAYERS.getValue()-1);
             System.out.println("How many AI players are there (" + minBots + "-" + maxBots + ")?");
-            botPlayers = Util.getValidInput(minBots, maxBots);
+            botPlayers = Util.getValidInput(scanner, minBots, maxBots);
         }
 
         IPlayerManager playerManager = playerFactory.createPlayerManager(humanPlayers, botPlayers);
@@ -120,15 +130,16 @@ public class Main {
         IServer server;
         if (humanPlayers > 1) {
             server = new Server();
+            server.startServer(port);
         } else {
-            server = new OfflineServer();
+            server = new OfflineServer(scanner);
         }
 
         Map<Integer, Integer> playerClientMap = new HashMap<>();
         ArrayList<ITurnActionStrategy> humanStrategies =
                 turnActionStrategyFactory.createHumanStrategies(gameBoard, server, playerClientMap);
         ArrayList<ITurnActionStrategy> botStrategies =
-                turnActionStrategyFactory.createBotStrategies(gameBoard);
+                turnActionStrategyFactory.createBotStrategies(gameBoard, playerManager);
 
         GameLoopTemplate gameLoop = gameLoopFactory.createGameLoop(
                 server,

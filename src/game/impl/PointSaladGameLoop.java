@@ -1,16 +1,13 @@
 package game.impl;
 
 import assets.IGameBoard;
-import common.point_salad.Constants;
 import game.GameLoopTemplate;
 import game.ITurnActionStrategy;
 import networking.IServer;
-import player.IPlayer;
 import player.IPlayerManager;
 
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.Scanner;
 
 public class PointSaladGameLoop extends GameLoopTemplate {
 
@@ -26,6 +23,7 @@ public class PointSaladGameLoop extends GameLoopTemplate {
 
     protected void setupGame(){
         System.out.println("Setting up Point Salad Game");
+        server.startServer(8080);
         if (playerManager.countHumanPlayers() > 1){
             System.out.println("Waiting for players to connect...");
         }
@@ -37,8 +35,8 @@ public class PointSaladGameLoop extends GameLoopTemplate {
 
     @Override
     protected void preRound() {
-        server.broadcast(gameBoard.represent());
         server.broadcast(playerManager.represent());
+        server.broadcast(gameBoard.represent());
     }
 
     @Override

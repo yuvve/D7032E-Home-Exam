@@ -51,10 +51,16 @@ public class PointSaladGameBoard implements IGameBoard {
         // Pretty print the game board
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < piles.size(); i++) {
-            sb.append("Pile ").append(i + 1).append(":\n");
-            sb.append(piles.get(i).represent()).append("\n");
+            sb.append("Pile ").append(i).append(":\n");
+            sb.append("-----------------------------\n");
+            sb.append(piles.get(i).represent());
+            sb.append("-----------------------------\n");
+            sb.append("\n");
         }
+        sb.append("Market:\n");
+        sb.append("-----------------------------\n");
         sb.append(market.represent());
+        sb.append("-----------------------------\n");
         return sb.toString();
     }
 }

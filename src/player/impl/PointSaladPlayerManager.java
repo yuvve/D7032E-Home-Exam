@@ -84,7 +84,11 @@ public class PointSaladPlayerManager implements IPlayerManager {
     public String represent() {
         StringBuilder sb = new StringBuilder();
         for (IPlayer player : players) {
+            sb.append("Player ").append(player.getId()).append(":\n");
+            sb.append("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
             sb.append(player.represent()).append("\n");
+            sb.append("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+            sb.append("\n");
         }
         return sb.toString();
     }
