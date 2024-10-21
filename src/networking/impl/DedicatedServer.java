@@ -1,6 +1,7 @@
 package networking.impl;
 
 import exceptions.NetworkingException;
+import networking.ControlProtocol;
 import networking.IServer;
 
 import java.io.BufferedReader;
@@ -54,6 +55,32 @@ public class DedicatedServer implements IServer {
     }
 
     @Override
+    public void stopServer() {
+        if (!isStarted) {
+            System.out.println("Server not started");
+            return;
+        }
+        broadcast(ControlProtocol.GAME_OVER.getValue());
+
+        try {
+            closeServerSocket();
+            clients.forEach(c -> {
+                try {
+                    c.in.close();
+                    c.out.close();
+                    c.socket.close();
+                } catch (IOException e) {
+                    System.err.println("Error closing client: " + e.getMessage());
+                }
+            });
+            clients.clear();
+            System.out.println("Server stopped");
+        } catch (NetworkingException e) {
+            System.err.println("Error stopping server: " + e.getMessage());
+        }
+    }
+
+    @Override
     public int acceptClient() throws NetworkingException{
         int clientId = clients.size();
         return acceptClient(clientId);
@@ -76,7 +103,7 @@ public class DedicatedServer implements IServer {
 
     @Override
     public String getClientInput(int clientId) throws NetworkingException{
-        //sendMsg(clientId, ControlProtocol.TRANSMISSION_OVER.getValue());
+        sendMsg(clientId, ControlProtocol.TRANSMISSION_OVER.getValue());
         Client client = getClientFromId(clientId);
         if (client == null) {
             throw new IllegalArgumentException("Invalid client ID: " + clientId);

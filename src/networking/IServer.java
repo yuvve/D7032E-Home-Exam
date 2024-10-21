@@ -14,6 +14,11 @@ public interface IServer {
     void startServer(int port) throws NetworkingException;
 
     /**
+     * Stop the server.
+     */
+    void stopServer();
+
+    /**
      * Wait for a client to connect.
      * @return The client's ID.
      */

@@ -25,6 +25,10 @@ public class Server extends DedicatedServer {
     @Override
     public String getClientInput(int clientId) {
         if (clientId == 0) {
+            // Flush scanner from all garbage players type when it's not their turn
+            while (scanner.hasNextLine()) {
+                scanner.nextLine();
+            }
             return scanner.nextLine();
         }
         return super.getClientInput(clientId);

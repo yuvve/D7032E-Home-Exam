@@ -29,7 +29,7 @@ public class Main {
         String ipPort = "";
         String prompt =
                 "To join a server: `[IP]:[PORT]`\n" +
-                "To host a (DEDICATED) server: `[PORT]` or just leave blank to use default port (2048).";
+                "To host a server: `[PORT]` or just leave blank to use default port (2048).";
         if (args.length == 0){
             System.out.println(prompt);
             ipPort = Util.getIpPort(scanner);
@@ -66,11 +66,15 @@ public class Main {
         IClient client = new Client();
         client.connectToServer(ip, port);
         while(client.isConnectionAlive()){
-            System.out.println(client.receiveMessage());
             if (client.serverWaitingForInput()){
+                // Flush scanner from all garbage players type when it's not their turn
+                while (scanner.hasNextLine()) {
+                    scanner.nextLine();
+                }
                 String msg = scanner.nextLine();
                 client.sendMessage(msg);
             }
+            System.out.println(client.receiveMessage());
         }
     }
 

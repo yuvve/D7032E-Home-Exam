@@ -3,10 +3,12 @@ package game.impl;
 import assets.IGameBoard;
 import game.GameLoopTemplate;
 import game.ITurnActionStrategy;
+import networking.ControlProtocol;
 import networking.IServer;
 import player.IPlayer;
 import player.IPlayerManager;
 
+import javax.naming.ldap.Control;
 import java.util.*;
 
 public class PointSaladGameLoop extends GameLoopTemplate {
@@ -56,6 +58,12 @@ public class PointSaladGameLoop extends GameLoopTemplate {
     @Override
     protected void postTurn() {
         gameBoard.refillMarket();
+        IPlayer currPlayer = playerManager.getCurrentPlayer();
+        if (!currPlayer.isBot() && playerManager.countHumanPlayers() > 1) {
+            server.sendMsg(
+                    getClientId(currPlayer.getId()),
+                    "Waiting for other players to finish their turn...");
+        }
     }
 
     @Override
@@ -88,6 +96,8 @@ public class PointSaladGameLoop extends GameLoopTemplate {
         } else {
             server.sendMsg(getClientId(winner.getId()), "Congratulations! You are the winner!");
         }
+        server.broadcast("Game over! Closing connection...");
+        server.stopServer();
     }
 
 }

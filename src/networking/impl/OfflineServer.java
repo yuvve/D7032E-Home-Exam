@@ -20,6 +20,11 @@ public class OfflineServer implements IServer {
     }
 
     @Override
+    public void stopServer() {
+        System.out.println("Offline server stopped");
+    }
+
+    @Override
     public int acceptClient() {
         return 0;
     }

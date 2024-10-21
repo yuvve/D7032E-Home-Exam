@@ -67,25 +67,23 @@ public class Client implements IClient {
         }
         try {
             String fromServer = inFromServer.readLine();
-            /**
             if (Objects.equals(fromServer, ControlProtocol.TRANSMISSION_OVER.getValue())) {
                 isServerListening = true;
-                return null;
+                return "Your input: ";
             }
-             */
             if (Objects.equals(fromServer, ControlProtocol.GAME_OVER.getValue())) {
                 closeConnection();
                 return "Game over, closing connection!";
             }
+            return fromServer;
         } catch (IOException e) {
             throw new NetworkingException("Error receiving message: " + e.getMessage());
         }
-        throw new NetworkingException("Error receiving message: unexpected message from server");
     }
 
     @Override
     public boolean serverWaitingForInput() {
-        return false;
+        return isServerListening;
     }
 
     @Override
