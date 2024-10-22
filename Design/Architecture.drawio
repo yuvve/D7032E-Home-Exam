@@ -1,6 +1,6 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.7.17 Chrome/128.0.6613.36 Electron/32.0.1 Safari/537.36" version="24.7.17">
   <diagram name="Page-1" id="F4KrW8JxtzPAobyz8DqY">
-    <mxGraphModel dx="976" dy="1521" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1383" dy="2155" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -18,7 +18,7 @@
         <mxCell id="FavM__Tn094tiXzaovP9-74" value="«interface»&lt;br&gt;&lt;b&gt;IPlayer&lt;/b&gt;" style="html=1;whiteSpace=wrap;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;fillColor=#647687;fontColor=#ffffff;strokeColor=#314354;" parent="FavM__Tn094tiXzaovP9-73" vertex="1">
           <mxGeometry width="186.68892052194545" height="76.22714148219441" as="geometry" />
         </mxCell>
-        <mxCell id="FavM__Tn094tiXzaovP9-75" value="&lt;div&gt;int getId();&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;boolean isBot();&lt;/span&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;AL&amp;lt;ICard&amp;gt; getHand();&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;AL&amp;lt;ICard&amp;gt; getResourceCards();&lt;br&gt;&lt;/div&gt;&lt;div&gt;AL&amp;lt;ICard&amp;gt; getCriteriaCards();&lt;br&gt;&lt;/div&gt;&lt;div&gt;void discard(ICard);&lt;/div&gt;&lt;div&gt;void addToHand(ICard);&lt;/div&gt;&lt;div&gt;void makeBot();&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" parent="FavM__Tn094tiXzaovP9-73" vertex="1">
+        <mxCell id="FavM__Tn094tiXzaovP9-75" value="&lt;div&gt;int getId();&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;boolean isBot();&lt;/span&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;AL&amp;lt;ICard&amp;gt; getHand();&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;AL&amp;lt;ICard&amp;gt; getResourceCards();&lt;br&gt;&lt;/div&gt;&lt;div&gt;AL&amp;lt;ICard&amp;gt; getCriteriaCards();&lt;br&gt;&lt;/div&gt;&lt;div&gt;void discard(ICard);&lt;/div&gt;&lt;div&gt;void addToHand(ICard);&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" parent="FavM__Tn094tiXzaovP9-73" vertex="1">
           <mxGeometry y="76.22714148219441" width="186.68892052194545" height="152.45428296438882" as="geometry" />
         </mxCell>
         <mxCell id="SN2yluZUW8M9mS18KECz-39" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.75;entryY=1;entryDx=0;entryDy=0;dashed=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" parent="SN2yluZUW8M9mS18KECz-75" source="t7THmQA8hoJjXBgSS74K-178" target="FavM__Tn094tiXzaovP9-75" edge="1">
@@ -572,7 +572,7 @@
         <mxCell id="H68FtNxgXIMP8BipjUGC-23" value="" style="group" parent="H68FtNxgXIMP8BipjUGC-26" vertex="1" connectable="0">
           <mxGeometry x="300.0033333333329" y="450" width="160.0083333333333" height="87.6288" as="geometry" />
         </mxCell>
-        <mxCell id="H68FtNxgXIMP8BipjUGC-24" value="&lt;b&gt;PointCityBotTurn&lt;/b&gt;&lt;div&gt;&lt;b&gt;Implements IBotTurn&lt;/b&gt;&lt;/div&gt;" style="html=1;whiteSpace=wrap;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;fillColor=#6a00ff;fontColor=#ffffff;strokeColor=#3700CC;" parent="H68FtNxgXIMP8BipjUGC-23" vertex="1">
+        <mxCell id="H68FtNxgXIMP8BipjUGC-24" value="&lt;b&gt;PointCityBotMain&lt;/b&gt;&lt;div&gt;&lt;b&gt;ITurnActionStrategy&lt;/b&gt;&lt;br&gt;&lt;/div&gt;" style="html=1;whiteSpace=wrap;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;fillColor=#6a00ff;fontColor=#ffffff;strokeColor=#3700CC;" parent="H68FtNxgXIMP8BipjUGC-23" vertex="1">
           <mxGeometry width="160.0083333333333" height="38.94613333333332" as="geometry" />
         </mxCell>
         <mxCell id="H68FtNxgXIMP8BipjUGC-25" value="" style="rounded=0;whiteSpace=wrap;html=1;align=left;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" parent="H68FtNxgXIMP8BipjUGC-23" vertex="1">
@@ -580,24 +580,6 @@
         </mxCell>
         <mxCell id="H68FtNxgXIMP8BipjUGC-37" value="" style="html=1;strokeColor=none;resizeWidth=1;resizeHeight=1;fillColor=none;part=1;connectable=0;allowArrows=0;deletable=0;whiteSpace=wrap;" parent="1" vertex="1">
           <mxGeometry x="19" y="1280" width="790" height="990" as="geometry" />
-        </mxCell>
-        <mxCell id="H68FtNxgXIMP8BipjUGC-38" value="" style="group" parent="1" vertex="1" connectable="0">
-          <mxGeometry x="600" y="1320" width="159" height="90" as="geometry" />
-        </mxCell>
-        <mxCell id="H68FtNxgXIMP8BipjUGC-39" value="&lt;b&gt;MockServer&lt;/b&gt;" style="html=1;whiteSpace=wrap;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;fillColor=#6a00ff;fontColor=#ffffff;strokeColor=#3700CC;" parent="H68FtNxgXIMP8BipjUGC-38" vertex="1">
-          <mxGeometry width="159" height="34.736842105263165" as="geometry" />
-        </mxCell>
-        <mxCell id="H68FtNxgXIMP8BipjUGC-40" value="" style="rounded=0;whiteSpace=wrap;html=1;align=left;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" parent="H68FtNxgXIMP8BipjUGC-38" vertex="1">
-          <mxGeometry y="34.74000000000001" width="159" height="55.26" as="geometry" />
-        </mxCell>
-        <mxCell id="H68FtNxgXIMP8BipjUGC-41" value="" style="group" parent="1" vertex="1" connectable="0">
-          <mxGeometry x="420" y="1320" width="159" height="90" as="geometry" />
-        </mxCell>
-        <mxCell id="H68FtNxgXIMP8BipjUGC-42" value="&lt;b&gt;MockClient&lt;/b&gt;" style="html=1;whiteSpace=wrap;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;fillColor=#6a00ff;fontColor=#ffffff;strokeColor=#3700CC;" parent="H68FtNxgXIMP8BipjUGC-41" vertex="1">
-          <mxGeometry width="159" height="34.736842105263165" as="geometry" />
-        </mxCell>
-        <mxCell id="H68FtNxgXIMP8BipjUGC-43" value="" style="rounded=0;whiteSpace=wrap;html=1;align=left;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" parent="H68FtNxgXIMP8BipjUGC-41" vertex="1">
-          <mxGeometry y="34.74000000000001" width="159" height="55.26" as="geometry" />
         </mxCell>
         <mxCell id="H68FtNxgXIMP8BipjUGC-44" value="" style="group" parent="1" vertex="1" connectable="0">
           <mxGeometry x="60" y="1320" width="309" height="220" as="geometry" />
@@ -618,7 +600,7 @@
           <mxGeometry y="34.736842105263165" width="309" height="185.26315789473685" as="geometry" />
         </mxCell>
         <mxCell id="H68FtNxgXIMP8BipjUGC-50" value="" style="group" parent="1" vertex="1" connectable="0">
-          <mxGeometry x="414" y="1580" width="309" height="220" as="geometry" />
+          <mxGeometry x="480" y="2030" width="309" height="220" as="geometry" />
         </mxCell>
         <mxCell id="H68FtNxgXIMP8BipjUGC-51" value="&lt;b&gt;IntegrationTests&lt;/b&gt;" style="html=1;whiteSpace=wrap;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;fillColor=#6a00ff;fontColor=#ffffff;strokeColor=#3700CC;" parent="H68FtNxgXIMP8BipjUGC-50" vertex="1">
           <mxGeometry width="309" height="34.736842105263165" as="geometry" />
@@ -629,16 +611,16 @@
         <mxCell id="H68FtNxgXIMP8BipjUGC-53" value="" style="group" parent="1" vertex="1" connectable="0">
           <mxGeometry x="60" y="1830" width="309" height="220" as="geometry" />
         </mxCell>
-        <mxCell id="H68FtNxgXIMP8BipjUGC-54" value="&lt;b&gt;RuleTests&lt;/b&gt;" style="html=1;whiteSpace=wrap;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;fillColor=#6a00ff;fontColor=#ffffff;strokeColor=#3700CC;" parent="H68FtNxgXIMP8BipjUGC-53" vertex="1">
+        <mxCell id="H68FtNxgXIMP8BipjUGC-54" value="&lt;b&gt;GameTests&lt;/b&gt;" style="html=1;whiteSpace=wrap;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;fillColor=#6a00ff;fontColor=#ffffff;strokeColor=#3700CC;" parent="H68FtNxgXIMP8BipjUGC-53" vertex="1">
           <mxGeometry width="309" height="34.736842105263165" as="geometry" />
         </mxCell>
         <mxCell id="H68FtNxgXIMP8BipjUGC-55" value="" style="rounded=0;whiteSpace=wrap;html=1;align=left;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" parent="H68FtNxgXIMP8BipjUGC-53" vertex="1">
           <mxGeometry y="34.736842105263165" width="309" height="185.26315789473685" as="geometry" />
         </mxCell>
         <mxCell id="H68FtNxgXIMP8BipjUGC-56" value="" style="group" parent="1" vertex="1" connectable="0">
-          <mxGeometry x="414" y="1830" width="309" height="220" as="geometry" />
+          <mxGeometry x="414" y="1320" width="309" height="220" as="geometry" />
         </mxCell>
-        <mxCell id="H68FtNxgXIMP8BipjUGC-57" value="&lt;b&gt;TurnTests&lt;/b&gt;" style="html=1;whiteSpace=wrap;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;fillColor=#6a00ff;fontColor=#ffffff;strokeColor=#3700CC;" parent="H68FtNxgXIMP8BipjUGC-56" vertex="1">
+        <mxCell id="H68FtNxgXIMP8BipjUGC-57" value="&lt;b&gt;NetworkingTests&lt;/b&gt;" style="html=1;whiteSpace=wrap;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;fillColor=#6a00ff;fontColor=#ffffff;strokeColor=#3700CC;" parent="H68FtNxgXIMP8BipjUGC-56" vertex="1">
           <mxGeometry width="309" height="34.736842105263165" as="geometry" />
         </mxCell>
         <mxCell id="H68FtNxgXIMP8BipjUGC-58" value="" style="rounded=0;whiteSpace=wrap;html=1;align=left;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" parent="H68FtNxgXIMP8BipjUGC-56" vertex="1">
