@@ -5,13 +5,14 @@ import assets.IGameBoard;
 import assets.impl.PointSaladAssetsFactory;
 import common.ScannerSingletons;
 import common.point_salad.Constants;
+import io.IIOManager;
+import io.NetworkIO;
+import io.OfflineIO;
 import game.impl.PointSaladGameLoopFactory;
 import game.impl.PointSaladTurnActionStrategyFactory;
 import networking.IClient;
 import networking.IServer;
 import networking.impl.Client;
-import networking.impl.OfflineServer;
-import networking.impl.DedicatedServer;
 import networking.impl.Server;
 import org.json.JSONObject;
 import player.IAbstractPlayerAssetsFactory;
@@ -133,25 +134,24 @@ public class Main {
 
         IPlayerManager playerManager = playerFactory.createPlayerManager(humanPlayers, botPlayers);
         IGameBoard gameBoard = assetsFactory.createGameBoard(deckJson, humanPlayers + botPlayers);
-        IServer server;
+        IIOManager io;
         if (humanPlayers > 1) {
-            server = new Server();
-            server.startServer(port);
+            IServer server  = new Server();
+            io = new NetworkIO(false, server, port, new HashMap<>());
         } else {
-            server = new OfflineServer();
+            io = new OfflineIO();
         }
 
         Map<Integer, Integer> playerClientMap = new HashMap<>();
         ArrayList<ITurnActionStrategy> humanStrategies =
-                turnActionStrategyFactory.createHumanStrategies(gameBoard, server, playerClientMap);
+                turnActionStrategyFactory.createHumanStrategies(gameBoard, io);
         ArrayList<ITurnActionStrategy> botStrategies =
                 turnActionStrategyFactory.createBotStrategies(gameBoard, playerManager, random);
 
         GameLoopTemplate gameLoop = gameLoopFactory.createGameLoop(
-                server,
+                io,
                 playerManager,
                 gameBoard,
-                playerClientMap,
                 humanStrategies,
                 botStrategies
         );

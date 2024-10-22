@@ -1,12 +1,10 @@
 package game;
 
 import assets.IGameBoard;
-import networking.IServer;
-import player.IPlayer;
+import io.IIOManager;
 import player.IPlayerManager;
 
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.Random;
 
 /**
@@ -17,14 +15,12 @@ public interface ITurnActionStrategyFactory {
     /**
      * Creates the actions for a human turn.
      * @param gameBoard The game board to perform the turn action on.
-     * @param server The server to use.
-     * @param playerClientMap a map of player id to client id
+     * @param io The IOManager to use.
      * @return The human turn actions
      */
     ArrayList<ITurnActionStrategy> createHumanStrategies(
             IGameBoard gameBoard,
-            IServer server,
-            Map<Integer, Integer> playerClientMap);
+            IIOManager io);
 
     /**
      * Creates the actions for a bot turn.

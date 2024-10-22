@@ -3,24 +3,21 @@ package game.impl;
 import assets.IGameBoard;
 import game.GameLoopTemplate;
 import game.ITurnActionStrategy;
-import networking.ControlProtocol;
-import networking.IServer;
+import io.IIOManager;
 import player.IPlayer;
 import player.IPlayerManager;
 
-import javax.naming.ldap.Control;
 import java.util.*;
 
 public class PointSaladGameLoop extends GameLoopTemplate {
 
     public PointSaladGameLoop(
-            IServer server,
+            IIOManager io,
             IPlayerManager playerManager,
             IGameBoard gameBoard,
-            Map<Integer, Integer> playerClientMap,
             ArrayList<ITurnActionStrategy> humanTurns,
             ArrayList<ITurnActionStrategy> botTurns) {
-        super(server, playerManager, gameBoard, playerClientMap, humanTurns, botTurns);
+        super(io, playerManager, gameBoard, humanTurns, botTurns);
     }
 
     protected void setupGame(){
@@ -30,8 +27,7 @@ public class PointSaladGameLoop extends GameLoopTemplate {
         }
 
         for (int i = 0; i < playerManager.countHumanPlayers(); i++){
-            int clientId = server.acceptClient();
-            mapPlayerToClient(i, clientId);
+            io.registerPlayer(i);
         }
     }
 
@@ -50,9 +46,8 @@ public class PointSaladGameLoop extends GameLoopTemplate {
         IPlayer currPlayer = playerManager.getCurrentPlayer();
         if (currPlayer.isBot()) return;
 
-        int currPlayerClientId = getClientId(currPlayer.getId());
-        server.sendMsg(currPlayerClientId, playerManager.represent());
-        server.sendMsg(currPlayerClientId, gameBoard.represent());
+        io.sendMsg(currPlayer.getId(), playerManager.represent());
+        io.sendMsg(currPlayer.getId(), gameBoard.represent());
     }
 
     @Override
@@ -60,16 +55,16 @@ public class PointSaladGameLoop extends GameLoopTemplate {
         gameBoard.refillMarket();
         IPlayer currPlayer = playerManager.getCurrentPlayer();
         if (!currPlayer.isBot() && playerManager.countHumanPlayers() > 1) {
-            server.sendMsg(
-                    getClientId(currPlayer.getId()),
+            io.sendMsg(
+                    currPlayer.getId(),
                     "Waiting for other players to finish their turn...");
         }
     }
 
     @Override
     protected void declareWinner() {
-        server.broadcast(playerManager.represent());
-        server.broadcast("Game over! Calculating scores...");
+        io.broadcast(playerManager.represent());
+        io.broadcast("Game over! Calculating scores...");
         Map<IPlayer, Integer> playerToScore = playerManager.calculateScores();
         List<Map.Entry<IPlayer, Integer>> sortedPlayerList = new ArrayList<>(playerToScore.entrySet());
 
@@ -90,14 +85,14 @@ public class PointSaladGameLoop extends GameLoopTemplate {
             sb.append("Player ").append(player.getId())
                     .append(" has scored ").append(sortedMap.get(player)).append(" points\n");
         }
-        server.broadcast(sb.toString());
+        io.broadcast(sb.toString());
         if (winner.isBot()) {
-            server.broadcast("The winner is a bot!");
+            io.broadcast("The winner is a bot!");
         } else {
-            server.sendMsg(getClientId(winner.getId()), "Congratulations! You are the winner!");
+            io.sendMsg(winner.getId(), "Congratulations! You are the winner!");
         }
-        server.broadcast("Game over! Closing connection...");
-        server.stopServer();
+        io.broadcast("Game over! Closing connection...");
+        io.endGame();
     }
 
 }

@@ -1,7 +1,7 @@
 package game;
 
 import assets.IGameBoard;
-import networking.IServer;
+import io.IIOManager;
 import player.IPlayer;
 import player.IPlayerManager;
 
@@ -14,33 +14,29 @@ import java.util.Map;
  * Each step of the game loop is defined in a separate method, which can be overridden by subclasses.
  */
 public abstract class GameLoopTemplate {
-    protected IServer server;
+    protected IIOManager io;
     protected IPlayerManager playerManager;
     protected IGameBoard gameBoard;
     protected ArrayList<ITurnActionStrategy> humanTurns;
     protected ArrayList<ITurnActionStrategy> botTurns;
-    private Map<Integer, Integer> playerClientMap;
 
     /**
      * Constructor for a game loop template.
-     * @param server The server to use.
+     * @param io The input output to use.
      * @param playerManager The player manager to use.
      * @param gameBoard The game board to use.
-     * @param playerClientMap The player to client map to use.
      * @param humanTurns The human turn actions to use.
      * @param botTurns The bot turn actions to use.
      */
     public GameLoopTemplate(
-            IServer server,
+            IIOManager io,
             IPlayerManager playerManager,
             IGameBoard gameBoard,
-            Map<Integer, Integer> playerClientMap,
             ArrayList<ITurnActionStrategy> humanTurns,
             ArrayList<ITurnActionStrategy> botTurns) {
-        this.server = server;
+        this.io = io;
         this.playerManager = playerManager;
         this.gameBoard = gameBoard;
-        this.playerClientMap = playerClientMap;
         this.humanTurns = humanTurns;
         this.botTurns = botTurns;
     }
@@ -79,31 +75,6 @@ public abstract class GameLoopTemplate {
             }
             postTurn();
         }
-    }
-
-    /** get the client id of a player
-     * @param playerId the id of the player
-     * @return the client id of the player
-     * @throws IllegalArgumentException if the player id is not found in the playerClientMap
-     */
-    protected int getClientId(int playerId) throws IllegalArgumentException {
-        int clientId = playerClientMap.getOrDefault(playerId, -1);
-        if (clientId == -1){
-            throw new IllegalArgumentException("Player ID not found in playerClientMap");
-        }
-        return clientId;
-    }
-
-    /** map a player to a client
-     * @param playerId the id of the player
-     * @param clientId the id of the client
-     * @throws IllegalArgumentException if the player id already exists in the playerClientMap
-     */
-    protected void mapPlayerToClient(int playerId, int clientId) throws IllegalArgumentException {
-        if (playerClientMap.containsKey(playerId)){
-            throw new IllegalArgumentException("Player ID already exists in playerClientMap");
-        }
-        playerClientMap.put(playerId, clientId);
     }
 
     /**
