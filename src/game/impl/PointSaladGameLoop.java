@@ -65,8 +65,9 @@ public class PointSaladGameLoop extends GameLoopTemplate {
 
     @Override
     protected void declareWinner() {
-        io.broadcast(playerManager.represent());
         io.broadcast("Game over! Calculating scores...");
+        io.broadcast(playerManager.represent());
+
         Map<IPlayer, Integer> playerToScore = playerManager.calculateScores();
         List<Map.Entry<IPlayer, Integer>> sortedPlayerList = new ArrayList<>(playerToScore.entrySet());
 
