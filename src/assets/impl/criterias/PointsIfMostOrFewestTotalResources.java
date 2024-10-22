@@ -43,7 +43,8 @@ public class PointsIfMostOrFewestTotalResources implements ICriteriaStrategy {
             }
         }
         playerCount = playerResources.size();
-        if (playerCount == bestCount) {
+
+        if ((mostOf && playerCount >= bestCount) || (!mostOf && playerCount <= bestCount)) {
             points = pointsValue;
         }
         return points;

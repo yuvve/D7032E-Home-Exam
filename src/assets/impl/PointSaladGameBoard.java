@@ -4,11 +4,8 @@ import assets.ICard;
 import assets.IGameBoard;
 import assets.IMarket;
 import assets.IPile;
-import common.point_salad.Constants;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class PointSaladGameBoard implements IGameBoard {
     private final ArrayList<IPile> piles;
@@ -28,7 +25,7 @@ public class PointSaladGameBoard implements IGameBoard {
     public ICard getCardFromPile(int pileIndex) throws IllegalArgumentException {
         IPile pile = getPile(pileIndex);
         ICard card = pile.drawTop();
-        if (pile.getCardCount() == 0) {
+        if (pile.size() == 0) {
             rebalancePiles();
         }
         return card;
@@ -38,7 +35,7 @@ public class PointSaladGameBoard implements IGameBoard {
     public ArrayList<Integer> getNonEmptyPiles() {
         ArrayList<Integer> nonEmptyPilesIndexes = new ArrayList<>();
         for (int i = 0; i < piles.size(); i++) {
-            if (piles.get(i).getCardCount() != 0) {
+            if (piles.get(i).size() != 0) {
                 nonEmptyPilesIndexes.add(i);
             }
         }
@@ -72,7 +69,7 @@ public class PointSaladGameBoard implements IGameBoard {
     private ICard getCardFromPiles(int col) {
         IPile pile = piles.get(col);
         ICard card = pile.drawTop();
-        if (pile.getCardCount() == 0) {
+        if (pile.size() == 0) {
             rebalancePiles();
         }
         return card;
@@ -84,7 +81,7 @@ public class PointSaladGameBoard implements IGameBoard {
             return false;
         }
         for (IPile pile : piles) {
-            if (pile.getCardCount() != 0) {
+            if (pile.size() != 0) {
                 return false;
             }
         }
@@ -117,7 +114,7 @@ public class PointSaladGameBoard implements IGameBoard {
             IPile emptyPile = piles.get(emptyIndex);
 
             ArrayList<ICard> cardsTakenFromMaxPile = new ArrayList<>();
-            int halfSize = largestPile.getCardCount() / 2;
+            int halfSize = largestPile.size() / 2;
             for (int i = 0; i < halfSize; i++) {
                 cardsTakenFromMaxPile.add(largestPile.drawBottom());
             }
@@ -127,7 +124,7 @@ public class PointSaladGameBoard implements IGameBoard {
 
     private boolean hasPileWithMoreThanOneCard() {
         for (IPile pile : piles) {
-            if (pile.getCardCount() > 1) {
+            if (pile.size() > 1) {
                 return true;
             }
         }
@@ -136,7 +133,7 @@ public class PointSaladGameBoard implements IGameBoard {
 
     private boolean allPilesEmpty() {
         for (IPile pile : piles) {
-            if (pile.getCardCount() != 0) {
+            if (pile.size() != 0) {
                 return false;
             }
         }
@@ -152,7 +149,7 @@ public class PointSaladGameBoard implements IGameBoard {
 
     private int findEmptyPileIndex() {
         for (int i = 0; i < piles.size(); i++) {
-            if (piles.get(i).getCardCount() == 0) {
+            if (piles.get(i).size() == 0) {
                 return i;
             }
         }
@@ -163,8 +160,8 @@ public class PointSaladGameBoard implements IGameBoard {
         int maxIndex = 0;
         int maxSize = 0;
         for (int i = 0; i < piles.size(); i++) {
-            if (piles.get(i).getCardCount() > maxSize) {
-                maxSize = piles.get(i).getCardCount();
+            if (piles.get(i).size() > maxSize) {
+                maxSize = piles.get(i).size();
                 maxIndex = i;
             }
         }

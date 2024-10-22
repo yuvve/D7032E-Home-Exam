@@ -22,7 +22,7 @@ public class MockIO implements IIOManager {
 
     @Override
     public void registerPlayer(int playerId) {
-
+        playerToMessagesReceived.put(playerId, new ArrayList<>());
     }
 
     @Override
@@ -32,7 +32,7 @@ public class MockIO implements IIOManager {
 
     @Override
     public void sendMsg(int playerId, String msg) {
-        playerToMessagesReceived.getOrDefault(playerId, new ArrayList<>()).add(msg);
+        playerToMessagesReceived.get(playerId).add(msg);
     }
 
     @Override

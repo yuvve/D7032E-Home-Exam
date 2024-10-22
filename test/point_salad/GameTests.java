@@ -7,10 +7,13 @@ import assets.impl.PointSaladCard;
 import assets.impl.PointSaladGameBoard;
 import assets.impl.PointSaladResource;
 import assets.impl.criterias.PointsIfMostOrFewestTotalResources;
+import assets.impl.criterias.PointsPerCopyOfOneOrManyResources;
 import common.point_salad.Constants;
 import common.point_salad.ManifestMetadata;
+import game.GameLoopTemplate;
 import game.ITurnActionStrategy;
 import game.Util;
+import game.impl.PointSaladGameLoop;
 import game.impl.turns.PointSaladHumanFree;
 import game.impl.turns.PointSaladHumanMain;
 import io.IIOManager;
@@ -24,6 +27,7 @@ import player.impl.PointSaladPlayerAssetsFactory;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -100,6 +104,9 @@ public class GameTests {
         playerToActions.put(0, actions);
 
         IIOManager io = new MockIO(playerToActions);
+        for (int i=0; i < Constants.MAX_PLAYERS.getValue(); i++){
+            io.registerPlayer(i);
+        }
         ITurnActionStrategy mainAction = new PointSaladHumanMain(gameBoard, io);
 
         IPlayer humanPlayer = playerManager.getPlayerById(0);
@@ -137,6 +144,9 @@ public class GameTests {
         playerToActions.put(0, actions);
 
         IIOManager io = new MockIO(playerToActions);
+        for (int i=0; i < Constants.MAX_PLAYERS.getValue(); i++){
+            io.registerPlayer(i);
+        }
         ITurnActionStrategy mainAction = new PointSaladHumanMain(gameBoard, io);
         ITurnActionStrategy freeAction = new PointSaladHumanFree(gameBoard, io);
 
@@ -196,4 +206,130 @@ public class GameTests {
      * <H1>Requirement 12</H1>
      * Test that the game continues (each player gets their turn) until the game ends
      */
+    @Test
+    public void testPlayersTakeTurns(){
+        IAbstractPlayerAssetsFactory playerAssetsFactory1 = new PointSaladPlayerAssetsFactory(random);
+        IPlayerManager playerManager = playerAssetsFactory1.createPlayerManager(
+                6, 0);
+        MockIO io = runFakeMatch(playerManager);
+
+        // Check that all players play every round
+        ArrayList<Integer> searchOccurences = new ArrayList<>();
+
+        for (int playerId=0; playerId<6; playerId++){
+            ArrayList<String> msgs = io.getMessages(playerId);
+            searchOccurences.add(0);
+            String search = "It's your turn (player " + playerId + ")!";
+            for (int msgId=0; msgId<msgs.size(); msgId++){
+                if (msgs.get(msgId).contains(search)){
+                    searchOccurences.set(playerId, searchOccurences.get(playerId)+1);
+                }
+            }
+        }
+
+        int maxOccurences = searchOccurences.stream().max(Integer::compare).get();
+        int minOccurences = searchOccurences.stream().min(Integer::compare).get();
+        assertTrue(maxOccurences-minOccurences <= 1,
+                "All players should have played the same number of turns.");
+    }
+
+    /**
+     * <H1>Requirement 13</H1>
+     * Test that scores are calculated correctly
+     *  This is just an example, making tests for all criteria will take a long time.
+     *  Similar tests can be made for the other criteria.
+     */
+    @Test
+    public void testScoreCalculation(){
+        IAbstractPlayerAssetsFactory playerAssetsFactory1 = new PointSaladPlayerAssetsFactory(random);
+        IPlayerManager playerManager1 = playerAssetsFactory1.createPlayerManager(
+                2, 0);
+
+        IPlayer player0 = playerManager1.getPlayerById(0);
+        IPlayer player1 = playerManager1.getPlayerById(1);
+
+        ICard card0 = new PointSaladCard(
+                new PointsPerCopyOfOneOrManyResources(
+                        new ArrayList<>(Arrays.asList(4, 3)),
+                        new ArrayList<>(Arrays.asList(PointSaladResource.CABBAGE, PointSaladResource.LETTUCE))),
+                PointSaladResource.LETTUCE);
+
+        ICard card1 = new PointSaladCard(
+                new PointsIfMostOrFewestTotalResources(10, true),
+                PointSaladResource.CABBAGE);
+
+        player0.addToHand(card0);
+        player1.addToHand(card1);
+
+        // Grow some cabbages
+        for (int i=0; i<10; i++){
+            ICard card = new PointSaladCard(
+                    new PointsIfMostOrFewestTotalResources(10, true),
+                    PointSaladResource.CABBAGE);
+            card.flip();
+            player0.addToHand(card);
+        }
+
+        // Grow some tomatoes
+        for (int i=0; i<15; i++){
+            ICard card = new PointSaladCard(
+                    new PointsIfMostOrFewestTotalResources(10, true),
+                    PointSaladResource.TOMATO);
+            card.flip();
+            player1.addToHand(card);
+        }
+
+        Map<IPlayer, Integer> scores = playerManager1.calculateScores();
+        assertEquals(scores.get(player0), 40,
+                "Player 0 should have 40 points.");
+        assertEquals(scores.get(player1), 10,
+                "Player 1 should have 10 points.");
+
+    }
+
+    /**
+     * <H1>Requirement 14</H1>
+     * Test that the declared winner is correct
+     */
+
+
+    private MockIO runFakeMatch(IPlayerManager playerManager){
+        // Reduce the piles to 6 cards each
+        for (IPile pile : piles){
+            while (pile.size() > 6){
+                pile.drawTop();
+            }
+        }
+
+        Map<Integer, ArrayList<String>> playerToActions = new HashMap<>();
+
+        for (int playerId=0; playerId < 6; playerId++) {
+            playerToActions.put(playerId, new ArrayList<>());
+            for (int i = 0; i < 3; i++) {
+                int pileId = playerId%3;
+                playerToActions.get(playerId).add("P" + pileId);
+                playerToActions.get(playerId).add("");
+            }
+            int marketRow = playerId%2;
+            int marketCol = playerId%3;
+            playerToActions.get(playerId).add("M" + marketRow + marketCol);
+            playerToActions.get(playerId).add("");
+        }
+
+        MockIO io = new MockIO(playerToActions);
+        ArrayList<ITurnActionStrategy> humanActions = new ArrayList<>();
+        humanActions.add(new PointSaladHumanMain(gameBoard, io));
+        humanActions.add(new PointSaladHumanFree(gameBoard, io));
+
+        GameLoopTemplate gameLoop = new PointSaladGameLoop(
+                io,
+                playerManager,
+                gameBoard,
+                humanActions,
+                new ArrayList<ITurnActionStrategy>()
+        );
+        gameLoop.startGame();
+
+        return io;
+    }
 }

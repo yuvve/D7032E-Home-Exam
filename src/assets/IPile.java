@@ -18,7 +18,7 @@ public interface IPile extends IRepresentable {
      * Gets the number of cards in the pile.
      * @return The number of cards.
      */
-    int getCardCount();
+    int size();
 
     /**
      * Views the top card from the pile.

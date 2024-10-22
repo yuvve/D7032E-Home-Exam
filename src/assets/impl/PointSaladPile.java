@@ -22,7 +22,7 @@ public class PointSaladPile implements IPile {
     }
 
     @Override
-    public int getCardCount() {
+    public int size() {
         return cards.size();
     }
 

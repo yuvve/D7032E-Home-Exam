@@ -6,7 +6,6 @@ import player.IPlayer;
 import player.IPlayerManager;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 /**
  * Template for a game loop.

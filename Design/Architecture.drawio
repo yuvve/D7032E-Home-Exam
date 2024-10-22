@@ -1,6 +1,6 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.7.17 Chrome/128.0.6613.36 Electron/32.0.1 Safari/537.36" version="24.7.17">
   <diagram name="Page-1" id="F4KrW8JxtzPAobyz8DqY">
-    <mxGraphModel dx="976" dy="1521" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1509" dy="2351" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -269,7 +269,7 @@
         <mxCell id="SN2yluZUW8M9mS18KECz-166" value="«interface»&lt;br&gt;&lt;b&gt;IPile&lt;/b&gt;" style="html=1;whiteSpace=wrap;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;fillColor=#647687;fontColor=#ffffff;strokeColor=#314354;" parent="SN2yluZUW8M9mS18KECz-165" vertex="1">
           <mxGeometry width="171" height="43.15217273837441" as="geometry" />
         </mxCell>
-        <mxCell id="SN2yluZUW8M9mS18KECz-167" value="&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;void shuffle();&lt;/span&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;int getCardCount();&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;ICard viewTop();&lt;br&gt;&lt;/div&gt;&lt;div&gt;ICard drawTop();&lt;/div&gt;&lt;div&gt;ICard drawBottom();&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;void addCards(AL&amp;lt;ICard&amp;gt;);&lt;/span&gt;&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" parent="SN2yluZUW8M9mS18KECz-165" vertex="1">
+        <mxCell id="SN2yluZUW8M9mS18KECz-167" value="&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;void shuffle();&lt;/span&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;int size();&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;ICard viewTop();&lt;br&gt;&lt;/div&gt;&lt;div&gt;ICard drawTop();&lt;/div&gt;&lt;div&gt;ICard drawBottom();&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;void addCards(AL&amp;lt;ICard&amp;gt;);&lt;/span&gt;&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" parent="SN2yluZUW8M9mS18KECz-165" vertex="1">
           <mxGeometry y="43.15217273837441" width="171" height="151.03260458431043" as="geometry" />
         </mxCell>
         <mxCell id="SN2yluZUW8M9mS18KECz-173" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;dashed=1;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" parent="SN2yluZUW8M9mS18KECz-71" source="SN2yluZUW8M9mS18KECz-167" target="SN2yluZUW8M9mS18KECz-85" edge="1">
@@ -810,7 +810,7 @@
           <mxGeometry y="40.96333333333334" width="135.16" height="81.92666666666668" as="geometry" />
         </mxCell>
         <mxCell id="AnyZIgocJgsn1Ua-VpLK-129" value="io" style="shape=folder;fontStyle=1;tabWidth=110;tabHeight=30;tabPosition=left;html=1;boundedLbl=1;labelInHeader=1;container=1;collapsible=0;whiteSpace=wrap;" vertex="1" parent="1">
-          <mxGeometry x="1673" y="1280" width="790" height="620" as="geometry" />
+          <mxGeometry x="1673" y="1250" width="790" height="620" as="geometry" />
         </mxCell>
         <mxCell id="AnyZIgocJgsn1Ua-VpLK-130" value="" style="html=1;strokeColor=none;resizeWidth=1;resizeHeight=1;fillColor=none;part=1;connectable=0;allowArrows=0;deletable=0;whiteSpace=wrap;" vertex="1" parent="AnyZIgocJgsn1Ua-VpLK-129">
           <mxGeometry width="790" height="591.8181818181818" relative="1" as="geometry">
@@ -872,7 +872,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="AnyZIgocJgsn1Ua-VpLK-199" value="" style="group" vertex="1" connectable="0" parent="1">
-          <mxGeometry x="60" y="2530" width="730" height="620" as="geometry" />
+          <mxGeometry x="50" y="2380" width="730" height="620" as="geometry" />
         </mxCell>
         <mxCell id="AnyZIgocJgsn1Ua-VpLK-200" value="" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;" vertex="1" parent="AnyZIgocJgsn1Ua-VpLK-199">
           <mxGeometry width="729.9999999999999" height="620" as="geometry" />

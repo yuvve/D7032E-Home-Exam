@@ -47,7 +47,7 @@ public class PointsIfHasMostOrFewestOfResource implements ICriteriaStrategy {
             }
         }
         playerCount = Util.countResourceOccurrences(resource, playerResources);
-        if (playerCount == bestCount) {
+        if ((mostOf && playerCount >= bestCount) || (!mostOf && playerCount <= bestCount)) {
             points = pointsValue;
         }
         return points;

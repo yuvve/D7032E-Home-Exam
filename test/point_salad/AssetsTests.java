@@ -126,7 +126,7 @@ public class AssetsTests {
             boolean seenRemainder = false;
 
             for (IPile pile : piles) {
-                int size = pile.getCardCount();
+                int size = pile.size();
                 if (size != expectedSize){
                     if (seenRemainder){
                         fail("More than one pile is not the expected size");
@@ -178,7 +178,7 @@ public class AssetsTests {
 
             boolean seenRemainder = false;
             for (IPile pile : piles) {
-                int size = pile.getCardCount();
+                int size = pile.size();
                 if (size != expectedSize) {
                     if (seenRemainder) {
                         fail("More than one pile is not the expected size");
@@ -225,7 +225,7 @@ public class AssetsTests {
 
         int[] pilesStartingSizes = new int[NUM_PILES];
         for (int i = 0; i < NUM_PILES; i++) {
-            pilesStartingSizes[i] = piles.get(i).getCardCount();
+            pilesStartingSizes[i] = piles.get(i).size();
         }
         for (int row = 0; row < MARKET_ROWS; row++) {
             for (int col = 0; col < MARKET_COLS; col++) {
@@ -235,7 +235,7 @@ public class AssetsTests {
                 assertNotNull(market.viewCard(row, col), "Card was not added to market");
                 assertEquals(
                         -(row+1),
-                        piles.get(col).getCardCount() - pilesStartingSizes[col],
+                        piles.get(col).size() - pilesStartingSizes[col],
                         "Pile " + col + " was not used to refill the market at the correct slot");
             }
         }
@@ -260,29 +260,29 @@ public class AssetsTests {
 
         ArrayList<ICard> discardedCards = new ArrayList<>();
 
-        while (pile0.getCardCount() > 1){
+        while (pile0.size() > 1){
             discardedCards.add(pile0.drawTop());
         }
-        while (pile2.getCardCount() > 1){
+        while (pile2.size() > 1){
             discardedCards.add(pile2.drawTop());
         }
-        assertEquals(1, pile0.getCardCount(), "All cards were not drawn from pile 1!");
-        assertEquals(1, pile2.getCardCount(), "All cards were not drawn from pile 2!");
+        assertEquals(1, pile0.size(), "All cards were not drawn from pile 1!");
+        assertEquals(1, pile2.size(), "All cards were not drawn from pile 2!");
 
-        if (!(pile1.getCardCount() > pile0.getCardCount()) || !(pile1.getCardCount() > pile2.getCardCount())){
+        if (!(pile1.size() > pile0.size()) || !(pile1.size() > pile2.size())){
             fail("Pile 1 should be the largest");
         }
 
         ICard pile1TopCardBefore = pile1.viewTop();
         int pile1ExpectedSize;
-        if (pile1.getCardCount()%2 == 0){
-            pile1ExpectedSize = pile1.getCardCount()/2;
+        if (pile1.size()%2 == 0){
+            pile1ExpectedSize = pile1.size()/2;
         } else {
-            pile1ExpectedSize = (pile1.getCardCount()/2) + 1;
+            pile1ExpectedSize = (pile1.size()/2) + 1;
         }
 
         gameBoard.getCardFromPile(0);
-        assertEquals(pile1.getCardCount(),
+        assertEquals(pile1.size(),
                 pile1ExpectedSize,
                 "Pile 1 was not correctly used to refill pile 0");
         assertEquals(pile1.viewTop(), pile1TopCardBefore,
@@ -293,17 +293,45 @@ public class AssetsTests {
 
         ICard pile0TopCardBefore = pile0.viewTop();
         int pile0ExpectedSize;
-        if (pile0.getCardCount()%2 == 0){
-            pile0ExpectedSize = pile0.getCardCount()/2;
+        if (pile0.size()%2 == 0){
+            pile0ExpectedSize = pile0.size()/2;
         } else {
-            pile0ExpectedSize = (pile0.getCardCount()/2) + 1;
+            pile0ExpectedSize = (pile0.size()/2) + 1;
         }
 
         gameBoard.getCardFromPile(2);
-        assertEquals(pile0.getCardCount(),
+        assertEquals(pile0.size(),
                 pile0ExpectedSize,
                 "Pile 0 was not correctly used to refill pile 2");
         assertEquals(pile0.viewTop(), pile0TopCardBefore,
                 "The top card of pile 0 was removed during refill of pile 2!");
+    }
+
+    /**
+     * <H1>Requirement 12</H1>
+     * Test that the game ends when the piles and market are empty
+     */
+    @Test
+    public void testGameEnds(){
+        ArrayList<ICard> deck = factory.createDeck(deckJson, MAX_PLAYERS);
+        ArrayList<IPile> piles = factory.createPiles(deck);
+        IMarket market = factory.createMarket(piles);
+        IGameBoard gameBoard = new PointSaladGameBoard(piles, market);
+
+        assertFalse(gameBoard.hasGameEnded(), "Game ended too early!");
+        for (IPile pile: piles){
+            while (pile.size() > 0){
+                pile.drawTop();
+            }
+            assertFalse(gameBoard.hasGameEnded(), "Game ended too early!");
+        }
+        for (int row = 0; row < MARKET_ROWS; row++) {
+            for (int col = 0; col < MARKET_COLS; col++) {
+                assertFalse(gameBoard.hasGameEnded(), "Game ended too early!");
+                market.draftCard(row, col);
+            }
+        }
+        assertTrue(gameBoard.hasGameEnded(), "Game did not end when it should have!");
+
     }
 }

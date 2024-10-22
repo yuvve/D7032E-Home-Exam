@@ -10,6 +10,7 @@ import player.IPlayerManager;
 import java.util.*;
 
 public class PointSaladGameLoop extends GameLoopTemplate {
+    private int currRound;
 
     public PointSaladGameLoop(
             IIOManager io,
@@ -18,6 +19,7 @@ public class PointSaladGameLoop extends GameLoopTemplate {
             ArrayList<ITurnActionStrategy> humanTurns,
             ArrayList<ITurnActionStrategy> botTurns) {
         super(io, playerManager, gameBoard, humanTurns, botTurns);
+        currRound = 1;
     }
 
     protected void setupGame(){
@@ -33,7 +35,7 @@ public class PointSaladGameLoop extends GameLoopTemplate {
 
     @Override
     protected void preRound() {
-
+        io.broadcast("Starting round " + currRound++ + "...");
     }
 
     @Override
