@@ -1,134 +1,59 @@
 package networking.impl;
 
-import networking.ControlProtocol;
-import networking.IServer;
+import common.ScannerSingletons;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.util.ArrayList;
+import java.util.Scanner;
 
-public class Server implements IServer {
-    private class Client {
-        private Client(int id, Socket socket, DataInputStream in, DataOutputStream out) {
-            this.id = id;
-            this.socket = socket;
-            this.in = in;
-            this.out = out;
-        }
-        private int id;
-        private Socket socket;
-        private DataInputStream in;
-        private DataOutputStream out;
-    }
+/**
+ * A listen server (it can host a game and participate in it).
+ */
+public class Server extends DedicatedServer {
+    private boolean acceptedListenClient;
 
-    private ArrayList<Client> clients;
-    private boolean isStarted = false;
-    private ServerSocket serverSocket;
-
-    @Override
-    public void startServer(int port) {
-        if (isStarted) {
-            System.out.println("Server already started");
-            return;
-        }
-        serverSocket = null;
-        try {
-            serverSocket = new ServerSocket(port);
-            isStarted = true;
-            System.out.println("Server started");
-        } catch (Exception e) {
-            System.out.println(e);
-        } finally {
-            if (!isStarted) {
-                try {
-                    if (serverSocket != null) serverSocket.close();
-                } catch (Exception e) {
-                    System.out.println(e);
-                }
-            }
-        }
+    public Server() {
+        super();
+        acceptedListenClient = false;
     }
 
     @Override
     public int acceptClient() {
-        int clientId = clients.size();
-        Socket connectionSocket = null;
-        try {
-            connectionSocket = serverSocket.accept();
-            Client client = new Client(
-                    clientId, connectionSocket,
-                    new DataInputStream(connectionSocket.getInputStream()),
-                    new DataOutputStream(connectionSocket.getOutputStream()));
-            clients.add(client);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        if (!acceptedListenClient) {
+            acceptedListenClient = true;
+            return 0;
         }
-        return clientId;
-    }
-
-    @Override
-    public void broadcast(String msg) {
-        clients.forEach(c -> sendMsg(c, msg));
-    }
-
-    @Override
-    public void sendMsg(int clientId, String msg) {
-        Client client = getClientFromId(clientId);
-        sendMsg(client, msg);
+        int clientId = clients.size()+1;
+        return acceptClient(clientId);
     }
 
     @Override
     public String getClientInput(int clientId) {
-        Client client = getClientFromId(clientId);
-        StringBuilder msg = new StringBuilder();
-        try {
-            while (true) {
-                String line = client.in.readUTF();
-                if (line.equals(ControlProtocol.TRANSMISSION_OVER.getValue())) {
-                    break;
-                }
-                msg.append(line);
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        Scanner scanner = ScannerSingletons.getInstance(System.in);
+        if (clientId == 0) {
+            common.Util.flushSystemIn();
+            return scanner.nextLine();
         }
-        return msg.toString();
+        return super.getClientInput(clientId);
     }
 
     @Override
     public void removeClient(int clientId) {
-        Client client = getClientFromId(clientId);
-        try {
-            client.in.close();
-            client.out.close();
-            client.socket.close();
-            clients.remove(client);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        if (clientId == 0) {
+            return;
         }
+        super.removeClient(clientId);
     }
 
     @Override
     public int getClientCount() {
-        return clients.size();
+        return clients.size()+1;
     }
 
-    private void sendMsg(Client client, String msg) {
-        try {
-            client.out.writeUTF(msg);
-            client.out.writeUTF(ControlProtocol.TRANSMISSION_OVER.getValue());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+    @Override
+    public void sendMsg(int clientId, String msg) {
+        if (clientId == 0) {
+            System.out.println(msg);
+            return;
         }
-    }
-
-    private Client getClientFromId(int clientId) {
-        return clients.stream()
-                .filter(c -> c.id == clientId)
-                .findFirst()
-                .orElse(null);
+        super.sendMsg(clientId, msg);
     }
 }

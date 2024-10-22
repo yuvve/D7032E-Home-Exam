@@ -28,6 +28,6 @@ public enum PointSaladResource implements IResource {
 
     @Override
     public String represent() {
-        return type;
+        return type.substring(0, 3);
     }
 }

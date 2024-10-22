@@ -10,10 +10,11 @@ import org.json.JSONObject;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import utils.Util;
+import game.Util;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -28,15 +29,19 @@ public class AssetsTests {
             Constants.CARDS_REMOVED_PER_MISSING_PLAYER_PER_VEG.getValue();
     private static final int CARDS_DRAWN_PER_PILE_TO_INIT_MARKET =
             Constants.CARDS_DRAWN_PER_PILE_TO_INIT_MARKET.getValue();
+    private static final int MARKET_ROWS = Constants.MARKET_ROWS.getValue();
+    private static final int MARKET_COLS = Constants.MARKET_COLS.getValue();
     private static final String JSON_FILENAME = ManifestMetadata.MANIFEST_FILENAME.getValue();
 
     private static JSONObject deckJson;
     private static IAbstractAssetsFactory factory;
+    private static Random random;
 
     @BeforeAll
     public static void setUpAll() throws FileNotFoundException {
+        random = new Random();
         deckJson = Util.fileToJSON(JSON_FILENAME);
-        factory = new PointSaladAssetsFactory();
+        factory = new PointSaladAssetsFactory(random);
     }
 
     @AfterAll
@@ -133,8 +138,9 @@ public class AssetsTests {
             ArrayList<ICard> deck = factory.createDeck(deckJson, i);
             ArrayList<IPile> piles = factory.createPiles(deck);
             IMarket market = factory.createMarket(piles);
-            for (ICard[] row : market.viewCards()) {
-                for (ICard card : row) {
+            for (int row = 0; row < MARKET_ROWS; row++) {
+                for (int col = 0; col < MARKET_COLS; col++) {
+                    ICard card = market.draftCard(row, col);
                     assertNotNull(card, "Market is not full");
                     assertFalse(card.isCriteriaSideActive(), "Vegetable side is not active");
                 }

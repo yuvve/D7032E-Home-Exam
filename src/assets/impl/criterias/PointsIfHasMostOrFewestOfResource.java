@@ -6,6 +6,10 @@ import assets.Util;
 
 import java.util.ArrayList;
 
+/**
+ * The calculation algorithm for the condition "Points if the player has the most or fewest of a resource"
+ *  (most or fewest copies of the given resource compared to all other players)
+ */
 public class PointsIfHasMostOrFewestOfResource implements ICriteriaStrategy {
     private final IResource resource;
     private final int pointsValue;
@@ -51,7 +55,7 @@ public class PointsIfHasMostOrFewestOfResource implements ICriteriaStrategy {
 
     @Override
     public String represent() {
-        return "Get " + pointsValue + " points if you have the "
-                + (mostOf ? "most" : "fewest") + " " + resource.represent();
+        return "\"" + pointsValue + " points if you have the "
+                + (mostOf ? "most" : "fewest") + " " + resource.represent() + ".\"";
     }
 }

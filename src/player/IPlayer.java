@@ -2,7 +2,6 @@ package player;
 
 import assets.ICard;
 import common.IRepresentable;
-import exceptions.CardFlippingException;
 
 import java.util.ArrayList;
 
@@ -15,7 +14,7 @@ public interface IPlayer extends IRepresentable {
      * Get the player's ID.
      * @return the player's ID
      */
-    int getPlayerId();
+    int getId();
 
     /**
      * Checks if the player is a bot.
@@ -34,6 +33,18 @@ public interface IPlayer extends IRepresentable {
      * @return the player's hand
      */
     ArrayList<ICard> getHand();
+
+    /**
+     * Gets all resource cards in the player's hand.
+     * @return all resource cards in the player's hand
+     */
+    ArrayList<ICard> getResourceCards();
+
+    /**
+     * Gets all criteria cards in the player's hand.
+     * @return all criteria cards in the player's hand
+     */
+    ArrayList<ICard> getCriteriaCards();
 
     /**
      * Discard a card from the player's hand.

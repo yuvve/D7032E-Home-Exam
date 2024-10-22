@@ -3,17 +3,22 @@ package assets;
 import common.IRepresentable;
 import exceptions.MarketCardPlacementException;
 
+import java.util.ArrayList;
+
 /**
  * Interface for the card market.
  * Contains the cards that are available for drafting.
  */
 public interface IMarket extends IRepresentable {
 
-    /**
-     * Gets the cards in the market.
-     * @return The cards in the market.
+    /** Lets you view a market card without drafting it.
+     * @param row The row of the card.
+     *            Must be between 0 and the number of rows in the market cards.
+     * @param column The column of the card.
+     *               Must be between 0 and the number of columns in the market cards.
+     * @return The card viewed.
      */
-    ICard[][] viewCards();
+    ICard viewCard(int row, int column) throws IllegalArgumentException;
 
     /**
      * Draws a card from the market from the given coordinates.
@@ -24,7 +29,7 @@ public interface IMarket extends IRepresentable {
      * Will return null if the slot is empty.
      * @return The card drawn.
      */
-    ICard draftCard(int row, int column);
+    ICard draftCard(int row, int column) throws IllegalArgumentException;
 
     /**
      * Place a card in the market at the given coordinates.
@@ -34,5 +39,19 @@ public interface IMarket extends IRepresentable {
      *               Must be between 0 and the number of columns in the market cards.
      * @throws MarketCardPlacementException If the position is already occupied.
      */
-    void placeCardInPosition(ICard card, int row, int column) throws MarketCardPlacementException;
+    void placeCardInPosition(ICard card, int row, int column)
+            throws MarketCardPlacementException, IllegalArgumentException;
+
+    /**
+     * Gets the coordinates of all non-empty slots in the market.
+     * @return The coordinates of all non-empty slots in the market.
+     */
+    ArrayList<Integer[]> getNonEmptySlotsCoords();
+
+    /**
+     * Gets the size of the market ({rows, columns}).
+     * @return The size of the market.
+     */
+    int[] getMarketSize();
+
 }

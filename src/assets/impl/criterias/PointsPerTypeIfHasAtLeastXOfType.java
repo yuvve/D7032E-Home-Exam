@@ -6,6 +6,9 @@ import assets.Util;
 
 import java.util.ArrayList;
 
+/**
+ * The calculation algorithm for the condition "Points per type of resource if the player has at least X of that type"
+ */
 public class PointsPerTypeIfHasAtLeastXOfType implements ICriteriaStrategy {
     private final int pointsValue;
     private final int acceptableLimit;
@@ -34,6 +37,6 @@ public class PointsPerTypeIfHasAtLeastXOfType implements ICriteriaStrategy {
 
     @Override
     public String represent() {
-        return "Get " + pointsValue + " points for each type of resource you have at least " + acceptableLimit + " of.";
+        return "\"" + pointsValue + " points for each type of resource you have at least " + acceptableLimit + " of.\"";
     }
 }

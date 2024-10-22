@@ -6,6 +6,10 @@ import assets.Util;
 
 import java.util.ArrayList;
 
+/**
+ * The calculation algorithm for the condition "Points if the player has an even or odd number of a resource",
+ *  (even or odd number of copies of the given resource)
+ */
 public class PointsIfHasEvenOrOddOfResource implements ICriteriaStrategy {
     private final IResource resource;
     private final int pointsValue;
@@ -46,7 +50,7 @@ public class PointsIfHasEvenOrOddOfResource implements ICriteriaStrategy {
 
     @Override
     public String represent() {
-        return "Get " + pointsValue + " points if you have an "
-                + (even ? "even" : "odd") + " number of " + resource.represent();
+        return "\"" + pointsValue + " points if you have an "
+                + (even ? "even" : "odd") + " number of " + resource.represent() + ".\"";
     }
 }

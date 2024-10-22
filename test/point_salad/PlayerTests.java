@@ -1,16 +1,28 @@
 package point_salad;
 
 import common.point_salad.Constants;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import player.IPlayer;
 import player.IPlayerManager;
-import player.IPlayerManagerFactory;
-import player.impl.PointSaladPlayerManagerFactory;
+import player.impl.PointSaladPlayer;
+import player.impl.PointSaladPlayerAssetsFactory;
+import player.impl.PointSaladPlayerManager;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PlayerTests {
     private static final int MIN_PLAYERS = Constants.MIN_PLAYERS.getValue();
     private static final int MAX_PLAYERS = Constants.MAX_PLAYERS.getValue();
+    private static Random random;
+
+    @BeforeAll
+    public static void setUpAll() {
+        random = new Random();
+    }
 
     /**
      * <H1>Requirement 6</H1>
@@ -25,10 +37,10 @@ public class PlayerTests {
         int lastStartingPlayerId = -1;
         boolean foundDifferentStartingPlayers = false;
         for (int i = 0; i< totalExperiments; i++){
-            IPlayerManagerFactory playerManagerFactory = new PointSaladPlayerManagerFactory();
-            IPlayerManager playerManager = playerManagerFactory.createPlayerManager(MAX_PLAYERS, 0);
+            IPlayerManager playerManager = new PointSaladPlayerAssetsFactory(random).
+                    createPlayerManager(MAX_PLAYERS,0);
 
-            int startingPlayerId = playerManager.getCurrentPlayer().getPlayerId();
+            int startingPlayerId = playerManager.getCurrentPlayer().getId();
             if (lastStartingPlayerId == -1){
                 lastStartingPlayerId = startingPlayerId;
             } else if (lastStartingPlayerId != startingPlayerId){

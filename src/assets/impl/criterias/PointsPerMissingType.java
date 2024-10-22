@@ -6,6 +6,10 @@ import assets.Util;
 
 import java.util.ArrayList;
 
+/**
+ * The calculation algorithm for the condition "Points per missing type of resource",
+ *  (each type of resource that the player does not have)
+ */
 public class PointsPerMissingType implements ICriteriaStrategy {
     private final int pointsValue;
     private final int totalNrTypes;
@@ -28,6 +32,6 @@ public class PointsPerMissingType implements ICriteriaStrategy {
 
     @Override
     public String represent() {
-        return "Get " + pointsValue + " points for each missing resource type.";
+        return "\"" + pointsValue + " points for each missing resource type.\"";
     }
 }

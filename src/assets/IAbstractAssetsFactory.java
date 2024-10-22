@@ -1,8 +1,6 @@
 package assets;
 
-import exceptions.DeckGenerationException;
-import exceptions.PileGenerationException;
-import exceptions.MarketGenerationException;
+import exceptions.*;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -60,19 +58,19 @@ public interface IAbstractAssetsFactory {
      * @param cardJson The JSON object representing the card.
      * @return The card.
      */
-    ICard createCard(JSONObject cardJson);
+    ICard createCard(JSONObject cardJson) throws CardGenerationException;
 
     /**
      * Creates a criteria strategy.
      * @param criteriaJson The JSON object representing the criteria strategy.
      * @return The criteria strategy.
      */
-    ICriteriaStrategy createCriteria(JSONObject criteriaJson);
+    ICriteriaStrategy createCriteria(JSONObject criteriaJson) throws CriteriaGenerationException;
 
     /**
      * Creates a resource.
      * @param resourceName The name of the resource.
      * @return The resource.
      */
-    IResource createResource(String resourceName);
+    IResource createResource(String resourceName) throws ResourceGenerationException;
 }
