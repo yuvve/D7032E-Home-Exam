@@ -24,7 +24,6 @@ replay_pid*
 
 # IDEs
 out/
-.idea/
 
 # Drawio temp files
 *.dtmp
