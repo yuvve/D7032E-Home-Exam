@@ -22,8 +22,8 @@
 hs_err_pid*
 replay_pid*
 
-# IDEs
 out/
+javadoc/
 
 # Drawio temp files
 *.dtmp
