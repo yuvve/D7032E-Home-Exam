@@ -31,8 +31,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class GameTests {
     private static IAbstractAssetsFactory assetsFactory;
@@ -291,6 +290,50 @@ public class GameTests {
      * <H1>Requirement 14</H1>
      * Test that the declared winner is correct
      */
+    @Test
+    public void testWinner() {
+        IAbstractPlayerAssetsFactory playerAssetsFactory1 = new PointSaladPlayerAssetsFactory(random);
+        IPlayerManager playerManager = playerAssetsFactory1.createPlayerManager(
+                6, 0);
+        MockIO io = runFakeMatch(playerManager);
+        Map<IPlayer, Integer> scores = playerManager.calculateScores();
+
+        int winnerId = -1;
+        for (int playerId=0; playerId<6; playerId++){
+            ArrayList<String> msgs = io.getMessages(playerId);
+            String search = "Congratulations! You are the winner!";
+            for (String msg : msgs) {
+                if (msg.contains(search)) {
+                    if (winnerId != -1) {
+                        fail("There should only be one winner.");
+                    }
+                    winnerId = playerId;
+                    break;
+                }
+            }
+        }
+
+        int bestScore = 0;
+        ArrayList<Integer> playersWithBestScore = new ArrayList<>(); // Handle case where multiple players have the same score
+        for (IPlayer player : scores.keySet()){
+            if (scores.get(player) > bestScore){
+                bestScore = scores.get(player);
+                playersWithBestScore.clear();
+            }
+            if (scores.get(player) == bestScore){
+                playersWithBestScore.add(player.getId());
+            }
+        }
+        if (playersWithBestScore.size() > 1){
+            assertTrue(playersWithBestScore.contains(winnerId),
+                    "The winner should be one of the players with the highest score.");
+        } else if (playersWithBestScore.size() == 1){
+            assertEquals(playersWithBestScore.get(0), winnerId,
+                    "The winner should be the player with the highest score.");
+        } else {
+            fail("There should be at least one winner.");
+        }
+    }
 
 
     private MockIO runFakeMatch(IPlayerManager playerManager){
