@@ -45,6 +45,16 @@ public class PointSaladPlayerManager implements IPlayerManager {
     }
 
     @Override
+    public IPlayer getPlayerById(int id) {
+        for (IPlayer player : players) {
+            if (player.getId() == id) {
+                return player;
+            }
+        }
+        return null;
+    }
+
+    @Override
     public void nextTurn() {
         currentPlayerIndex = getNextPlayerIndex();
         roundComplete = (currentPlayerIndex == 0);

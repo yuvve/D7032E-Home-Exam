@@ -2,6 +2,7 @@ package point_salad;
 
 import assets.*;
 import assets.impl.PointSaladAssetsFactory;
+import assets.impl.PointSaladGameBoard;
 import assets.impl.PointSaladResource;
 import common.point_salad.Constants;
 import common.point_salad.ManifestMetadata;
@@ -198,5 +199,100 @@ public class AssetsTests {
         } catch (CardFlippingException e) {
             assertTrue(true);
         }
+    }
+
+    /**
+     * <H1>Requirement 10</H1>
+     * Test that the market is correctly refilled
+     */
+    @Test
+    public void testMarketRefill(){
+        ArrayList<ICard> deck = factory.createDeck(deckJson, MAX_PLAYERS);
+        ArrayList<IPile> piles = factory.createPiles(deck);
+        IMarket market = factory.createMarket(piles);
+        IGameBoard gameBoard = new PointSaladGameBoard(piles, market);
+
+        int[] pilesStartingSizes = new int[NUM_PILES];
+        for (int i = 0; i < NUM_PILES; i++) {
+            pilesStartingSizes[i] = piles.get(i).getCardCount();
+        }
+        for (int row = 0; row < MARKET_ROWS; row++) {
+            for (int col = 0; col < MARKET_COLS; col++) {
+                market.draftCard(row, col);
+                assertNull(market.viewCard(row, col), "Card was not removed from market");
+                gameBoard.refillMarket();
+                assertNotNull(market.viewCard(row, col), "Card was not added to market");
+                assertEquals(
+                        -row,
+                        piles.get(col).getCardCount() - pilesStartingSizes[col],
+                        "Pile " + col + " was not used to refill the market at the correct slot");
+            }
+        }
+
+    }
+
+    /**
+     * <H1>Requirement 11</H1>
+     * Test that piles are correctly refilled
+     * Test that the bottom half of the largest pile is used to refill the smallest pile
+     */
+    @Test
+    public void testPileRefill(){
+        ArrayList<ICard> deck = factory.createDeck(deckJson, MAX_PLAYERS);
+        ArrayList<IPile> piles = factory.createPiles(deck);
+        IMarket market = factory.createMarket(piles);
+        IGameBoard gameBoard = new PointSaladGameBoard(piles, market);
+
+        IPile pile0 = piles.getFirst();
+        IPile pile1 = piles.get(1);
+        IPile pile2 = piles.get(2);
+
+        ArrayList<ICard> discardedCards = new ArrayList<>();
+
+        while (pile0.getCardCount() > 1){
+            discardedCards.add(pile0.drawTop());
+        }
+        while (pile2.getCardCount() > 1){
+            discardedCards.add(pile2.drawTop());
+        }
+        assertEquals(1, pile0.getCardCount(), "All cards were not drawn from pile 1!");
+        assertEquals(1, pile2.getCardCount(), "All cards were not drawn from pile 2!");
+
+        if (!(pile1.getCardCount() > pile0.getCardCount()) || !(pile1.getCardCount() > pile2.getCardCount())){
+            fail("Pile 1 should be the largest");
+        }
+
+        ICard pile1TopCardBefore = pile1.viewTop();
+        int pile1ExpectedSize;
+        if (pile1.getCardCount()%2 == 0){
+            pile1ExpectedSize = pile1.getCardCount()/2;
+        } else {
+            pile1ExpectedSize = (pile1.getCardCount()/2) + 1;
+        }
+
+        gameBoard.getCardFromPile(0);
+        assertEquals(pile1.getCardCount(),
+                pile1ExpectedSize,
+                "Pile 1 was not correctly used to refill pile 0");
+        assertEquals(pile1.viewTop(), pile1TopCardBefore,
+                "The top card of pile 1 was removed during refill of pile 0!");
+
+        // Make pile 0 the largest
+        pile0.addCards(discardedCards);
+
+        ICard pile0TopCardBefore = pile0.viewTop();
+        int pile0ExpectedSize;
+        if (pile0.getCardCount()%2 == 0){
+            pile0ExpectedSize = pile0.getCardCount()/2;
+        } else {
+            pile0ExpectedSize = (pile0.getCardCount()/2) + 1;
+        }
+
+        gameBoard.getCardFromPile(2);
+        assertEquals(pile0.getCardCount(),
+                pile0ExpectedSize,
+                "Pile 0 was not correctly used to refill pile 2");
+        assertEquals(pile0.viewTop(), pile0TopCardBefore,
+                "The top card of pile 0 was removed during refill of pile 2!");
     }
 }
