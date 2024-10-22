@@ -6,6 +6,10 @@ import assets.Util;
 
 import java.util.ArrayList;
 
+/**
+ * The calculation algorithm for the condition "Points per resources",
+ *  which can be any number of resources > 1, each with their own points value
+ */
 public class PointsPerCopyOfOneOrManyResources implements ICriteriaStrategy {
     private final ArrayList<Integer> pointsValue;
     private final ArrayList<IResource> resources;

@@ -10,6 +10,8 @@ import java.util.Map;
 
 /**
  * Template for a game loop.
+ * This class is responsible for running the game loop, which runs until the match concludes.
+ * Each step of the game loop is defined in a separate method, which can be overridden by subclasses.
  */
 public abstract class GameLoopTemplate {
     protected IServer server;

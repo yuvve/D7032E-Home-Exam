@@ -1,6 +1,8 @@
 package common.point_salad;
 
-
+/**
+ * Point salad manifest metadata
+ */
 public enum ManifestMetadata {
     MANIFEST_FILENAME("PointSaladManifest.json"),
     CARDS_FIELD("Cards"),

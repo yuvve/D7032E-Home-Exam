@@ -6,6 +6,10 @@ import assets.Util;
 
 import java.util.ArrayList;
 
+/**
+ * The calculation algorithm for the condition "Points if the player has a complete set of resources"
+ *  (at least one of each type)
+ */
 public class PointsIfHasCompleteSet implements ICriteriaStrategy {
     private final int pointsValue;
     private final int totalNrTypes;

@@ -13,6 +13,9 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
+/**
+ * A dedicated server (it can only host a game, not participate in it).
+ */
 public class DedicatedServer implements IServer {
     private class Client {
         private int id;

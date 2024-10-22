@@ -9,6 +9,12 @@ import player.IPlayerManager;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * The bot action strategy representing a Point Salad main action.
+ * The bot will take a card from a random pile with probability PROB_TAKE_FROM_PILE, otherwise take from market.
+ * If one option is not possible, then the bot will take from the other one.
+ * The bot will take two cards from the market with a PROB_TAKE_TWICE_FROM_MARKET probability.
+ */
 public class PointSaladBotMain implements ITurnActionStrategy {
     private static final float PROB_TAKE_FROM_PILE = 0.25f;
     private static final float PROB_TAKE_TWICE_FROM_MARKET = 0.5f;

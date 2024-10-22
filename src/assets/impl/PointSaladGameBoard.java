@@ -116,7 +116,11 @@ public class PointSaladGameBoard implements IGameBoard {
             IPile largestPile = piles.get(maxIndex);
             IPile emptyPile = piles.get(emptyIndex);
 
-            ArrayList<ICard> cardsTakenFromMaxPile = largestPile.getBottomHalf();
+            ArrayList<ICard> cardsTakenFromMaxPile = new ArrayList<>();
+            int halfSize = largestPile.getCardCount() / 2;
+            for (int i = 0; i < halfSize; i++) {
+                cardsTakenFromMaxPile.add(largestPile.drawBottom());
+            }
             emptyPile.addCards(cardsTakenFromMaxPile);
         }
     }

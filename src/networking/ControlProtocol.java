@@ -1,7 +1,7 @@
 package networking;
 
 /**
- * Enum for control protocols (so both client and server can use the same tokens for ending transmissions).
+ * Enum for control protocols to assist in communication between server and client.
  */
 public enum ControlProtocol {
     TRANSMISSION_OVER("TRANSMISSION_OVER"),

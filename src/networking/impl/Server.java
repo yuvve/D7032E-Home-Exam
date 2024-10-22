@@ -2,21 +2,23 @@ package networking.impl;
 
 import common.ScannerSingletons;
 
-import java.io.IOException;
-import java.util.Objects;
 import java.util.Scanner;
 
+/**
+ * A listen server (it can host a game and participate in it).
+ */
 public class Server extends DedicatedServer {
-    private boolean returnedSelf = false;
+    private boolean acceptedListenClient;
 
     public Server() {
         super();
+        acceptedListenClient = false;
     }
 
     @Override
     public int acceptClient() {
-        if (!returnedSelf) {
-            returnedSelf = true;
+        if (!acceptedListenClient) {
+            acceptedListenClient = true;
             return 0;
         }
         int clientId = clients.size()+1;
@@ -54,8 +56,4 @@ public class Server extends DedicatedServer {
         }
         super.sendMsg(clientId, msg);
     }
-
-
-
-
 }

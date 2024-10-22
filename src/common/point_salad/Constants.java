@@ -1,5 +1,8 @@
 package common.point_salad;
 
+/**
+ * Point Salad constants
+ */
 public enum Constants {
     MIN_PLAYERS(2),
     MAX_PLAYERS(6),

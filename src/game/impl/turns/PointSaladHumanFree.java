@@ -9,6 +9,9 @@ import player.IPlayer;
 import java.util.ArrayList;
 import java.util.Map;
 
+/**
+ * The human action strategy representing a Point Salad free action.
+ */
 public class PointSaladHumanFree implements ITurnActionStrategy {
     private IGameBoard gameBoard;
     private IServer server;

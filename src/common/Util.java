@@ -1,7 +1,7 @@
 package common;
 
 /**
- * Utility class for common module
+ * Utility class for functions common to all classes in the project.
  */
 public class Util {
     /**

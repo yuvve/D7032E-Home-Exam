@@ -6,6 +6,10 @@ import assets.Util;
 
 import java.util.ArrayList;
 
+/**
+ * The calculation algorithm for the condition "Points per combination of resources",
+ *  which can be any number of resources > 2
+ */
 public class PointsPerCombinationOfResources implements ICriteriaStrategy {
     private final int pointsValue;
     private final ArrayList<IResource> resourcesInCombo;
