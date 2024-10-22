@@ -1,5 +1,6 @@
 package networking.impl;
 
+import common.ScannerSingletons;
 import networking.IServer;
 
 import java.util.Scanner;
@@ -8,11 +9,6 @@ import java.util.Scanner;
  * Offline server implementation for local play against bots only
  */
 public class OfflineServer implements IServer {
-    private Scanner scanner;
-
-    public OfflineServer(Scanner scanner) {
-        this.scanner = scanner;
-    }
 
     @Override
     public void startServer(int port) {
@@ -44,9 +40,11 @@ public class OfflineServer implements IServer {
 
     @Override
     public String getClientInput(int clientId) {
+        Scanner scanner = ScannerSingletons.getInstance(System.in);
         if (clientId != 0) {
             return null;
         }
+        common.Util.flushSystemIn();
         return scanner.nextLine();
     }
 

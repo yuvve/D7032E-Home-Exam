@@ -1,18 +1,22 @@
 package game;
 
+import common.ScannerSingletons;
 import org.json.JSONObject;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Scanner;
 
+/**
+ * Utility class for game module
+ */
 public class Util {
-
     /**
      * Gets the IP address and port from the user
      * @return the IP address and port
      */
-    public static String getIpPort(Scanner scanner){
+    public static String getIpPort(){
+        Scanner scanner = ScannerSingletons.getInstance(System.in);
         String ipPort = scanner.nextLine();
         do {
             if (!validateIpPort(ipPort)) {
@@ -82,7 +86,8 @@ public class Util {
      * @param max the maximum value
      * @return the valid input
      */
-    public static int getValidInput(Scanner scanner, int min, int max) {
+    public static int getValidInput(int min, int max) {
+        Scanner scanner = ScannerSingletons.getInstance(System.in);
         String input = scanner.nextLine();
         do {
             if (!validateInput(input, min, max)) {

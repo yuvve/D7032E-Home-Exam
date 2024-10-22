@@ -73,7 +73,7 @@ public class Client implements IClient {
             }
             if (Objects.equals(fromServer, ControlProtocol.GAME_OVER.getValue())) {
                 closeConnection();
-                return "Game over, closing connection!";
+                return "Closed!";
             }
             return fromServer;
         } catch (IOException e) {
