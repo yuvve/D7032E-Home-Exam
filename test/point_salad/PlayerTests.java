@@ -3,6 +3,7 @@ package point_salad;
 import common.point_salad.Constants;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import player.IAbstractPlayerAssetsFactory;
 import player.IPlayer;
 import player.IPlayerManager;
 import player.impl.PointSaladPlayer;
@@ -18,10 +19,47 @@ public class PlayerTests {
     private static final int MIN_PLAYERS = Constants.MIN_PLAYERS.getValue();
     private static final int MAX_PLAYERS = Constants.MAX_PLAYERS.getValue();
     private static Random random;
+    private static IAbstractPlayerAssetsFactory playerAssetsFactory;
 
     @BeforeAll
     public static void setUpAll() {
         random = new Random();
+        playerAssetsFactory = new PointSaladPlayerAssetsFactory(random);
+    }
+
+    /**
+     * <H1>Requirement 1</H1>
+     * Test that the player manager can be created with the correct number of players.
+     * This test checks that the player manager can be created with the minimum and maximum number of players.
+     * It also checks that the player manager cannot be created with less than the minimum number of players
+     * or more than the maximum number of players.
+     */
+    @Test
+    public void testNumberOfPlayers(){
+        try {
+            playerAssetsFactory.createPlayerManager(MIN_PLAYERS - 1, 0);
+            fail("Should not be able to create a player manager with less than the minimum number of players");
+        } catch (IllegalArgumentException e) {
+            assert(true);
+        }
+        try {
+            playerAssetsFactory.createPlayerManager(MAX_PLAYERS + 1, 0);
+            fail("Should not be able to create a player manager with more than the maximum number of players");
+        } catch (IllegalArgumentException e) {
+            assert(true);
+        }
+        try {
+            playerAssetsFactory.createPlayerManager(MIN_PLAYERS, 0);
+            assert(true);
+        } catch (IllegalArgumentException e) {
+            fail("Should be able to create a player manager with the minimum number of players");
+        }
+        try {
+            playerAssetsFactory.createPlayerManager(MAX_PLAYERS, 0);
+            assert(true);
+        } catch (IllegalArgumentException e) {
+            fail("Should be able to create a player manager with the maximum number of players");
+        }
     }
 
     /**

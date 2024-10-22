@@ -3,6 +3,7 @@ package player.impl;
 import assets.ICard;
 import assets.ICriteriaStrategy;
 import assets.IResource;
+import common.point_salad.Constants;
 import player.IPlayer;
 import player.IPlayerManager;
 
@@ -19,6 +20,13 @@ public class PointSaladPlayerManager implements IPlayerManager {
      * @param players the players in the game
      */
     public PointSaladPlayerManager(ArrayList<IPlayer> players, Random random) {
+        if (players == null || players.isEmpty()) {
+            throw new IllegalArgumentException("Players cannot be null or empty.");
+        }
+        if (players.size() < Constants.MIN_PLAYERS.getValue() || players.size() > Constants.MAX_PLAYERS.getValue()) {
+            throw new IllegalArgumentException("Invalid number of players.");
+        }
+
         this.players = players;
         this.random = random;
         this.currentPlayerIndex = 0;
@@ -34,6 +42,16 @@ public class PointSaladPlayerManager implements IPlayerManager {
     @Override
     public IPlayer getCurrentPlayer() {
         return players.get(currentPlayerIndex);
+    }
+
+    @Override
+    public IPlayer getPlayerById(int id) {
+        for (IPlayer player : players) {
+            if (player.getId() == id) {
+                return player;
+            }
+        }
+        return null;
     }
 
     @Override

@@ -21,6 +21,13 @@ public interface IPlayerManager extends IRepresentable {
     IPlayer getCurrentPlayer();
 
     /**
+     * Get the player with the given ID.
+     * @param id the ID of the player
+     * @return the player with the given ID
+     */
+    IPlayer getPlayerById(int id);
+
+    /**
      * Move the turn to the next player.
      */
     void nextTurn();

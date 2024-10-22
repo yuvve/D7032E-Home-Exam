@@ -4,6 +4,7 @@ import assets.IGameBoard;
 import game.GameLoopTemplate;
 import game.IGameLoopFactory;
 import game.ITurnActionStrategy;
+import io.IIOManager;
 import networking.IServer;
 import player.IPlayerManager;
 
@@ -13,12 +14,11 @@ import java.util.Map;
 public class PointSaladGameLoopFactory implements IGameLoopFactory {
     @Override
     public GameLoopTemplate createGameLoop(
-            IServer server,
+            IIOManager io,
             IPlayerManager playerManager,
             IGameBoard gameBoard,
-            Map<Integer, Integer> playerClientMap,
             ArrayList<ITurnActionStrategy> humanTurns,
             ArrayList<ITurnActionStrategy> botTurns) {
-        return new PointSaladGameLoop(server, playerManager, gameBoard, playerClientMap, humanTurns, botTurns);
+        return new PointSaladGameLoop(io, playerManager, gameBoard, humanTurns, botTurns);
     }
 }

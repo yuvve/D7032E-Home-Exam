@@ -5,6 +5,8 @@ import assets.IResource;
 import assets.Util;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * The calculation algorithm for the condition "Points per combination of resources",
@@ -26,13 +28,25 @@ public class PointsPerCombinationOfResources implements ICriteriaStrategy {
 
     @Override
     public int calcScore(ArrayList<IResource> playerResources, ArrayList<ArrayList<IResource>> otherPlayersResources) {
-        ArrayList<Integer> occurrencesCount = new ArrayList<>();
+        ArrayList<Integer> compensatedOccurrencesCount = new ArrayList<>();
+
+        // Must account for duplicate resources in the combo
+        Map<IResource, Integer> repeatedResourcesInCombo = new HashMap<>();
         for (IResource resource : resourcesInCombo) {
-            occurrencesCount.add(Util.countResourceOccurrences(resource, playerResources));
+            if (repeatedResourcesInCombo.containsKey(resource)) {
+                repeatedResourcesInCombo.put(resource, repeatedResourcesInCombo.get(resource) + 1);
+            } else {
+                repeatedResourcesInCombo.put(resource, 1);
+            }
         }
 
-        occurrencesCount.sort(Integer::compareTo);
-        int minOccurrences = occurrencesCount.getFirst();
+        for (IResource resource : resourcesInCombo) {
+            int resourceOccurrences = Util.countResourceOccurrences(resource, playerResources);
+            compensatedOccurrencesCount.add(resourceOccurrences / repeatedResourcesInCombo.get(resource));
+        }
+
+        compensatedOccurrencesCount.sort(Integer::compareTo);
+        int minOccurrences = compensatedOccurrencesCount.getFirst();
 
         return minOccurrences * pointsValue;
     }

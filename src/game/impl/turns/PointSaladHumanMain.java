@@ -1,31 +1,26 @@
 package game.impl.turns;
 
 import assets.IGameBoard;
-import assets.IPile;
+import io.IIOManager;
 import game.ITurnActionStrategy;
-import networking.IServer;
 import player.IPlayer;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 /**
  * The human action strategy representing a Point Salad main action.
  */
 public class PointSaladHumanMain implements ITurnActionStrategy {
     private IGameBoard gameBoard;
-    private IServer server;
-    private Map<Integer, Integer> playerClientMap;
+    private IIOManager io;
 
-    public PointSaladHumanMain(IGameBoard gameBoard, IServer server, Map<Integer, Integer> playerClientMap) {
+    public PointSaladHumanMain(IGameBoard gameBoard, IIOManager io) {
         this.gameBoard = gameBoard;
-        this.server = server;
-        this.playerClientMap = playerClientMap;
+        this.io = io;
     }
 
     @Override
     public void executeTurnAction(IPlayer player) {
-        int clientId = playerClientMap.get(player.getId());
         StringBuilder message = new StringBuilder();
         message.append("It's your turn (player ").append(player.getId()).append(")").append("!\n");
         message.append("Your current hand: \n");
@@ -34,7 +29,7 @@ public class PointSaladHumanMain implements ITurnActionStrategy {
         message.append("- Pick one card from a pile by typing 'P<X>' (i.e. P2) \n");
         message.append("- Draft a card from from the [M]arket by typing 'M<ROW><COL>' (i.e. M11) \n");
         message.append("- Draft two cards from the [M]arket by typing 'M<ROW1><COL1><ROW2><COL2>' (i.e. M1101)\n");
-        server.sendMsg(clientId, message.toString());
+        io.sendMsg(player.getId(), message.toString());
 
         String input;
         char action;
@@ -42,12 +37,12 @@ public class PointSaladHumanMain implements ITurnActionStrategy {
         int[][] marketIndices;
 
         do {
-            input = server.getClientInput(clientId);
+            input = io.getPlayerInput(player.getId());
             if (!validateInput(input)) {
-                server.sendMsg(clientId, "Invalid input. Please try again.");
+                io.sendMsg(player.getId(), "Invalid input. Please try again.");
             } else {
                 if (!validateAction(input)) {
-                    server.sendMsg(clientId, "Invalid action. Please try again.");
+                    io.sendMsg(player.getId(), "Invalid action. Please try again.");
                 } else {
                     action = input.charAt(0);
                     pileIndex = Integer.parseInt(input.substring(1,2));

@@ -2,35 +2,30 @@ package game.impl.turns;
 
 import assets.ICard;
 import assets.IGameBoard;
+import io.IIOManager;
 import game.ITurnActionStrategy;
-import networking.IServer;
 import player.IPlayer;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 /**
  * The human action strategy representing a Point Salad free action.
  */
 public class PointSaladHumanFree implements ITurnActionStrategy {
     private IGameBoard gameBoard;
-    private IServer server;
-    private Map<Integer, Integer> playerClientMap;
+    private IIOManager io;
 
-    public PointSaladHumanFree(IGameBoard gameBoard, IServer server, Map<Integer, Integer> playerClientMap) {
+    public PointSaladHumanFree(IGameBoard gameBoard, IIOManager io) {
         this.gameBoard = gameBoard;
-        this.server = server;
-        this.playerClientMap = playerClientMap;
+        this.io = io;
     }
 
     @Override
     public void executeTurnAction(IPlayer player) {
-        int clientId = playerClientMap.get(player.getId());
-
         ArrayList<ICard> criteriaCards = player.getCriteriaCards();
 
         if (criteriaCards.isEmpty()){
-            server.sendMsg(clientId,
+            io.sendMsg(player.getId(),
                     "You have no flipable cards, and thus cannot perform a free action.");
             return;
         }
@@ -41,15 +36,15 @@ public class PointSaladHumanFree implements ITurnActionStrategy {
             msg.append(i).append(": ").append(criteriaCards.get(i).represent()).append("\n");
         }
         msg.append("To flip a card, type '<CARD_NUMBER>' (i.e. 1), or leave blank (press enter) to skip your free action.");
-        server.sendMsg(clientId, msg.toString());
+        io.sendMsg(player.getId(), msg.toString());
 
         String input;
         do {
-            input = server.getClientInput(clientId);
+            input = io.getPlayerInput(player.getId());
             try {
                 int cardIndex = Integer.parseInt(input);
                 if (cardIndex < 0 || cardIndex >= criteriaCards.size()){
-                    server.sendMsg(clientId, "Invalid card number. Please try again.");
+                    io.sendMsg(player.getId(), "Invalid card number. Please try again.");
                 } else {
                     criteriaCards.get(cardIndex).flip();
                     break;
@@ -58,7 +53,7 @@ public class PointSaladHumanFree implements ITurnActionStrategy {
                 if (input.equals("")){
                     break;
                 } else {
-                    server.sendMsg(clientId, "Invalid input. Please try again.");
+                    io.sendMsg(player.getId(), "Invalid input. Please try again.");
                 }
             }
         } while (true);

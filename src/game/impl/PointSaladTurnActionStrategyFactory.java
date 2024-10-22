@@ -1,17 +1,16 @@
 package game.impl;
 
 import assets.IGameBoard;
+import io.IIOManager;
 import game.ITurnActionStrategy;
 import game.ITurnActionStrategyFactory;
 import game.impl.turns.PointSaladBotFree;
 import game.impl.turns.PointSaladBotMain;
 import game.impl.turns.PointSaladHumanFree;
 import game.impl.turns.PointSaladHumanMain;
-import networking.IServer;
 import player.IPlayerManager;
 
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.Random;
 
 public class PointSaladTurnActionStrategyFactory implements ITurnActionStrategyFactory {
@@ -19,11 +18,10 @@ public class PointSaladTurnActionStrategyFactory implements ITurnActionStrategyF
     @Override
     public ArrayList<ITurnActionStrategy> createHumanStrategies(
             IGameBoard gameBoard,
-            IServer server,
-            Map<Integer, Integer> playerClientMap) {
+            IIOManager io) {
         ArrayList<ITurnActionStrategy> strategies = new ArrayList<>();
-        strategies.add(new PointSaladHumanMain(gameBoard, server, playerClientMap));
-        strategies.add(new PointSaladHumanFree(gameBoard, server, playerClientMap));
+        strategies.add(new PointSaladHumanMain(gameBoard, io));
+        strategies.add(new PointSaladHumanFree(gameBoard, io));
         return strategies;
     }
 
