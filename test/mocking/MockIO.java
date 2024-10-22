@@ -3,18 +3,21 @@ package mocking;
 import io.IIOManager;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MockIO implements IIOManager {
-    private ArrayList<String> actions;
-    private ArrayList<String> messages;
+    private Map<Integer, ArrayList<String>> playerToActions;
+    private Map<Integer, ArrayList<String>> playerToMessagesReceived;
 
-    public MockIO(ArrayList<String> actions) {
-        this.actions = actions;
-        this.messages = new ArrayList<>();
+    public MockIO(
+            Map<Integer, ArrayList<String>> playerToActions) {
+        this.playerToActions = playerToActions;
+        this.playerToMessagesReceived = new HashMap<>();
     }
 
-    public ArrayList<String> getMessages() {
-        return messages;
+    public ArrayList<String> getMessages(int playerId) {
+        return playerToMessagesReceived.get(playerId);
     }
 
     @Override
@@ -23,13 +26,13 @@ public class MockIO implements IIOManager {
     }
 
     @Override
-    public String getPlayerInput(int Playerid) {
-        return actions.removeFirst();
+    public String getPlayerInput(int playerId) {
+        return playerToActions.get(playerId).removeFirst();
     }
 
     @Override
-    public void sendMsg(int Playerid, String msg) {
-        messages.add(msg);
+    public void sendMsg(int playerId, String msg) {
+        playerToMessagesReceived.getOrDefault(playerId, new ArrayList<>()).add(msg);
     }
 
     @Override

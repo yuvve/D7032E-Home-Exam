@@ -8,9 +8,7 @@ import common.point_salad.Constants;
 import common.point_salad.ManifestMetadata;
 import exceptions.CardFlippingException;
 import org.json.JSONObject;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import game.Util;
 
 import java.io.FileNotFoundException;
@@ -39,15 +37,28 @@ public class AssetsTests {
     private static Random random;
 
     @BeforeAll
-    public static void setUpAll() throws FileNotFoundException {
-        random = new Random();
-        deckJson = Util.fileToJSON(JSON_FILENAME);
-        factory = new PointSaladAssetsFactory(random);
+    public static void setUpAll(){
+        try {
+            deckJson = Util.fileToJSON(JSON_FILENAME);
+        } catch (FileNotFoundException e) {
+            System.out.println("Error: Could not find the deck manifest.");
+        }
     }
 
     @AfterAll
-    public static void tearDownAll() {
+    public static void tearDownAll(){
         deckJson = null;
+    }
+
+    @BeforeEach
+    public void setUp() throws FileNotFoundException {
+        random = new Random();
+        factory = new PointSaladAssetsFactory(random);
+    }
+
+    @AfterEach
+    public void tearDown() {
+        random = null;
         factory = null;
     }
 
@@ -223,7 +234,7 @@ public class AssetsTests {
                 gameBoard.refillMarket();
                 assertNotNull(market.viewCard(row, col), "Card was not added to market");
                 assertEquals(
-                        -row,
+                        -(row+1),
                         piles.get(col).getCardCount() - pilesStartingSizes[col],
                         "Pile " + col + " was not used to refill the market at the correct slot");
             }

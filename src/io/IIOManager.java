@@ -13,17 +13,17 @@ public interface IIOManager {
 
     /**
      * Get the input from the player.
-     * @param Playerid the id of the player
+     * @param playerId the id of the player
      * @return the input from the player
      */
-    String getPlayerInput(int Playerid);
+    String getPlayerInput(int playerId);
 
     /**
      * Send a message to the player.
-     * @param Playerid the id of the player
+     * @param playerId the id of the player
      * @param msg the message to send
      */
-    void sendMsg(int Playerid, String msg);
+    void sendMsg(int playerId, String msg);
 
     /**
      * Send a message to all players.

@@ -8,6 +8,7 @@ import assets.impl.PointSaladGameBoard;
 import assets.impl.PointSaladResource;
 import assets.impl.criterias.PointsIfMostOrFewestTotalResources;
 import common.point_salad.Constants;
+import common.point_salad.ManifestMetadata;
 import game.ITurnActionStrategy;
 import game.Util;
 import game.impl.turns.PointSaladHumanFree;
@@ -22,8 +23,9 @@ import player.IPlayerManager;
 import player.impl.PointSaladPlayerAssetsFactory;
 
 import java.io.FileNotFoundException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -39,28 +41,26 @@ public class GameTests {
     private static IPlayerManager playerManager;
 
     @BeforeAll
-    public static void setUpAll() {
-        random = new mocking.Random();
-        assetsFactory = new PointSaladAssetsFactory(random);
-        playerAssetsFactory = new PointSaladPlayerAssetsFactory(random);
-
+    public static void setUpAll(){
         try {
-            deckJson = Util.fileToJSON("PointSaladManifest.json");
+            deckJson = Util.fileToJSON(ManifestMetadata.MANIFEST_FILENAME.getValue());
         } catch (FileNotFoundException e) {
             System.out.println("Error: Could not find the deck manifest.");
         }
     }
 
     @AfterAll
-    public static void tearDownAll() {
-        random = null;
-        assetsFactory = null;
-        playerAssetsFactory = null;
+    public static void tearDownAll(){
         deckJson = null;
     }
 
     @BeforeEach
     public void setUp() {
+        random = new mocking.Random();
+
+        assetsFactory = new PointSaladAssetsFactory(random);
+        playerAssetsFactory = new PointSaladPlayerAssetsFactory(random);
+
         ArrayList<ICard> deck = assetsFactory.createDeck(deckJson, Constants.MAX_PLAYERS.getValue());
         piles = assetsFactory.createPiles(deck);
         market = assetsFactory.createMarket(piles);
@@ -72,6 +72,11 @@ public class GameTests {
 
     @AfterEach
     public void tearDown() {
+        random = null;
+
+        assetsFactory = null;
+        playerAssetsFactory = null;
+
         piles = null;
         market = null;
         gameBoard = null;
@@ -87,12 +92,14 @@ public class GameTests {
      */
     @Test
     public void testPlayerMainAction(){
+        Map<Integer, ArrayList<String>> playerToActions = new HashMap<>();
         ArrayList<String> actions = new ArrayList<>();
         actions.add("M00");
         actions.add("M0011");
         actions.add("P1");
+        playerToActions.put(0, actions);
 
-        IIOManager io = new MockIO(actions);
+        IIOManager io = new MockIO(playerToActions);
         ITurnActionStrategy mainAction = new PointSaladHumanMain(gameBoard, io);
 
         IPlayer humanPlayer = playerManager.getPlayerById(0);
@@ -123,11 +130,13 @@ public class GameTests {
      */
     @Test
     public void testPlayerFreeAction(){
+        Map<Integer, ArrayList<String>> playerToActions = new HashMap<>();
         ArrayList<String> actions = new ArrayList<>();
         actions.add("P1");
         actions.add("0");
+        playerToActions.put(0, actions);
 
-        IIOManager io = new MockIO(actions);
+        IIOManager io = new MockIO(playerToActions);
         ITurnActionStrategy mainAction = new PointSaladHumanMain(gameBoard, io);
         ITurnActionStrategy freeAction = new PointSaladHumanFree(gameBoard, io);
 
@@ -182,4 +191,9 @@ public class GameTests {
         assertTrue(playersRepresentation.contains(expectedCriteria),
                 "Player 1's criteria should be shown to the other player.");
     }
+
+    /**
+     * <H1>Requirement 12</H1>
+     * Test that the game continues (each player gets their turn) until the game ends
+     */
 }

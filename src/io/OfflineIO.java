@@ -12,15 +12,15 @@ public class OfflineIO implements IIOManager {
     }
 
     @Override
-    public String getPlayerInput(int Playerid) {
+    public String getPlayerInput(int playerId) {
         Scanner scanner = ScannerSingletons.getInstance(System.in);
         Util.flushSystemIn();
         return scanner.nextLine();
     }
 
     @Override
-    public void sendMsg(int Playerid, String msg) {
-        if (Playerid == 0) {
+    public void sendMsg(int playerId, String msg) {
+        if (playerId == 0) {
             System.out.println(msg);
         }
     }
